@@ -1,0 +1,285 @@
+/* Vista de usuarios */
+/* Panel de usuario Columna izquierda */
+.a-user{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+    padding: 25px 15px;
+}
+
+.a-user h2{
+    width: 100%;
+    font-weight: 700;
+    font-size: 30px;
+    padding: 0px 20px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.add-new-user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: var(--main-color);
+    top: 25px;
+    right: 25px;
+    overflow: hidden;
+    border-radius: 15px;
+    transition: all 0.5s ease;
+    border: 2px solid rgba(255,255,255,0.5);
+    cursor: pointer;
+}
+
+.add-new-user:hover{
+    width: 200px;
+}
+
+.add-new-user span{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    min-width: 50px;
+    min-height: 50px;
+    padding: 0px 0px 3px 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--main-color);
+    z-index: 1;
+}
+
+.add-new-user p{
+    height: 50px;
+    width: 200px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0px 15px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.a-user h3{
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 20px;
+    font-weight: 300;
+}
+
+.add-pre-registred{
+    width: 100%;
+    height: auto;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    padding: 5px 20px;
+}
+
+.box-type1{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 5px 5px;
+    margin: 5px 0px;
+    background: linear-gradient(90deg, var(--bg-color), var(--second-bg-color));
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.25);
+    border-radius: 10px;
+    position: relative;
+}
+
+.box-type1 h4{
+    font-weight: 500;
+    width: 100%;
+    
+    padding: 5px 5px 10px 25px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border-radius: 10px 0px 0px 0px;
+}
+
+.box-type1 h4::after{
+    content: "";
+    position: absolute;
+    top: 0%;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    transform: skewX(-45deg);
+    background: var(--main-color);
+    z-index: -1;
+}
+
+.box-type1 h4::before{
+    content: "";
+    position: absolute;
+    top: 0%;
+    left: -45%;
+    width: 100%;
+    height: 100%;
+    transform: skewX(-45deg);
+    background: var(--main-color);
+    z-index: -1;
+    opacity: 0.75;
+}
+
+.box-type1-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 15px 10px 15px 25px;
+
+}
+
+.box-type1-content span{
+    display: flex;
+    margin: 5px 0px;
+}
+
+.box-type1-content span p{
+    font-weight: 100;
+    text-indent: 10px;
+}
+
+.box-type1-btns{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: flex;
+    
+    justify-content: center;
+}
+
+.box-type1-btns span{
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin: 0px 5px;
+    font-size: 15px;
+    border: 2px solid var(--main-color);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.box-type1-btns span:hover{
+    color: var(--bg-color);
+}
+
+.box-type1-btns span::after{
+    content: "";
+    width: 200%;
+    height: 300%;
+    position: absolute;
+    background: var(--main-color);
+    top: -100%;
+    left: -300%;
+    transform: skewX(-45deg);
+    transition: all 0.5s ease;
+    z-index: -1;
+}
+
+.box-type1-btns span:hover::after{
+    left: -50%;
+}
+
+
+
+
+
+/* Panel de usuario Columna derecha */
+.bm-user{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+    padding: 15px 15px;
+}
+
+.bm-user h2{
+    width: 100%;
+    font-weight: 700;
+    font-size: 30px;
+    padding: 0px 20px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.bm-user-buscar{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding: 15px 25px;
+    position: relative;
+}
+
+.search-type1{
+    width: 100%;
+    height: 50px;
+    display: flex;
+}
+
+.search-type1 span{
+    width: 50px;
+    height: 50px;
+    padding: 0px 0px 3px 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px 0px 0px 5px;
+    border: 2px solid var(--main-color);
+    background: var(--main-color);
+    z-index: 1;
+    font-size: 20px;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.search-type1 input{
+    width: 100%;
+    border: 2px solid var(--main-color);
+    border-radius: 0px 5px 5px 0px;
+    padding: 0px 20px;
+    font-size: 15px;
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    transition: all 0.5s ease;
+    color: var(--text-color);
+}
+
+.search-type1 input::placeholder{
+    color: var(--text-color);
+}
+
+.search-type1 input:focus{
+    background: var(--text-color);
+    color: var(--bg-color);
+}
+
+.bm-user-result{
+    width: 100%;
+    padding: 0px 10px 0px 25px;
+    overflow-y: scroll;
+}

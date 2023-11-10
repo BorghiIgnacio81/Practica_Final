@@ -1,0 +1,55 @@
+.modal-form1-inputs{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+}
+
+
+.modal-form1-input-item{
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    height: 70px;
+    margin: 10px 0px;
+    padding: 15px;
+
+}
+
+.modal-form1-input-item input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid var(--text-color);
+    font-size: 16px;
+    padding-right: 35px;
+    color: transparent;
+    font-weight: 500;
+    transition: all 0.5s ease;
+}
+
+.modal-form1-input-item input:focus,
+.modal-form1-input-item input:valid{
+    border-bottom-color: var(--main-color);
+    color: var(--text-color);
+}
+
+.modal-form1-input-item label{
+    position: absolute;
+    top: 30%;
+    left: 15px;
+    font-size: 16px;
+    color: var(--text-color);
+    pointer-events: none;
+    transition: all 0.5s ease;
+}
+
+.modal-form1-input-item input:focus~label,
+.modal-form1-input-item input:valid~label{
+    top: -5px; 
+    color: var(--main-color);
+}
+

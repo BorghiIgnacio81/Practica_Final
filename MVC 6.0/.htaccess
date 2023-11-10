@@ -1,0 +1,5 @@
+
+Options All -Indexes
+RewriteEngine On
+RewriteRule ^([-a-zA-Z0-9_-]+)$ index.php?pagina=$1 [QSA,L]
+
