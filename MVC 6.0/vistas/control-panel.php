@@ -1123,7 +1123,7 @@
     <div class="modal-frame modal-edit-libro-pedido">
         <form action="#" class="modal-form1">
             <div class="modal-form1-titulo">
-                <p>Editar libro</p>
+                <p>Editar Pedido</p>
                 <span class="icon-cross close-modal-edit-libro-pedido"></span>
             </div>
 
@@ -1183,7 +1183,7 @@
     <div class="modal-frame modal-edit-libro">
         <form action="#" class="modal-form1">
             <div class="modal-form1-titulo">
-                <p>Editar libro</p>
+                <p>Editar Libro</p>
                 <span class="icon-cross close-modal-edit-libro"></span>
             </div>
 
@@ -1195,12 +1195,24 @@
                         <label for="">Titulo</label>
                     </div>
                     <div class="modal-form1-input-item">
+                        <input type="text" class="libro-edit autor" name="" id="" required>
+                        <label for="">Autor</label>
+                    </div>
+                    <div class="modal-form1-input-item">
+                        <input type="text" class="libro-edit ubicacion" name="" id="" required>
+                        <label for="">Ubicación en biblioteca</label>
+                    </div>
+                    <div class="modal-form1-input-item">
                         <input type="text" class="libro-edit editorial" name="" id="" required>
                         <label for="">Editorial</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input type="text" class="libro-edit autor" name="" id="" required>
-                        <label for="">Autor</label>
+                        <input type="text" class="libro-edit materia" name="" id="" required>
+                        <label for="">Materia</label>
+                    </div>
+                    <div class="modal-form1-input-item">
+                        <input type="text" class="libro-edit origen" name="" id="" required>
+                        <label for="">Lugar de edición</label>
                     </div>
                     <div class="modal-form1-input-item">
                         <input type="text" class="libro-edit anio" name="" id="" required>
@@ -1211,17 +1223,13 @@
                         <label for="">Número de edición</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input type="text" class="libro-edit ubicacion" name="" id="" required>
-                        <label for="">Ubicación en biblioteca</label>
-                    </div>
-                    <div class="modal-form1-input-item">
                         <input type="text" class="libro-edit observacion" name="" id="" required>
                         <label for="">Observaciones</label>
                     </div>
 
                 </div>
 
-                <div class="modal-form1-status db-edit-libro-pedido">
+                <div class="modal-form1-status db-edit-libro">
 
                 </div>
 
@@ -1252,7 +1260,7 @@
 
                 
                 <div class="modal-form1-btns">
-                    <button type="submit">Confirmar</button>
+                    <button type="button">Confirmar</button>
                     <button type="button" class="cancel-modal-del-libro">Cancelar</button>
                 </div>
 

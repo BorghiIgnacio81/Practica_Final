@@ -2,7 +2,7 @@
 // UsuariosController::index();
 class ControladorIndex
 {
-
+    
     public function ctrMostrarPlantilla()
     {
 

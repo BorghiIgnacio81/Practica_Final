@@ -1,5 +1,10 @@
 <?php
-    include_once("../modelo/Libros_modelo.php");
+    //include_once("../modelo/Libros_modelo.php");
+    include_once __DIR__ . '/../modelo/Libros_modelo.php';
+    set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/../modelo/');
+    include_once 'Libros_modelo.php';
+
+
     //$response =  Libros_Controlador::get_Libros_Controlador(json_decode(file_get_contents('php://input'),true));
     $response = json_decode(file_get_contents('php://input'),true);
         //print_r($response);
@@ -8,22 +13,7 @@
         }
     class Libros_Controlador {
       
-        static public function get_Libros_Controlador($data) { //Puede venir informacion con un json para add, del, mod, o bien un string para search
-            //de prueba para hacer una busqueda
-            //$data= null;
-            //$data = array();
-            // $data = array(
-            //     'idLibro' => '1234512',
-            //     'Titulo' => 'Caperucita y el lobo',
-            //     'autor' => 'Julio Cortazar',
-            //     'UbicacionBiblioteca' => 'A33',
-            //     'Editorial' => 'Santillana',
-            //     'materia' => 'Lengua y literatura',
-            //     'Lugar_Edicion' =>  'Buenos Aires',
-            //     'anio' => '2000',
-            //     'serie' => 'Ficcion',
-            //     'observaciones' => 'Un libro muy interesante'
-            // );
+        static public function get_Libros_Controlador($data) { 
             switch ($data["funcion"]) {
                 case "search":
                     if (isset($data["data"])) {
@@ -32,7 +22,7 @@
                         
                        //echo json_encode(["respuesta" => $respuesta]);
                         //var_dump($respuesta);
-                        echo $respuesta;
+                        echo json_encode($respuesta);
                     } else {
                         // Manejo de error si no se proporciona el dato de búsqueda
                         echo json_encode(["error" => "No se proporcionó el dato de búsqueda"]);
@@ -40,9 +30,30 @@
                     break;
             
                 case "add":
-                    // Lógica para agregar
-                    break;
-            
+                    
+                    if (isset($data["data"])) {
+                        $aux = $data["data"];
+                        $libro = array(
+                        "titulo" => $aux["titulo"],
+                        "idAutor" => $aux["autor"],
+                        "ubicacionBiblioteca" => $aux["ubicacionFisica"],
+                        "editorial" => $aux["editorial"],
+                        "lugarEdicion" => $aux["lugarEdicion"],
+                        "anio" => $aux["anio"],
+                        "serie" => $aux["serie"],
+                        "observaciones" => $aux["observaciones"],
+                        "idMateria" => $aux["materia"]
+                        );
+                        
+                        
+                        $respuesta = Libros_modelo::nuevo_libro_modelo($libro);
+                        if ($respuesta) {
+                        echo json_encode(array("status"=>"ok"));
+                        }else {
+                            echo json_encode(array("status"=>"no"));
+                        }
+                        break;
+                    }
                 case "del":
                     // Lógica para eliminar
                     break;
@@ -56,11 +67,8 @@
                     echo json_encode(["error" => "Función no válida"]);
                     break;
             }
-            
-            /*
-            $respuesta = Libros_modelo::get_libros_modelo($pTitulo);
-            return $respuesta;*/        
-            
-        }    
+       
+        }
+         
     }      
 ?>

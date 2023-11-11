@@ -7,7 +7,7 @@
                 $conexion->exec("SET CHARACTER SET UTF8");
             }catch(Exception $e){
                 die("Error" . $e->getMessage());
-                echo "Linea del error" . $e->getLine();
+                //echo "Linea del error" . $e->getLine();
             }
             return $conexion;
         }
