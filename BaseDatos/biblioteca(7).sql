@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-11-2023 a las 10:29:21
+-- Tiempo de generación: 12-11-2023 a las 21:25:57
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -27,7 +27,6 @@ DELIMITER $$
 --
 -- Procedimientos
 --
-DROP PROCEDURE IF EXISTS `editarLibro`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `editarLibro` (IN `pIdLibro` INT, IN `pTitulo` VARCHAR(100), IN `pIdAutor` INT, IN `pIdEditorial` INT, IN `pUbicacionBiblioteca` VARCHAR(45), IN `pLugarEdicion` VARCHAR(45), IN `pAnio` INT, IN `pSerie` TINYINT, IN `pObservaciones` VARCHAR(100), IN `pIdMateria` INT)   UPDATE libros SET 
 titulo=pTitulo, 
 idAutor=pIdAutor, 
@@ -38,18 +37,20 @@ anio= pAnio,
 serie=pSerie, observaciones=pObservaciones, idMateria=pIdMateria
 WHERE idLibro=pIdLibro$$
 
-DROP PROCEDURE IF EXISTS `librosXactivo`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `librosXactivo` (IN `pActivo` INT)   select idLibro, titulo, concat('', a.apellido, ', ', a.nombre) as 'autor', ubicacionBiblioteca, E.editorial, M.materia, lugarEdicion, anio, serie, observaciones from libros L JOIN autores A ON L.idAutor = A.idAutor JOIN editoriales E ON E.idEditorial = L.idEditorial JOIN materias M on M.idMateria = L.idMateria where activo = pActivo$$
 
-DROP PROCEDURE IF EXISTS `librosXtitulo`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `librosXtitulo` (IN `pTitulo` VARCHAR(200))   select idLibro, titulo, concat('', a.apellido, ', ', a.nombre) as 'autor', ubicacionBiblioteca, E.editorial, M.materia, lugarEdicion, anio, serie, observaciones from libros L JOIN autores A ON L.idAutor = A.idAutor JOIN editoriales E ON E.idEditorial = L.idEditorial JOIN materias M on M.idMateria = L.idMateria where Titulo like concat('%', pTitulo, '%')$$
 
-DROP PROCEDURE IF EXISTS `nuevoLibro`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `nuevoLibro` (IN `pTitulo` VARCHAR(100), IN `pIdAutor` INT, IN `pIdEditorial` INT, IN `pUbicacionBiblioteca` VARCHAR(45), IN `pLugarEdicion` VARCHAR(45), IN `pAnio` INT, IN `pSerie` TINYINT, IN `pObservaciones` VARCHAR(100), IN `pIdMateria` INT)   INSERT INTO libros(titulo, idAutor, idEditorial, ubicacionBiblioteca, lugarEdicion, anio, serie, observaciones, idMateria, activo) VALUES 
         (pTitulo, pIdAutor, pIdEditorial, pUbicacionBiblioteca, pLugarEdicion, pAnio, pSerie, pObservaciones, pIdMateria, 1)$$
 
-DROP PROCEDURE IF EXISTS `usuarioXparam`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `usuarioXparam` (IN `param` VARCHAR(200))   SELECT * FROM usuarios WHERE Nombre LIKE concat('%', param, '%') OR Apellido LIKE concat('%', param, '%') OR DNI like concat ('%',param, '%')$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `preUsuarios` ()   SELECT idUsuarios as idUsuario, nombre, apellido, dni, direccion, telefono, email, TIMESTAMPDIFF(YEAR, fechaNac, CURDATE()) AS Edad
+from usuarios
+WHERE tipoUsuario = 4$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `usuarioXparam` (IN `pUsuario` VARCHAR(200))   SELECT idUsuarios as idUsuario, nombre, apellido, dni, direccion, telefono, email, TIMESTAMPDIFF(YEAR, fechaNac, CURDATE()) AS Edad 
+FROM usuarios 
+WHERE Nombre LIKE concat('%', pUsuario, '%') OR Apellido LIKE concat('%', pUsuario, '%') OR DNI like concat ('%',pUsuario, '%')$$
 
 DELIMITER ;
 
@@ -59,7 +60,6 @@ DELIMITER ;
 -- Estructura de tabla para la tabla `autores`
 --
 
-DROP TABLE IF EXISTS `autores`;
 CREATE TABLE `autores` (
   `idAutor` int(11) NOT NULL,
   `nombre` varchar(100) DEFAULT NULL,
@@ -260,7 +260,6 @@ INSERT INTO `autores` (`idAutor`, `nombre`, `apellido`, `nacionalidad`, `fechaNa
 -- Estructura de tabla para la tabla `editoriales`
 --
 
-DROP TABLE IF EXISTS `editoriales`;
 CREATE TABLE `editoriales` (
   `idEditorial` int(11) NOT NULL,
   `editorial` varchar(100) DEFAULT NULL,
@@ -300,7 +299,6 @@ INSERT INTO `editoriales` (`idEditorial`, `editorial`, `pais`, `fundacion`) VALU
 -- Estructura de tabla para la tabla `libros`
 --
 
-DROP TABLE IF EXISTS `libros`;
 CREATE TABLE `libros` (
   `idLibro` int(11) NOT NULL,
   `titulo` varchar(100) DEFAULT NULL,
@@ -785,7 +783,6 @@ INSERT INTO `libros` (`idLibro`, `titulo`, `idAutor`, `idEditorial`, `ubicacionB
 -- Estructura de tabla para la tabla `libros_reservas`
 --
 
-DROP TABLE IF EXISTS `libros_reservas`;
 CREATE TABLE `libros_reservas` (
   `idLibro` int(11) NOT NULL,
   `idReserva` int(11) NOT NULL,
@@ -854,7 +851,6 @@ INSERT INTO `libros_reservas` (`idLibro`, `idReserva`, `libros_Reservas`) VALUES
 -- Estructura de tabla para la tabla `login`
 --
 
-DROP TABLE IF EXISTS `login`;
 CREATE TABLE `login` (
   `idLogin` int(11) NOT NULL,
   `nombre_usuario` varchar(250) NOT NULL,
@@ -875,7 +871,6 @@ INSERT INTO `login` (`idLogin`, `nombre_usuario`, `contraseÃ±a`) VALUES
 -- Estructura de tabla para la tabla `materias`
 --
 
-DROP TABLE IF EXISTS `materias`;
 CREATE TABLE `materias` (
   `idMateria` int(11) NOT NULL,
   `materia` varchar(100) DEFAULT NULL
@@ -934,7 +929,6 @@ INSERT INTO `materias` (`idMateria`, `materia`) VALUES
 -- Estructura de tabla para la tabla `prestamos`
 --
 
-DROP TABLE IF EXISTS `prestamos`;
 CREATE TABLE `prestamos` (
   `idPrestamo` int(11) NOT NULL,
   `fecha` datetime DEFAULT NULL,
@@ -1018,7 +1012,6 @@ INSERT INTO `prestamos` (`idPrestamo`, `fecha`, `fechaVencimiento`, `fechaDevolu
 -- Estructura de tabla para la tabla `prestamos_libros`
 --
 
-DROP TABLE IF EXISTS `prestamos_libros`;
 CREATE TABLE `prestamos_libros` (
   `idPrestamo` int(11) NOT NULL,
   `idLibro` int(11) NOT NULL,
@@ -1187,7 +1180,6 @@ INSERT INTO `prestamos_libros` (`idPrestamo`, `idLibro`, `idPrestamos_Libros`) V
 -- Estructura de tabla para la tabla `reservas`
 --
 
-DROP TABLE IF EXISTS `reservas`;
 CREATE TABLE `reservas` (
   `idReserva` int(11) NOT NULL,
   `fechaSolicitud` datetime DEFAULT NULL,
@@ -1279,7 +1271,6 @@ INSERT INTO `reservas` (`idReserva`, `fechaSolicitud`, `fechaRetiro`, `idUsuario
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `idUsuarios` int(11) NOT NULL,
   `nombre` varchar(50) DEFAULT NULL,

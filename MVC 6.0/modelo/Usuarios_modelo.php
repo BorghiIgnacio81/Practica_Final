@@ -9,23 +9,24 @@ class Usuarios_modelo {
         { 
             $consulta = Conectar::conexion()->prepare("Call preUsuarios");
             $consulta->execute();
-            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+            $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $resultados;
         }
         catch(Exception $e)
         {
-            return "Error: " . $e->getMessage();
+            return array();
         }
     }
     
-    static public function get_usuarios_modelo($paraBus) {
+    static public function get_usuarios_modelo($usuario) {
         try {
-            $consulta = Conectar::conexion()->prepare("CALL `usuarioXparam`(:param)");
-            $consulta->bindParam(":param", $paraBus, PDO::PARAM_STR);
+            $consulta = Conectar::conexion()->prepare("CALL `usuarioXparam`(:usuario)");
+            $consulta->bindParam(":usuario", $usuario, PDO::PARAM_STR);
             $consulta->execute();
-    
-            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+            $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $resultados;
         } catch (PDOException $e) {
-            echo "Error PDO!!!: " . $e->getMessage();
+            return array();
         }
     }
 

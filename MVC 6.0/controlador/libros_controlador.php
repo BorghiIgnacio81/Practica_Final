@@ -62,9 +62,31 @@
                     break;
             
                 case "mod":
-                    // Lógica para modificar
-                    break;
-            
+                    if (isset($data["data"])) {
+                        $aux = $data["data"];
+
+                        $libro = array(
+                            "idLibro" => $aux["idLibro"],
+                            "titulo" => $aux["titulo"],
+                            "idAutor" => $aux["autor"],
+                            "ubicacionBiblioteca" => $aux["ubicacionFisica"],
+                            "idEditorial" => $aux["editorial"],
+                            "lugarEdicion" => $aux["lugarEdicion"],
+                            "anio" => $aux["anio"],
+                            "serie" => $aux["serie"],
+                            "observaciones" => $aux["observaciones"],
+                            "idMateria" => $aux["materia"]
+                        );
+                        
+                        
+                        $respuesta = Libros_modelo::editar_libro_modelo($libro);
+                        if ($respuesta) {
+                            echo json_encode(array("status"=>"ok"));
+                        }else {
+                            echo json_encode(array("status"=>"no"));
+                        }
+                        break;
+                    }
                 default:
                     // Manejo de error si la función no está definida
                     echo json_encode(["error" => "Función no válida"]);

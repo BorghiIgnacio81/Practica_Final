@@ -31,7 +31,7 @@ var campoObservacionAdd = document.querySelector(".libro-add.observacion");
 var modalEditLibroClose = document.querySelector(".close-modal-edit-libro");
 var modalEditLibroCancel = document.querySelector(".cancel-modal-edit-libro");
 var modalEditLibro = document.querySelector(".modal-frame.modal-edit-libro");
-var botonEditLibroOpen = document.querySelectorAll(".edit-libro");
+var botonEditLibroOpen;
 var modalEditBotonSend = document.querySelector(".confirm-modal-edit-libro");
 var modalStatusEdit = document.querySelector(".db-edit-libro");
 
@@ -50,11 +50,11 @@ var campoObservacionEdit = document.querySelector(".libro-edit.observacion");
 var modalDelLibroClose = document.querySelector(".close-modal-del-libro");
 var modalDelLibroCancel = document.querySelector(".cancel-modal-del-libro");
 var modalDelLibro = document.querySelector(".modal-del-libro");
-var botonDelLibroOpen = document.querySelectorAll(".del-libro");
+var botonDelLibroOpen;
 var modalDelBotonSend = document.querySelector(".confirm-modal-del-libro");
 var modalStatusDel = document.querySelector(".db-del-libro");
 
-var campoModalDelLibro = document.querySelector(".icon-user.del-user-id");
+var campoModalDelLibro = document.querySelector(".icon-book.del-libro-id");
 
 
 // ------------------------ Editar libro pedido + modal pedido ------------------------
@@ -62,17 +62,17 @@ var modalPedidoLibroClose = document.querySelector(".close-modal-edit-libro-pedi
 var modalPedidolibroCancel = document.querySelector(".cancel-modal-edit-libro-pedido");
 var modalPedidoLibro = document.querySelector(".modal-edit-libro-pedido");
 var botonPedidoLibroOpen = document.querySelectorAll(".edit-libro-pedido");
-var modalEditBotonSend = document.querySelector(".confirm-modal-edit-libro-pedido");
+var modalEditPedidoBotonSend = document.querySelector(".confirm-modal-edit-libro-pedido");
 var modalStatusEdit = document.querySelector(".db-edit-libro-pedido");
 
-var campoTituloEdit = document.querySelector(".libro-edit-pedido.titulo");
-var campoEditorialEdit = document.querySelector(".libro-edit-pedido.editorial");
-var campoAutorEdit = document.querySelector(".libro-edit-pedido.autor");
-var campoAnioEdit = document.querySelector(".libro-edit-pedido.anio");
-var campoEjemplaresEdit = document.querySelector(".libro-edit-pedido.ejemplares");
-var campoEdicionEdit = document.querySelector(".libro-edit-pedido.edicion");
-var campoUbicacionEdit = document.querySelector(".libro-edit-pedido.ubicacion");
-var campoObservacionEdit = document.querySelector(".libro-edit-pedido.observacion");
+var campoTituloEditPedido = document.querySelector(".libro-edit-pedido.titulo");
+var campoEditorialEditPedido = document.querySelector(".libro-edit-pedido.editorial");
+var campoAutorEditPedido = document.querySelector(".libro-edit-pedido.autor");
+var campoAnioEditPedido = document.querySelector(".libro-edit-pedido.anio");
+var campoEjemplaresEditPedido = document.querySelector(".libro-edit-pedido.ejemplares");
+var campoEdicionEditPedido = document.querySelector(".libro-edit-pedido.edicion");
+var campoUbicacionEditPedido = document.querySelector(".libro-edit-pedido.ubicacion");
+var campoObservacionEditPedido = document.querySelector(".libro-edit-pedido.observacion");
 
 
 
@@ -160,10 +160,14 @@ class LibroController{
     }
 
     buscarLibroPorid(id){
+        let aux;
         this.listaLibrosBM.forEach(function (l) {
-            if(l.idLibro == id)
-                return new Libro(l.idLibro, l.titulo, l.autor, l.ubicacionFisica, l.editorial, l.materia, l.lugarEdicion, l.anio, l.serie, l.observaciones);
+            if(l.idLibro == id){
+                aux = new Libro(l.idLibro, l.titulo, l.autor, l.ubicacionFisica, l.editorial, l.materia, l.lugarEdicion, l.anio, l.serie, l.observaciones);
+                return aux.toJson();
+            }
         });
+        return aux;
     }
 
     solicitudAjaxBuscar(target, filtros, data){
@@ -177,6 +181,9 @@ class LibroController{
                 this.listaLibrosBM = JSON.parse(xhr.responseText); //el json que envía el servidor
                 let listado = "";
 
+
+                libroCtrl.listaLibrosBM = this.listaLibrosBM;
+
                 if(this.listaLibrosBM){
                     this.listaLibrosBM.forEach(function (l) {
                         listado += (new Libro(l.idLibro, l.titulo, l.autor, l.ubicacionFisica, l.editorial, l.materia, l.lugarEdicion, l.anio, l.serie, l.observaciones)).printBoxLibroBM();
@@ -185,8 +192,13 @@ class LibroController{
                     target.innerHTML = listado;
 
                     //Agregar eventos
+
+                    botonEditLibroOpen = document.querySelectorAll(".edit-libro");
+                    botonDelLibroOpen = document.querySelectorAll(".del-libro");
+
                     agregarEventoLibrosEditar();
                     agregarEventoLibrosEliminar();
+
                     //fin agregar eventos
 
                 }else{
@@ -313,10 +325,11 @@ modalEditLibroCancel.addEventListener("click", ()=>{
 
 function agregarEventoLibrosEditar(){
     for (let i = 0; i < libroCtrl.cantidadLibros(); i++) {
+        
         botonEditLibroOpen[i].addEventListener("click",()=>{
             let idLibro = botonEditLibroOpen[i].getAttribute("idLibro");
             let objLibro = libroCtrl.buscarLibroPorid(idLibro);
-    
+
             campoTituloEdit.value = objLibro.titulo;
             campoAutorEdit.value = objLibro.autor;
             campoUbicacionEdit.value = objLibro.ubicacionFisica;
@@ -367,7 +380,7 @@ function agregarEventoLibrosEliminar(){
             let idLibro = botonDelLibroOpen[i].getAttribute("idLibro");
             let objLibro = libroCtrl.buscarLibroPorid(idLibro);
 
-            campoModalDelLibro.innerHTML("<p>#"+objLibro.idLibro+" - "+ objLibro.titulo+"</p>");
+            campoModalDelLibro.innerHTML = "<p>#"+objLibro.idLibro+" - "+ objLibro.titulo+"</p>";
 
             modalDelLibro.setAttribute("idLibroTemp", idLibro);
 
