@@ -1258,9 +1258,12 @@
                     <span class="icon-user del-user-id"><p>#123415135 - Caperucita Verde</p></span>
                 </div>
 
+                <div class="modal-form1-status db-del-libro">
+
+                </div>
                 
                 <div class="modal-form1-btns">
-                    <button type="button">Confirmar</button>
+                    <button type="button" class="confirm-modal-del-libro">Confirmar</button>
                     <button type="button" class="cancel-modal-del-libro">Cancelar</button>
                 </div>
 
