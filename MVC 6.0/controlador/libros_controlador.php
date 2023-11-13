@@ -39,7 +39,7 @@
                         $libro = array(
                             "titulo" => $aux["titulo"],
                             "idAutor" => $aux["autor"],
-                            "ubicacionBiblioteca" => $aux["ubicacionFisica"],
+                            "ubicacionFisica" => $aux["ubicacionFisica"],
                             "idEditorial" => $aux["editorial"],
                             "lugarEdicion" => $aux["lugarEdicion"],
                             "anio" => $aux["anio"],
@@ -58,18 +58,30 @@
                         break;
                     }
                 case "del":
-                    // Lógica para eliminar
-                    break;
-            
-                case "mod":
                     if (isset($data["data"])) {
                         $aux = $data["data"];
-
+                        
+                        $idLibro = $aux["idLibro"];
+                        
+                        $respuesta = Libros_modelo::eliminar_libro_modelo($idLibro);
+                        if ($respuesta) {
+                            echo json_encode(array("status"=>"ok"));
+                        }else {
+                            echo json_encode(array("status"=>"no"));
+                        }
+                        break;
+                    }
+            
+                case "edit":
+                    if (isset($data["data"])) {
+                        $aux = $data["data"];
+                        //print_r($aux);
+                        
                         $libro = array(
                             "idLibro" => $aux["idLibro"],
                             "titulo" => $aux["titulo"],
                             "idAutor" => $aux["autor"],
-                            "ubicacionBiblioteca" => $aux["ubicacionFisica"],
+                            "ubicacionFisica" => $aux["ubicacionFisica"],
                             "idEditorial" => $aux["editorial"],
                             "lugarEdicion" => $aux["lugarEdicion"],
                             "anio" => $aux["anio"],
@@ -78,6 +90,7 @@
                             "idMateria" => $aux["materia"]
                         );
                         
+                        //print_r($libro);
                         
                         $respuesta = Libros_modelo::editar_libro_modelo($libro);
                         if ($respuesta) {

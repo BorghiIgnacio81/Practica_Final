@@ -58,7 +58,7 @@
 
 
     <!-- Frames -->
-    <section class="frame-usuarios">
+    <section class="frame-usuarios active">
         <form action="" class="form-container">
             <h1>Gestión de Usuarios</h1>
             <article class="a-user">
@@ -125,8 +125,8 @@
                 <h2>Baja, Modificación y Penalidad</h2>
                 <div class="bm-user-buscar">
                     <div class="user-buscador search-type1">
-                        <span class="icon-search buscar-usuario"></span>
-                        <input type="text" name="" id="" placeholder="Ingrese nombre, apellido o dni">
+                        <span class="icon-search buscar-usuario-bm"></span>
+                        <input class="input-buscar-usuario-bm" type="text" name="" id="" placeholder="Ingrese nombre, apellido o dni">
                     </div>
                 </div>
 
@@ -135,7 +135,7 @@
                     <div class="frame-filters-select-container">
                         <span class="icon-play3"></span>
 
-                        <select name="" id="">
+                        <select class="filtro-buscar-usuario-bm" name="" id="">
                             <option value="">por Fecha (ASC)</option>
                             <option value="">por Fecha (DESC)</option>
                             <option value="">por Libro (ASC)</option>
@@ -158,51 +158,11 @@
                             <span class="icon-mail"><p>pabloperez@gmail.com</p></span>
                         </div>
                         <div class="add-pre-btns box-type1-btns">
-                            <span class="icon-hammer2 penal-user"></span>
-                            <span class="icon-pencil edit-user"></span>
-                            <span class="icon-bin del-user"></span>
+                            <span class="icon-hammer2 penal-user-bm"></span>
+                            <span class="icon-pencil edit-user-bm"></span>
+                            <span class="icon-bin del-user-bm"></span>
                         </div>
                     </div>
-                    <div class="add-pre-item box-type1">
-                        <h4>Pablo Perez</h4>
-                        <div class="add-pre-content box-type1-content">
-                            <span class="icon-home"><p>Alberdi 345</p></span>
-                            <span class="icon-phone"><p>+345515964</p></span>
-                            <span class="icon-mail"><p>pabloperez@gmail.com</p></span>
-                        </div>
-                        <div class="add-pre-btns box-type1-btns">
-                            <span class="icon-hammer2 penal-user"></span>
-                            <span class="icon-pencil edit-user"></span>
-                            <span class="icon-bin del-user"></span>
-                        </div>
-                    </div>
-                    <div class="add-pre-item box-type1">
-                        <h4>Pablo Perez</h4>
-                        <div class="add-pre-content box-type1-content">
-                            <span class="icon-home"><p>Alberdi 345</p></span>
-                            <span class="icon-phone"><p>+345515964</p></span>
-                            <span class="icon-mail"><p>pabloperez@gmail.com</p></span>
-                        </div>
-                        <div class="add-pre-btns box-type1-btns">
-                            <span class="icon-hammer2 penal-user"></span>
-                            <span class="icon-pencil edit-user"></span>
-                            <span class="icon-bin del-user"></span>
-                        </div>
-                    </div>
-                    <div class="add-pre-item box-type1">
-                        <h4>Pablo Perez</h4>
-                        <div class="add-pre-content box-type1-content">
-                            <span class="icon-home"><p>Alberdi 345</p></span>
-                            <span class="icon-phone"><p>+345515964</p></span>
-                            <span class="icon-mail"><p>pabloperez@gmail.com</p></span>
-                        </div>
-                        <div class="add-pre-btns box-type1-btns">
-                            <span class="icon-hammer2 penal-user"></span>
-                            <span class="icon-pencil edit-user"></span>
-                            <span class="icon-bin del-user"></span>
-                        </div>
-                    </div>
-
                 </div>
             </article>
         </form>
@@ -312,7 +272,7 @@
         </form>
     </section>
 
-    <section class="frame-libros active">
+    <section class="frame-libros">
         <form action="" class="form-container">
             <h1>Gestión de Libros</h1>
             <article class="a-libro">
@@ -803,38 +763,42 @@
                 
                 <div class="modal-form1-inputs">
                     <div class="modal-form1-input-item">
-                        <input type="text" id="" required>
+                        <input class="input-add-user nombre" type="text" id="" required>
                         <label for="">Nombre</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input type="text" name="" id="" required>
+                        <input class="input-add-user apellido" type="text" name="" id="" required>
                         <label for="">Apellido</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input type="text" name="" id="" required>
+                        <input class="input-add-user dni" type="text" name="" id="" required>
                         <label for="">DNI</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input type="date" name="" id="" required>
+                        <input class="input-add-user fechaNac" type="date" name="" id="" required>
                         <label for="">Fecha de Nacimiento</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input type="text" name="" id="" required>
+                        <input class="input-add-user direccion" type="text" name="" id="" required>
                         <label for="">Domicilio</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input type="text" name="" id="" required>
+                        <input class="input-add-user email" type="text" name="" id="" required>
                         <label for="">Email</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input type="text" name="" id="" required>
+                        <input class="input-add-user telefono" type="text" name="" id="" required>
                         <label for="">Telefono</label>
                     </div>
                 </div>
 
+                <div class="modal-form1-status db-add-user">
+
+                </div>
+
                 
                 <div class="modal-form1-btns">
-                    <button type="submit">Confirmar</button>
+                    <button type="button" class="confirm-modal-add-user">Confirmar</button>
                     <button type="button" class="cancel-modal-add-user">Cancelar</button>
                 </div>
 
@@ -854,35 +818,38 @@
                 
                 <div class="modal-form1-inputs">
                     <div class="modal-form1-input-item">
-                        <input type="text" value="TextoEjemplo" id="" required>
+                        <input class="input-edit-user nombre" type="text" id="" required>
                         <label for="">Nombre</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input type="text" value="TextoEjemplo" name="" id="" required>
+                        <input class="input-edit-user apellido" type="text" name="" id="" required>
                         <label for="">Apellido</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input type="text" value="TextoEjemplo" name="" id="" required>
+                        <input class="input-edit-user dni" type="text" name="" id="" required>
                         <label for="">DNI</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input type="date" value="TextoEjemplo" name="" id="" required>
+                        <input class="input-edit-user fechaNac" type="date" name="" id="" required>
                         <label for="">Fecha de Nacimiento</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input type="text" value="TextoEjemplo" name="" id="" required>
+                        <input class="input-edit-user direccion" type="text" name="" id="" required>
                         <label for="">Domicilio</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input type="text" value="TextoEjemplo" name="" id="" required>
+                        <input class="input-edit-user email" type="text" name="" id="" required>
                         <label for="">Email</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input type="text" value="TextoEjemplo" name="" id="" required>
+                        <input class="input-edit-user telefono" type="text" name="" id="" required>
                         <label for="">Telefono</label>
                     </div>
                 </div>
 
+                <div class="modal-form1-status db-edit-user">
+                    
+                </div>
                 
                 <div class="modal-form1-btns">
                     <button type="submit">Confirmar</button>
@@ -1255,7 +1222,7 @@
                 
                 <div class="modal-form1-confirmdialog">
                     <p>¿Está seguro de eliminar el siguiente elemento?</p>
-                    <span class="icon-user del-user-id"><p>#123415135 - Caperucita Verde</p></span>
+                    <span class="icon-book del-libro-id"></span>
                 </div>
 
                 <div class="modal-form1-status db-del-libro">

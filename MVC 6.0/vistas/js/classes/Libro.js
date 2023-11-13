@@ -14,7 +14,7 @@ var modalAddLibroCancel = document.querySelector(".cancel-modal-add-libro");
 var modalAddLibro = document.querySelector(".modal-add-libro");
 var modalAddLibroOpen = document.querySelector(".add-new-libro");
 var modalAddBotonSend = document.querySelector(".confirm-modal-add-libro");
-var modalStatusAdd = document.querySelector(".db-add-libro");
+var modalStatusAddLibro = document.querySelector(".db-add-libro");
 
 var campoTituloAdd = document.querySelector(".libro-add.titulo");
 var campoAutorAdd = document.querySelector(".libro-add.autor");
@@ -33,7 +33,7 @@ var modalEditLibroCancel = document.querySelector(".cancel-modal-edit-libro");
 var modalEditLibro = document.querySelector(".modal-frame.modal-edit-libro");
 var botonEditLibroOpen;
 var modalEditBotonSend = document.querySelector(".confirm-modal-edit-libro");
-var modalStatusEdit = document.querySelector(".db-edit-libro");
+var modalStatusEditLibro = document.querySelector(".db-edit-libro");
 
 var campoTituloEdit = document.querySelector(".libro-edit.titulo");
 var campoAutorEdit = document.querySelector(".libro-edit.autor");
@@ -52,7 +52,7 @@ var modalDelLibroCancel = document.querySelector(".cancel-modal-del-libro");
 var modalDelLibro = document.querySelector(".modal-del-libro");
 var botonDelLibroOpen;
 var modalDelBotonSend = document.querySelector(".confirm-modal-del-libro");
-var modalStatusDel = document.querySelector(".db-del-libro");
+var modalStatusDelLibro = document.querySelector(".db-del-libro");
 
 var campoModalDelLibro = document.querySelector(".icon-book.del-libro-id");
 
@@ -63,7 +63,7 @@ var modalPedidolibroCancel = document.querySelector(".cancel-modal-edit-libro-pe
 var modalPedidoLibro = document.querySelector(".modal-edit-libro-pedido");
 var botonPedidoLibroOpen = document.querySelectorAll(".edit-libro-pedido");
 var modalEditPedidoBotonSend = document.querySelector(".confirm-modal-edit-libro-pedido");
-var modalStatusEdit = document.querySelector(".db-edit-libro-pedido");
+var modalStatusEditLibro = document.querySelector(".db-edit-libro-pedido");
 
 var campoTituloEditPedido = document.querySelector(".libro-edit-pedido.titulo");
 var campoEditorialEditPedido = document.querySelector(".libro-edit-pedido.editorial");
@@ -228,25 +228,25 @@ class LibroController{
                 switch(accion){
                     case "add":
                         if(response.status == "ok"){
-                            modalStatusAdd.innerHTML = '<span class="icon-checkmark"> Libro agregado exitosamente</span>';
+                            modalStatusAddLibro.innerHTML = '<span class="icon-checkmark"> Libro agregado exitosamente</span>';
                         }else{
-                            modalStatusAdd.innerHTML = '<span class="icon-blocked"> No se ha podido agregar el libro</span>';
+                            modalStatusAddLibro.innerHTML = '<span class="icon-blocked"> No se ha podido agregar el libro</span>';
                         }
                         break;
                     case "edit":
                         if(response.status == "ok"){
-                            modalStatusEdit.innerHTML = '<span class="icon-checkmark"> Libro editado exitosamente</span>';
-                            solicitudAjaxBuscar(listadoResultadosLibrosBM, filtroBuscarLibrosBM.value, inputBuscarLibrosBM.value);
+                            modalStatusEditLibro.innerHTML = '<span class="icon-checkmark"> Libro editado exitosamente</span>';
+                            busquedaLibro();
                         }else{
-                            modalStatusEdit.innerHTML = '<span class="icon-blocked"> No se ha podido editar el libro</span>';
+                            modalStatusEditLibro.innerHTML = '<span class="icon-blocked"> No se ha podido editar el libro</span>';
                         }
                         break;
                     case "del":
                         if(response.status == "ok"){
-                            modalStatusDel.innerHTML = '<span class="icon-checkmark"> Libro eliminado exitosamente</span>';
-                            solicitudAjaxBuscar(listadoResultadosLibrosBM, filtroBuscarLibrosBM.value, inputBuscarLibrosBM.value);
+                            modalStatusDelLibro.innerHTML = '<span class="icon-checkmark"> Libro eliminado exitosamente</span>';
+                            busquedaLibro();
                         }else{
-                            modalStatusDel.innerHTML = '<span class="icon-blocked"> No se ha podido eliminar el libro</span>';
+                            modalStatusDelLibro.innerHTML = '<span class="icon-blocked"> No se ha podido eliminar el libro</span>';
                         }
                         break;
                     
@@ -271,8 +271,12 @@ var libroCtrl = new LibroController();
 
 // ------------------------  Evento buscar  ------------------------
 botonBuscarLibrosBM.addEventListener("click",()=>{
-    libroCtrl.solicitudAjaxBuscar(listadoResultadosLibrosBM, filtroBuscarLibrosBM.value, inputBuscarLibrosBM.value);
+    busquedaLibro();
 });
+
+function busquedaLibro(){
+    libroCtrl.solicitudAjaxBuscar(listadoResultadosLibrosBM, filtroBuscarLibrosBM.value, inputBuscarLibrosBM.value);
+}
 
 // ------------------------  Eventos añadir libro  ------------------------
 
@@ -285,6 +289,7 @@ modalAddLibroCancel.addEventListener("click", ()=>{
 });
 
 modalAddLibroOpen.addEventListener("click",()=>{
+    modalStatusAddLibro.innerHTML = "";
     campoTituloAdd.value = "";
     campoAutorAdd.value = "";
     campoUbicacionAdd.value = "";
@@ -329,7 +334,7 @@ function agregarEventoLibrosEditar(){
         botonEditLibroOpen[i].addEventListener("click",()=>{
             let idLibro = botonEditLibroOpen[i].getAttribute("idLibro");
             let objLibro = libroCtrl.buscarLibroPorid(idLibro);
-
+            modalStatusEditLibro.innerHTML = "";
             campoTituloEdit.value = objLibro.titulo;
             campoAutorEdit.value = objLibro.autor;
             campoUbicacionEdit.value = objLibro.ubicacionFisica;
@@ -379,7 +384,7 @@ function agregarEventoLibrosEliminar(){
         botonDelLibroOpen[i].addEventListener("click",()=>{
             let idLibro = botonDelLibroOpen[i].getAttribute("idLibro");
             let objLibro = libroCtrl.buscarLibroPorid(idLibro);
-
+            modalStatusDelLibro.innerHTML = "";
             campoModalDelLibro.innerHTML = "<p>#"+objLibro.idLibro+" - "+ objLibro.titulo+"</p>";
 
             modalDelLibro.setAttribute("idLibroTemp", idLibro);
@@ -390,7 +395,8 @@ function agregarEventoLibrosEliminar(){
 }
 
 modalDelBotonSend.addEventListener("click", ()=>{
-    let libro = libroCtrl.buscarLibroPorid(modalEditLibro.getAttribute("idLibroTemp"));
+    
+    let libro = libroCtrl.buscarLibroPorid(modalDelLibro.getAttribute("idLibroTemp"));
     
     libroCtrl.solicitudAjaxABM(libro.toJson(),"del");
 });
