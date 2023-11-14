@@ -63,7 +63,8 @@ var modalPedidolibroCancel = document.querySelector(".cancel-modal-edit-libro-pe
 var modalPedidoLibro = document.querySelector(".modal-edit-libro-pedido");
 var botonPedidoLibroOpen = document.querySelectorAll(".edit-libro-pedido");
 var modalEditPedidoBotonSend = document.querySelector(".confirm-modal-edit-libro-pedido");
-var modalStatusEditLibro = document.querySelector(".db-edit-libro-pedido");
+
+var modalStatusEditLibroPedido = document.querySelector(".db-edit-libro-pedido");
 
 var campoTituloEditPedido = document.querySelector(".libro-edit-pedido.titulo");
 var campoEditorialEditPedido = document.querySelector(".libro-edit-pedido.editorial");
@@ -135,12 +136,12 @@ class Libro{
             "titulo" : this.titulo,
             "autor" : this.autor,
             "ubicacionFisica" : this.ubicacionFisica,
-            "editorial" : this.editorial,
-            "materia" : this.materia,
+            "editorial" : this.editorial,            
             "lugarEdicion" : this.lugarEdicion,
             "anio" : this.anio,
             "serie" : this.serie,
-            "observaciones" : this.observaciones
+            "observaciones" : this.observaciones,
+            "materia" : this.materia
         }
     }
 }
@@ -342,11 +343,11 @@ function agregarEventoLibrosEditar(){
             campoAutorEdit.value = objLibro.autor;
             campoUbicacionEdit.value = objLibro.ubicacionFisica;
             campoEditorialEdit.value = objLibro.editorial;
-            campoMateriaEdit.value = objLibro.materia;
             campoOrigenEdit.value = objLibro.lugarEdicion;
             campoAnioEdit.value = objLibro.anio;
             campoEdicionEdit.value = objLibro.serie;
             campoObservacionEdit.value = objLibro.observaciones;
+            campoMateriaEdit.value = objLibro.materia;
     
             modalEditLibro.setAttribute("idLibroTemp", idLibro);
     

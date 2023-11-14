@@ -80,14 +80,14 @@
                         $libro = array(
                             "idLibro" => $aux["idLibro"],
                             "titulo" => $aux["titulo"],
-                            "autor" => $aux["autor"],
+                            "idAutor" => $aux["autor"],
+                            "idEditorial" => $aux["editorial"],
                             "ubicacionFisica" => $aux["ubicacionFisica"],
-                            "editorial" => $aux["editorial"],
                             "lugarEdicion" => $aux["lugarEdicion"],
                             "anio" => $aux["anio"],
                             "serie" => $aux["serie"],
                             "observaciones" => $aux["observaciones"],
-                            "materia" => $aux["materia"]
+                            "idMateria" => $aux["materia"]
                         );
                         
                         //print_r($libro);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-11-2023 a las 00:28:53
+-- Tiempo de generación: 14-11-2023 a las 05:36:45
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -35,7 +35,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `editarLibro` (IN `pIdLibro` INT, IN
     -- Obtener el ID del autor (si ya existe)
     SELECT idAutor INTO autorId
     FROM autores A
-    WHERE CONCAT(A.apellido, ', ', A.nombre) = pIdAutor
+    WHERE CONCAT(A.apellido, ', ', A.nombre) like pIdAutor
     LIMIT 1;
 
     -- Insertar en la tabla autores si el autor no existe
@@ -49,7 +49,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `editarLibro` (IN `pIdLibro` INT, IN
     -- Obtener el ID de la editorial (si ya existe)
     SELECT idEditorial INTO editorialId
     FROM editoriales E
-    WHERE E.editorial = pIdEditorial
+    WHERE E.editorial like pIdEditorial
     LIMIT 1;
 
     -- Insertar en la tabla editoriales si la editorial no existe
@@ -63,7 +63,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `editarLibro` (IN `pIdLibro` INT, IN
     -- Obtener el ID de la materia (si ya existe)
     SELECT idMateria INTO materiaId
     FROM Materias M
-    WHERE M.materia = pIdMateria
+    WHERE M.materia like pIdMateria
     LIMIT 1;
 
     -- Insertar en la tabla materias si la materia no existe
@@ -432,7 +432,41 @@ INSERT INTO `autores` VALUES
 (190, '0', '0', NULL, NULL),
 (191, '0', '0', NULL, NULL),
 (192, '', '', NULL, NULL),
-(193, ' Clara', 'Gomez', NULL, NULL);
+(193, ' Clara', 'Gomez', NULL, NULL),
+(194, '0', '0', NULL, NULL),
+(195, '0', '0', NULL, NULL),
+(196, '0', '0', NULL, NULL),
+(197, ' J.K', 'Rowling', NULL, NULL),
+(198, ' Jota ka', 'Rwlons', NULL, NULL),
+(199, '  Jota ka', 'RowlinGGG', NULL, NULL),
+(200, '   Jota ka', 'RowlinG', NULL, NULL),
+(201, 'Matias', 'Matias', NULL, NULL),
+(202, NULL, NULL, NULL, NULL),
+(203, NULL, NULL, NULL, NULL),
+(204, ' Juan', 'Echanove', NULL, NULL),
+(205, '1', '1', NULL, NULL),
+(206, NULL, NULL, NULL, NULL),
+(207, NULL, NULL, NULL, NULL),
+(208, NULL, NULL, NULL, NULL),
+(209, NULL, NULL, NULL, NULL),
+(210, NULL, NULL, NULL, NULL),
+(211, NULL, NULL, NULL, NULL),
+(212, NULL, NULL, NULL, NULL),
+(213, NULL, NULL, NULL, NULL),
+(214, NULL, NULL, NULL, NULL),
+(215, NULL, NULL, NULL, NULL),
+(216, NULL, NULL, NULL, NULL),
+(217, NULL, NULL, NULL, NULL),
+(218, NULL, NULL, NULL, NULL),
+(219, ' Alejandro 	', 'Mendoza', NULL, NULL),
+(220, NULL, NULL, NULL, NULL),
+(221, NULL, NULL, NULL, NULL),
+(222, ' Julio', 'Julio', NULL, NULL),
+(223, NULL, NULL, NULL, NULL),
+(224, NULL, NULL, NULL, NULL),
+(225, NULL, NULL, NULL, NULL),
+(226, ' Julio', 'Julio', NULL, NULL),
+(227, ' Julio', 'Julio', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -478,7 +512,29 @@ INSERT INTO `editoriales` VALUES
 (24, 'Anagrama', NULL, NULL),
 (25, '1', NULL, NULL),
 (26, '0', NULL, NULL),
-(27, '4', NULL, NULL);
+(27, '4', NULL, NULL),
+(28, NULL, NULL, NULL),
+(29, NULL, NULL, NULL),
+(30, NULL, NULL, NULL),
+(31, NULL, NULL, NULL),
+(32, NULL, NULL, NULL),
+(33, NULL, NULL, NULL),
+(34, NULL, NULL, NULL),
+(35, NULL, NULL, NULL),
+(36, NULL, NULL, NULL),
+(37, NULL, NULL, NULL),
+(38, NULL, NULL, NULL),
+(39, NULL, NULL, NULL),
+(40, NULL, NULL, NULL),
+(41, NULL, NULL, NULL),
+(42, NULL, NULL, NULL),
+(43, NULL, NULL, NULL),
+(44, NULL, NULL, NULL),
+(45, 'Juliana', NULL, NULL),
+(46, NULL, NULL, NULL),
+(47, NULL, NULL, NULL),
+(48, NULL, NULL, NULL),
+(49, 'Anagrama lo flipa', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -569,7 +625,7 @@ INSERT INTO `libros` VALUES
 (62, 'Ciencias Sociales', 12, 2, 'F2', 'Buenos Aires-Argentina', 2021, 1, 'Parte de una serie', 12, 67),
 (63, 'Calculo Avanzado', 13, 3, 'A3', 'Rosario-Argentina', 2022, 0, 'Nuevo', 13, 68),
 (64, 'FiloSofia contemporanea', 14, 4, 'B4', 'Buenos Aires-Argentina', 2020, 0, 'En excelente estado', 14, 69),
-(65, 'Psicologia del Desarrollo', 15, 5, 'C5', 'Buenos Aires-Argentina', 2019, 0, 'Como nuevo', 15, 70),
+(65, 'Psicologia del Desarrollo 2', 203, 29, 'C5', 'Buenos Aires-Argentina', 2019, 1, 'Como nuevo', 48, 1),
 (66, 'Ingles Intermedio', 16, 6, 'D6', 'Cordoba-Argentina', 2021, 1, 'Parte de una serie', 16, 71),
 (67, 'Historia Antigua', 17, 7, 'E7', 'Buenos Aires-Argentina', 2018, 0, 'En buen estado', 5, 72),
 (68, 'Algebra Lineal', 18, 8, 'F8', 'Buenos Aires-Argentina', 2022, 0, 'Nuevo', 1, 73),
@@ -639,7 +695,7 @@ INSERT INTO `libros` VALUES
 (132, 'Los Juegos del Hambre: En Llamas', 48, 7, 'A7', 'Rosario-Argentina', 2009, 1, 'Parte de una serie', 11, 107),
 (133, 'El Retrato de Dorian Gray', 8, 8, 'B8', 'Buenos Aires-Argentina', 1890, 0, 'ClÃ¡sico', 11, 108),
 (134, 'Los Hombres Me Explican Cosas', 9, 9, 'C9', 'Buenos Aires-Argentina', 2014, 0, 'En buen estado', 11, 109),
-(135, 'Harry Potter y la CÃ¡mara Secreta', 51, 10, 'D10', 'Cordoba-Argentina', 1998, 1, 'Parte de una serie', 11, 110),
+(135, 'Harry Potter y la Camara Secreta', 200, 24, NULL, 'Cordoba-Argentina', 1998, 1, 'Parte de una serie', 46, 1),
 (136, 'El CÃ³digo Da Vinci', 11, 1, 'A1', 'Buenos Aires-Argentina', 2003, 0, 'En buen estado', 11, 111),
 (137, 'Las Ventajas de Ser Invisible', 12, 2, 'B2', 'Buenos Aires-Argentina', 1999, 0, 'En buen estado', 10, 112),
 (138, 'El Hobbit', 49, 3, 'C3', 'Buenos Aires-Argentina', 1937, 1, 'Parte de una serie', 11, 113),
@@ -864,7 +920,7 @@ INSERT INTO `libros` VALUES
 (358, 'Los Juegos del Hambre: En Llamas', 48, 7, 'A7', 'Rosario-Argentina', 2009, 1, 'Parte de una serie', 11, 107),
 (359, 'El Retrato de Dorian Gray', 8, 8, 'B8', 'Buenos Aires-Argentina', 1890, 0, 'ClÃ¡sico', 11, 108),
 (360, 'Los Hombres Me Explican Cosas', 9, 9, 'C9', 'Buenos Aires-Argentina', 2014, 0, 'En buen estado', 11, 109),
-(361, 'Harry Potter y la CÃ¡mara Secreta', 51, 10, 'D10', 'Cordoba-Argentina', 1998, 1, 'Parte de una serie', 11, 110),
+(361, 'Harry Potter y la Camara Secreta', 197, 24, NULL, 'Cordoba-Argentina', 1998, 1, 'Parte de una serie', 11, 1),
 (362, 'El CÃ³digo Da Vinci', 11, 1, 'A1', 'Buenos Aires-Argentina', 2003, 0, 'En buen estado', 11, 111),
 (363, 'Las Ventajas de Ser Invisible', 12, 2, 'B2', 'Buenos Aires-Argentina', 1999, 0, 'En buen estado', 10, 112),
 (364, 'El Hobbit', 49, 3, 'C3', 'Buenos Aires-Argentina', 1937, 1, 'Parte de una serie', 11, 113),
@@ -956,8 +1012,9 @@ INSERT INTO `libros` VALUES
 (450, 'InformÃ¡tica 5', 16, 1, 'D11', 'Buenos Aires-Argentina', 2023, 1, 'Parte de una serie', 19, 127),
 (451, 'Psicologia 5', 17, 1, 'E11', 'Buenos Aires-Argentina', 2023, 1, 'Parte de una serie', 8, 127),
 (452, 'ComunicaciÃ³n 5', 18, 1, 'F11', 'Buenos Aires-Argentina', 2023, 1, 'Parte de una serie', 3, 127),
-(466, 'Harry PANZAS y el asado con cuero', 191, 26, NULL, 'Mejico', 0, 1, 'faltan paginas', 44, 1),
-(467, 'Harry el Sucio', 193, 24, 'A44', 'Argentina', 2021, 0, 'Paginas rayadas', 11, 1);
+(467, 'Harry el Sucio', 193, 24, 'A44', 'Argentina', 2021, 0, 'Paginas rayadas', 11, 1),
+(472, 'Yo Claudio', 204, 24, 'A44', 'Argentina', 2011, 1, 'Roma', 5, 1),
+(475, 'Julio Julio Julio', 222, 49, 'A44', 'Argentina', 2000, 0, 'Buen estado', 11, 1);
 
 -- --------------------------------------------------------
 
@@ -1107,7 +1164,25 @@ INSERT INTO `materias` VALUES
 (42, 'Fantasia'),
 (43, '1'),
 (44, '0'),
-(45, '');
+(45, ''),
+(46, 'novela'),
+(47, NULL),
+(48, NULL),
+(49, NULL),
+(50, 'GoieG'),
+(51, NULL),
+(52, NULL),
+(53, NULL),
+(54, NULL),
+(55, NULL),
+(56, NULL),
+(57, NULL),
+(58, NULL),
+(59, NULL),
+(64, 'Calistenia'),
+(65, NULL),
+(66, NULL),
+(67, NULL);
 
 -- --------------------------------------------------------
 
@@ -2328,19 +2403,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `autores`
 --
 ALTER TABLE `autores`
-  MODIFY `idAutor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=194;
+  MODIFY `idAutor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=228;
 
 --
 -- AUTO_INCREMENT de la tabla `editoriales`
 --
 ALTER TABLE `editoriales`
-  MODIFY `idEditorial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `idEditorial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT de la tabla `libros`
 --
 ALTER TABLE `libros`
-  MODIFY `idLibro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=471;
+  MODIFY `idLibro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=476;
 
 --
 -- AUTO_INCREMENT de la tabla `libros_reservas`
@@ -2352,7 +2427,7 @@ ALTER TABLE `libros_reservas`
 -- AUTO_INCREMENT de la tabla `materias`
 --
 ALTER TABLE `materias`
-  MODIFY `idMateria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `idMateria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT de la tabla `prestamos`

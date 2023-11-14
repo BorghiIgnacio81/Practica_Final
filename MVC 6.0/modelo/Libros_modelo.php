@@ -43,7 +43,7 @@ class Libros_modelo {
 
     static public function nuevo_libro_modelo($libro){
         try {
-            $consulta = Conectar::conexion()->prepare("CALL nuevoLibro(
+            $consulta = Conectar::conexion()->prepare("CALL insertarLibro(
                 :titulo,
                 :idAutor,
                 :idEditorial, 
