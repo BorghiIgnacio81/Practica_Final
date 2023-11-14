@@ -178,14 +178,14 @@ class LibroController{
     
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                this.listaLibrosBM = JSON.parse(xhr.responseText); //el json que envía el servidor
+                let listaLibros = JSON.parse(xhr.responseText); //el json que envía el servidor
                 let listado = "";
 
 
-                libroCtrl.listaLibrosBM = this.listaLibrosBM;
+                libroCtrl.listaLibrosBM = listaLibros;
 
-                if(this.listaLibrosBM){
-                    this.listaLibrosBM.forEach(function (l) {
+                if(listaLibros){
+                    listaLibros.forEach(function (l) {
                         listado += (new Libro(l.idLibro, l.titulo, l.autor, l.ubicacionFisica, l.editorial, l.materia, l.lugarEdicion, l.anio, l.serie, l.observaciones)).printBoxLibroBM();
                     });
 
@@ -202,12 +202,12 @@ class LibroController{
                     //fin agregar eventos
 
                 }else{
-                    document.querySelector(target).innerHTML = "<p>No se han encontrado resultados.</p>";
+                    target.innerHTML = "<p>No se han encontrado resultados.</p>";
                 }
 
             } else if (xhr.readyState == 4 && xhr.status != 200) {
-                this.listaLibrosBM = null;
-                console.error("Error en la solicitud: " + xhr.status);
+                libroCtrl.listaLibrosBM = null;
+                target.innerHTML = "<p>Se ha producido un error, intente nuevamente.</p>";
             }
         };
     
@@ -290,6 +290,7 @@ modalAddLibroCancel.addEventListener("click", ()=>{
 
 modalAddLibroOpen.addEventListener("click",()=>{
     modalStatusAddLibro.innerHTML = "";
+
     campoTituloAdd.value = "";
     campoAutorAdd.value = "";
     campoUbicacionAdd.value = "";
@@ -299,6 +300,7 @@ modalAddLibroOpen.addEventListener("click",()=>{
     campoAnioAdd.value = "";
     campoEdicionAdd.value = "";
     campoObservacionAdd.value = "";
+    
     modalAddLibro.classList.add('active');
 
 });
@@ -335,6 +337,7 @@ function agregarEventoLibrosEditar(){
             let idLibro = botonEditLibroOpen[i].getAttribute("idLibro");
             let objLibro = libroCtrl.buscarLibroPorid(idLibro);
             modalStatusEditLibro.innerHTML = "";
+
             campoTituloEdit.value = objLibro.titulo;
             campoAutorEdit.value = objLibro.autor;
             campoUbicacionEdit.value = objLibro.ubicacionFisica;
@@ -384,7 +387,9 @@ function agregarEventoLibrosEliminar(){
         botonDelLibroOpen[i].addEventListener("click",()=>{
             let idLibro = botonDelLibroOpen[i].getAttribute("idLibro");
             let objLibro = libroCtrl.buscarLibroPorid(idLibro);
+            
             modalStatusDelLibro.innerHTML = "";
+
             campoModalDelLibro.innerHTML = "<p>#"+objLibro.idLibro+" - "+ objLibro.titulo+"</p>";
 
             modalDelLibro.setAttribute("idLibroTemp", idLibro);
@@ -395,7 +400,6 @@ function agregarEventoLibrosEliminar(){
 }
 
 modalDelBotonSend.addEventListener("click", ()=>{
-    
     let libro = libroCtrl.buscarLibroPorid(modalDelLibro.getAttribute("idLibroTemp"));
     
     libroCtrl.solicitudAjaxABM(libro.toJson(),"del");

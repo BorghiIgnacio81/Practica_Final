@@ -94,30 +94,8 @@
                             <span class="icon-cross"></span>
                         </div>
                     </div>
-                    <div class="add-pre-item box-type1">
-                        <h4>Pablo Perez</h4>
-                        <div class="add-pre-content box-type1-content">
-                            <span class="icon-home"><p>Alberdi 345</p></span>
-                            <span class="icon-phone"><p>+345515964</p></span>
-                            <span class="icon-mail"><p>pabloperez@gmail.com</p></span>
-                        </div>
-                        <div class="add-pre-btns box-type1-btns">
-                            <span class="icon-checkmark"></span>
-                            <span class="icon-cross"></span>
-                        </div>
-                    </div>
-                    <div class="add-pre-item box-type1">
-                        <h4>Pablo Perez</h4>
-                        <div class="add-pre-content box-type1-content">
-                            <span class="icon-home"><p>Alberdi 345</p></span>
-                            <span class="icon-phone"><p>+345515964</p></span>
-                            <span class="icon-mail"><p>pabloperez@gmail.com</p></span>
-                        </div>
-                        <div class="add-pre-btns box-type1-btns">
-                            <span class="icon-checkmark"></span>
-                            <span class="icon-cross"></span>
-                        </div>
-                    </div>
+                    
+                    
                 </div>
             </article>
             
@@ -136,13 +114,11 @@
                         <span class="icon-play3"></span>
 
                         <select class="filtro-buscar-usuario-bm" name="" id="">
-                            <option value="">por Fecha (ASC)</option>
-                            <option value="">por Fecha (DESC)</option>
-                            <option value="">por Libro (ASC)</option>
-                            <option value="">por Libro (DESC)</option>
-                            <option value="">por Estado: Aprobados</option>
-                            <option value="">por Estado: Rechazados</option>
-                            <option value="">por Estado: A confirmar</option>
+                            <option value="">Sin Filtros</option>
+                            <option value="apellido ASC">por Apellido (ASC)</option>
+                            <option value="apellido DESC">por Apellido (DESC)</option>
+                            <option value="direccion ASC">por Domicilio (ASC)</option>
+                            <option value="direccion DESC">por Domicilio (DESC)</option>
     
                         </select>    
                         
@@ -150,19 +126,7 @@
                 </div>
 
                 <div class="bm-user-result">
-                    <div class="add-pre-item box-type1">
-                        <h4>Pablo Perez</h4>
-                        <div class="add-pre-content box-type1-content">
-                            <span class="icon-home"><p>Alberdi 345</p></span>
-                            <span class="icon-phone"><p>+345515964</p></span>
-                            <span class="icon-mail"><p>pabloperez@gmail.com</p></span>
-                        </div>
-                        <div class="add-pre-btns box-type1-btns">
-                            <span class="icon-hammer2 penal-user-bm"></span>
-                            <span class="icon-pencil edit-user-bm"></span>
-                            <span class="icon-bin del-user-bm"></span>
-                        </div>
-                    </div>
+                    
                 </div>
             </article>
         </form>
@@ -845,14 +809,18 @@
                         <input class="input-edit-user telefono" type="text" name="" id="" required>
                         <label for="">Telefono</label>
                     </div>
+                    <div class="modal-form1-input-item">
+                        <input class="input-edit-user tipoUsuario" type="text" name="" id="" required>
+                        <label for="">Privilegios</label>
+                    </div>
                 </div>
 
                 <div class="modal-form1-status db-edit-user">
-                    
+
                 </div>
                 
                 <div class="modal-form1-btns">
-                    <button type="submit">Confirmar</button>
+                    <button type="button" class="confirm-modal-edit-user">Confirmar</button>
                     <button type="button" class="cancel-modal-edit-user">Cancelar</button>
                 </div>
 
@@ -872,14 +840,17 @@
                 
                 <div class="modal-form1-inputs user-penalidad">
                     <div class="modal-form1-input-item">
-                        <input type="number" id="" required>
+                        <input class="input-penal-user" type="number" id="" required>
                         <label for="">Penalidad (Horas)</label>
                     </div>
                 </div>
 
+                <div class="modal-form1-status db-penal-user">
+
+                </div>
                 
                 <div class="modal-form1-btns">
-                    <button type="submit">Confirmar</button>
+                    <button type="button" class="confirm-modal-penal-user">Confirmar</button>
                     <button type="button" class="cancel-modal-penal-user">Cancelar</button>
                 </div>
 
@@ -902,9 +873,12 @@
                     <span class="icon-user del-user-id"><p>#123415135 - Pablo Perez</p></span>
                 </div>
 
+                <div class="modal-form1-status db-del-user">
+                    
+                </div>
                 
                 <div class="modal-form1-btns">
-                    <button type="submit">Confirmar</button>
+                    <button type="button" class="confirm-modal-del-user">Confirmar</button>
                     <button type="button" class="cancel-modal-del-user">Cancelar</button>
                 </div>
 

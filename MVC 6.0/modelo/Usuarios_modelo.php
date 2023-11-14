@@ -38,9 +38,6 @@ class Usuarios_modelo {
                 :dni, 
                 :fechaNac, 
                 :telefono, 
-                :tipoUsuario, 
-                :penalidadTipo, 
-                :penalidadCantidad, 
                 :email,
                 :direccion)");
 
@@ -49,9 +46,6 @@ class Usuarios_modelo {
             $consulta->bindParam(":dni", $usuario["dni"], PDO::PARAM_INT);
             $consulta->bindParam(":fechaNac", $usuario["fechaNac"], PDO::PARAM_STR);
             $consulta->bindParam(":telefono", $usuario["telefono"], PDO::PARAM_INT);
-            $consulta->bindParam(":tipoUsuario", $usuario["tipoUsuario"], PDO::PARAM_INT);
-            $consulta->bindParam(":penalidadTipo", $usuario["penalidadTipo"], PDO::PARAM_INT);
-            $consulta->bindParam(":penalidadCantidad", $usuario["penalidadCantidad"], PDO::PARAM_INT);
             $consulta->bindParam(":email", $usuario["email"], PDO::PARAM_STR);
             $consulta->bindParam(":direccion", $usuario["direccion"], PDO::PARAM_STR);
             $consulta->execute();
@@ -73,9 +67,7 @@ class Usuarios_modelo {
                 :dni, 
                 :fechaNac, 
                 :telefono, 
-                :tipoUsuario, 
-                :penalidadTipo, 
-                :penalidadCantidad, 
+                :tipoUsuario,
                 :email,
                 :direccion)");
             $consulta->bindParam(":idUsuario", $usuario["idUsuario"], PDO::PARAM_INT);
@@ -85,8 +77,6 @@ class Usuarios_modelo {
             $consulta->bindParam(":fechaNac", $usuario["fechaNac"], PDO::PARAM_STR);
             $consulta->bindParam(":telefono", $usuario["telefono"], PDO::PARAM_INT);
             $consulta->bindParam(":tipoUsuario", $usuario["tipoUsuario"], PDO::PARAM_INT);
-            $consulta->bindParam(":penalidadTipo", $usuario["penalidadTipo"], PDO::PARAM_INT);
-            $consulta->bindParam(":penalidadCantidad", $usuario["penalidadCantidad"], PDO::PARAM_INT);
             $consulta->bindParam(":email", $usuario["email"], PDO::PARAM_STR);
             $consulta->bindParam(":direccion", $usuario["direccion"], PDO::PARAM_STR);
             $consulta->execute();
