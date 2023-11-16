@@ -27,7 +27,7 @@
     
     <aside>
         <div class="avatar">
-            <img src="img/129868.PNG">
+            <img src="vistas/img/129868.PNG">
             <span class="icon-cross"></span>
         </div>
 
@@ -774,7 +774,7 @@
     <div class="modal-frame modal-edit-user">
         <form action="#" class="modal-form1">
             <div class="modal-form1-titulo">
-                <p>Agregar nuevo usuario</p>
+                <p>Editar usuario</p>
                 <span class="icon-cross close-modal-edit-user"></span>
             </div>
 
@@ -870,7 +870,9 @@
                 
                 <div class="modal-form1-confirmdialog">
                     <p>¿Está seguro de eliminar el siguiente elemento?</p>
-                    <span class="icon-user del-user-id"><p>#123415135 - Pablo Perez</p></span>
+                    <span class="icon-user del-usuario-id">
+
+                    </span>
                 </div>
 
                 <div class="modal-form1-status db-del-user">
@@ -1038,7 +1040,7 @@
                     </div>
                     <div class="modal-form1-input-item">
                         <input class="libro-add edicion" type="text" name="" id="" required>
-                        <label for="">Número de serie</label>
+                        <label for="">Parte de una serie</label>
                     </div>
                     <div class="modal-form1-input-item">
                         <input class="libro-add observacion" type="text" name="" id="" required>
@@ -1161,7 +1163,7 @@
                     </div>
                     <div class="modal-form1-input-item">
                         <input type="text" class="libro-edit edicion" name="" id="" required>
-                        <label for="">Número de edición</label>
+                        <label for="">Parte de una serie</label>
                     </div>
                     <div class="modal-form1-input-item">
                         <input type="text" class="libro-edit observacion" name="" id="" required>
@@ -1265,10 +1267,10 @@
 
     <!-- Scripts -->
     <script src="vistas/js/classes/Libro.js"></script>
+    <script src="vistas/js/classes/Usuario.js"></script>
     <script src="vistas/js/calendario.js"></script>
     <script src="vistas/js/reservas.js"></script>
     <script src="vistas/js/dashboard-menu.js"></script>
-    <script src="vistas/js/user.js"></script>
     <script src="vistas/js/libro.js"></script>
     <script src="vistas/js/prestamo.js"></script>
     <script src="vistas/js/solicitar-libro.js"></script>

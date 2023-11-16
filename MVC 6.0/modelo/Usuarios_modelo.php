@@ -1,5 +1,5 @@
 <?php
-require_once 'Conectar.php';
+include_once 'Conectar.php';
 class Usuarios_modelo {
         
     
@@ -14,7 +14,7 @@ class Usuarios_modelo {
         }
         catch(Exception $e)
         {
-            return array();
+            return null;
         }
     }
     
@@ -23,10 +23,16 @@ class Usuarios_modelo {
             $consulta = Conectar::conexion()->prepare("CALL `usuarioXparam`(:pUsuario)");
             $consulta->bindParam(":pUsuario", $pUsuario, PDO::PARAM_STR);
             $consulta->execute();
+
             $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
-            return $resultados;
+            
+            if(count($resultados) > 0)
+                return $resultados;
+            else
+                return null;
+
         } catch (PDOException $e) {
-            return array();
+            return null;
         }
     }
 

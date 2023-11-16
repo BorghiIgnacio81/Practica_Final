@@ -3,6 +3,13 @@
     set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/../modelo/');
     include_once 'Usuarios_modelo.php';
 
+    $response = json_decode(file_get_contents('php://input'),true);
+        
+    if($response){
+        Usuarios_Controlador::get_usuarios_controlador($response);
+    }
+
+
    class Usuarios_Controlador {
   
       static public function get_usuarios_controlador($data) { 
