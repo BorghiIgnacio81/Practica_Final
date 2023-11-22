@@ -4,30 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="vistas/css/normalize-cp.css">
-    <link rel="stylesheet" href="vistas/css/dashboard-menu.css">
+    <link rel="stylesheet" href="css/normalize-cp.css">
+    <link rel="stylesheet" href="css/dashboard-menu.css">
     
-    <link rel="stylesheet" href="vistas/css/cp-user.css">
-    <link rel="stylesheet" href="vistas/css/cp-reserva.css">
-    <link rel="stylesheet" href="vistas/css/cp-libro.css">
-    <link rel="stylesheet" href="vistas/css/cp-prestamo.css">
-    <link rel="stylesheet" href="vistas/css/cp-solicitar.css">
+    <link rel="stylesheet" href="css/cp-user.css">
+    <link rel="stylesheet" href="css/cp-reserva.css">
+    <link rel="stylesheet" href="css/cp-libro.css">
+    <link rel="stylesheet" href="css/cp-prestamo.css">
+    <link rel="stylesheet" href="css/cp-solicitar.css">
 
-    <link rel="stylesheet" href="vistas/css/modal-reserva.css">
-    <link rel="stylesheet" href="vistas/css/modal-prestamo.css">
-    <link rel="stylesheet" href="vistas/css/modal-user-add.css">
-    <link rel="stylesheet" href="vistas/css/modal-user-penal.css">
-    <link rel="stylesheet" href="vistas/css/modal-user-del.css">
+    <link rel="stylesheet" href="css/modal-reserva.css">
+    <link rel="stylesheet" href="css/modal-prestamo.css">
+    <link rel="stylesheet" href="css/modal-user-add.css">
+    <link rel="stylesheet" href="css/modal-user-penal.css">
+    <link rel="stylesheet" href="css/modal-user-del.css">
     
-    <link rel="stylesheet" href="vistas/css/calendario.css">
-    <link rel="stylesheet" href="vistas/css/icomoon.css">
+    <link rel="stylesheet" href="css/calendario.css">
+    <link rel="stylesheet" href="css/icomoon.css">
 
 </head>
 <body>
     
     <aside>
         <div class="avatar">
-            <img src="vistas/img/129868.PNG">
+            <img src="img/129868.PNG">
             <span class="icon-cross"></span>
         </div>
 
@@ -58,7 +58,7 @@
 
 
     <!-- Frames -->
-    <section class="frame-usuarios active">
+    <section class="frame-usuarios">
         <form action="" class="form-container">
             <h1>Gestión de Usuarios</h1>
             <article class="a-user">
@@ -94,8 +94,30 @@
                             <span class="icon-cross"></span>
                         </div>
                     </div>
-                    
-                    
+                    <div class="add-pre-item box-type1">
+                        <h4>Pablo Perez</h4>
+                        <div class="add-pre-content box-type1-content">
+                            <span class="icon-home"><p>Alberdi 345</p></span>
+                            <span class="icon-phone"><p>+345515964</p></span>
+                            <span class="icon-mail"><p>pabloperez@gmail.com</p></span>
+                        </div>
+                        <div class="add-pre-btns box-type1-btns">
+                            <span class="icon-checkmark"></span>
+                            <span class="icon-cross"></span>
+                        </div>
+                    </div>
+                    <div class="add-pre-item box-type1">
+                        <h4>Pablo Perez</h4>
+                        <div class="add-pre-content box-type1-content">
+                            <span class="icon-home"><p>Alberdi 345</p></span>
+                            <span class="icon-phone"><p>+345515964</p></span>
+                            <span class="icon-mail"><p>pabloperez@gmail.com</p></span>
+                        </div>
+                        <div class="add-pre-btns box-type1-btns">
+                            <span class="icon-checkmark"></span>
+                            <span class="icon-cross"></span>
+                        </div>
+                    </div>
                 </div>
             </article>
             
@@ -103,8 +125,8 @@
                 <h2>Baja, Modificación y Penalidad</h2>
                 <div class="bm-user-buscar">
                     <div class="user-buscador search-type1">
-                        <span class="icon-search buscar-usuario-bm"></span>
-                        <input class="input-buscar-usuario-bm" type="text" name="" id="" placeholder="Ingrese nombre, apellido o dni">
+                        <span class="icon-search buscar-usuario"></span>
+                        <input type="text" name="" id="" placeholder="Ingrese nombre, apellido o dni">
                     </div>
                 </div>
 
@@ -113,12 +135,14 @@
                     <div class="frame-filters-select-container">
                         <span class="icon-play3"></span>
 
-                        <select class="filtro-buscar-usuario-bm" name="" id="">
-                            <option value="">Sin Filtros</option>
-                            <option value="apellido ASC">por Apellido (ASC)</option>
-                            <option value="apellido DESC">por Apellido (DESC)</option>
-                            <option value="direccion ASC">por Domicilio (ASC)</option>
-                            <option value="direccion DESC">por Domicilio (DESC)</option>
+                        <select name="" id="">
+                            <option value="">por Fecha (ASC)</option>
+                            <option value="">por Fecha (DESC)</option>
+                            <option value="">por Libro (ASC)</option>
+                            <option value="">por Libro (DESC)</option>
+                            <option value="">por Estado: Aprobados</option>
+                            <option value="">por Estado: Rechazados</option>
+                            <option value="">por Estado: A confirmar</option>
     
                         </select>    
                         
@@ -126,7 +150,59 @@
                 </div>
 
                 <div class="bm-user-result">
-                    
+                    <div class="add-pre-item box-type1">
+                        <h4>Pablo Perez</h4>
+                        <div class="add-pre-content box-type1-content">
+                            <span class="icon-home"><p>Alberdi 345</p></span>
+                            <span class="icon-phone"><p>+345515964</p></span>
+                            <span class="icon-mail"><p>pabloperez@gmail.com</p></span>
+                        </div>
+                        <div class="add-pre-btns box-type1-btns">
+                            <span class="icon-hammer2 penal-user"></span>
+                            <span class="icon-pencil edit-user"></span>
+                            <span class="icon-bin del-user"></span>
+                        </div>
+                    </div>
+                    <div class="add-pre-item box-type1">
+                        <h4>Pablo Perez</h4>
+                        <div class="add-pre-content box-type1-content">
+                            <span class="icon-home"><p>Alberdi 345</p></span>
+                            <span class="icon-phone"><p>+345515964</p></span>
+                            <span class="icon-mail"><p>pabloperez@gmail.com</p></span>
+                        </div>
+                        <div class="add-pre-btns box-type1-btns">
+                            <span class="icon-hammer2 penal-user"></span>
+                            <span class="icon-pencil edit-user"></span>
+                            <span class="icon-bin del-user"></span>
+                        </div>
+                    </div>
+                    <div class="add-pre-item box-type1">
+                        <h4>Pablo Perez</h4>
+                        <div class="add-pre-content box-type1-content">
+                            <span class="icon-home"><p>Alberdi 345</p></span>
+                            <span class="icon-phone"><p>+345515964</p></span>
+                            <span class="icon-mail"><p>pabloperez@gmail.com</p></span>
+                        </div>
+                        <div class="add-pre-btns box-type1-btns">
+                            <span class="icon-hammer2 penal-user"></span>
+                            <span class="icon-pencil edit-user"></span>
+                            <span class="icon-bin del-user"></span>
+                        </div>
+                    </div>
+                    <div class="add-pre-item box-type1">
+                        <h4>Pablo Perez</h4>
+                        <div class="add-pre-content box-type1-content">
+                            <span class="icon-home"><p>Alberdi 345</p></span>
+                            <span class="icon-phone"><p>+345515964</p></span>
+                            <span class="icon-mail"><p>pabloperez@gmail.com</p></span>
+                        </div>
+                        <div class="add-pre-btns box-type1-btns">
+                            <span class="icon-hammer2 penal-user"></span>
+                            <span class="icon-pencil edit-user"></span>
+                            <span class="icon-bin del-user"></span>
+                        </div>
+                    </div>
+
                 </div>
             </article>
         </form>
@@ -252,7 +328,7 @@
                     <div class="frame-filters-select-container">
                         <span class="icon-play3"></span>
 
-                        <select name="" id="" class="filtro-libro-pedido">
+                        <select name="" id="">
                             <option value="">por Titulo (ASC)</option>
                             <option value="">por Titulo (DESC)</option>
                             <option value="">por Autor (ASC)</option>
@@ -276,9 +352,9 @@
                             <span class="icon-calendar"><p>Fecha solicitada: 16/10/2023</p></span>
                         </div>
                         <div class="add-lp-btns box-type1-btns">
-                            <span class="icon-checkmark" idPedido="123"></span>
-                            <span class="icon-pencil edit-libro-pedido" idPedido="123"></span>
-                            <span class="icon-cross" idPedido="123"></span>
+                            <span class="icon-checkmark"></span>
+                            <span class="icon-pencil edit-libro-pedido"></span>
+                            <span class="icon-cross"></span>
                         </div>
                     </div>
 
@@ -328,14 +404,13 @@
                     <div class="frame-filters-select-container">
                         <span class="icon-play3"></span>
 
-                        <select name="" id="" class="filtro-libro-bm">
-                            <option value="">Sin filtros</option>
-                            <option value="titulo ASC">por Titulo (ASC)</option>
-                            <option value="titulo DESC">por Titulo (DESC)</option>
-                            <option value="autor ASC">por Autor (ASC)</option>
-                            <option value="autor DESC">por Autor (DESC)</option>
-                            <option value="materia ASC">por Materia (ASC)</option>
-                            <option value="materia DESC">por Materia (DESC)</option>
+                        <select name="" id="">
+                            <option value="">por Titulo (ASC)</option>
+                            <option value="">por Titulo (DESC)</option>
+                            <option value="">por Autor (ASC)</option>
+                            <option value="">por Autor (DESC)</option>
+                            <option value="">por Materia (ASC)</option>
+                            <option value="">por Materia (DESC)</option>
     
                         </select>    
                         
@@ -343,7 +418,54 @@
                 </div>
                 
                 <div class="bm-libro-result librosBM">
-                    
+                    <div class="add-pre-item box-type1">
+                        <h4>Los 5 mosquiteros</h4>
+                        <div class="add-pre-content box-type1-content">
+                            <span class="icon-quill" title="Autor"><p>Arnold Sampallo</p></span>
+                            <span class="icon-book" title="Materia"><p>Historia</p></span>
+                            <span class="icon-library" title="Editorial"><p>Santillana</p></span>
+                        </div>
+                        <div class="add-pre-btns box-type1-btns">
+                            <span class="icon-pencil edit-libro"></span>
+                            <span class="icon-bin del-libro"></span>
+                        </div>
+                    </div>
+                    <div class="add-pre-item box-type1">
+                        <h4>Los 5 mosquiteros</h4>
+                        <div class="add-pre-content box-type1-content">
+                            <span class="icon-quill" title="Autor"><p>Arnold Sampallo</p></span>
+                            <span class="icon-book" title="Materia"><p>Historia</p></span>
+                            <span class="icon-library" title="Editorial"><p>Santillana</p></span>
+                        </div>
+                        <div class="add-pre-btns box-type1-btns">
+                            <span class="icon-pencil edit-libro"></span>
+                            <span class="icon-bin del-libro"></span>
+                        </div>
+                    </div>
+                    <div class="add-pre-item box-type1">
+                        <h4>Los 5 mosquiteros</h4>
+                        <div class="add-pre-content box-type1-content">
+                            <span class="icon-quill" title="Autor"><p>Arnold Sampallo</p></span>
+                            <span class="icon-book" title="Materia"><p>Historia</p></span>
+                            <span class="icon-library" title="Editorial"><p>Santillana</p></span>
+                        </div>
+                        <div class="add-pre-btns box-type1-btns">
+                            <span class="icon-pencil edit-libro"></span>
+                            <span class="icon-bin del-libro"></span>
+                        </div>
+                    </div>
+                    <div class="add-pre-item box-type1">
+                        <h4>Los 5 mosquiteros</h4>
+                        <div class="add-pre-content box-type1-content">
+                            <span class="icon-quill" title="Autor"><p>Arnold Sampallo</p></span>
+                            <span class="icon-book" title="Materia"><p>Historia</p></span>
+                            <span class="icon-library" title="Editorial"><p>Santillana</p></span>
+                        </div>
+                        <div class="add-pre-btns box-type1-btns">
+                            <span class="icon-pencil edit-libro"></span>
+                            <span class="icon-bin del-libro"></span>
+                        </div>
+                    </div>
 
                 </div>
             </article>
@@ -727,42 +849,38 @@
                 
                 <div class="modal-form1-inputs">
                     <div class="modal-form1-input-item">
-                        <input class="input-add-user nombre" type="text" id="" required>
+                        <input type="text" id="" required>
                         <label for="">Nombre</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input class="input-add-user apellido" type="text" name="" id="" required>
+                        <input type="text" name="" id="" required>
                         <label for="">Apellido</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input class="input-add-user dni" type="text" name="" id="" required>
+                        <input type="text" name="" id="" required>
                         <label for="">DNI</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input class="input-add-user fechaNac" type="date" name="" id="" required>
+                        <input type="date" name="" id="" required>
                         <label for="">Fecha de Nacimiento</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input class="input-add-user direccion" type="text" name="" id="" required>
+                        <input type="text" name="" id="" required>
                         <label for="">Domicilio</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input class="input-add-user email" type="text" name="" id="" required>
+                        <input type="text" name="" id="" required>
                         <label for="">Email</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input class="input-add-user telefono" type="text" name="" id="" required>
+                        <input type="text" name="" id="" required>
                         <label for="">Telefono</label>
                     </div>
                 </div>
 
-                <div class="modal-form1-status db-add-user">
-
-                </div>
-
                 
                 <div class="modal-form1-btns">
-                    <button type="button" class="confirm-modal-add-user">Confirmar</button>
+                    <button type="submit">Confirmar</button>
                     <button type="button" class="cancel-modal-add-user">Cancelar</button>
                 </div>
 
@@ -782,45 +900,38 @@
                 
                 <div class="modal-form1-inputs">
                     <div class="modal-form1-input-item">
-                        <input class="input-edit-user nombre" type="text" id="" required>
+                        <input type="text" value="TextoEjemplo" id="" required>
                         <label for="">Nombre</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input class="input-edit-user apellido" type="text" name="" id="" required>
+                        <input type="text" value="TextoEjemplo" name="" id="" required>
                         <label for="">Apellido</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input class="input-edit-user dni" type="text" name="" id="" required>
+                        <input type="text" value="TextoEjemplo" name="" id="" required>
                         <label for="">DNI</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input class="input-edit-user fechaNac" type="date" name="" id="" required>
+                        <input type="date" value="TextoEjemplo" name="" id="" required>
                         <label for="">Fecha de Nacimiento</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input class="input-edit-user direccion" type="text" name="" id="" required>
+                        <input type="text" value="TextoEjemplo" name="" id="" required>
                         <label for="">Domicilio</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input class="input-edit-user email" type="text" name="" id="" required>
+                        <input type="text" value="TextoEjemplo" name="" id="" required>
                         <label for="">Email</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input class="input-edit-user telefono" type="text" name="" id="" required>
+                        <input type="text" value="TextoEjemplo" name="" id="" required>
                         <label for="">Telefono</label>
                     </div>
-                    <div class="modal-form1-input-item">
-                        <input class="input-edit-user tipoUsuario" type="text" name="" id="" required>
-                        <label for="">Privilegios</label>
-                    </div>
                 </div>
 
-                <div class="modal-form1-status db-edit-user">
-
-                </div>
                 
                 <div class="modal-form1-btns">
-                    <button type="button" class="confirm-modal-edit-user">Confirmar</button>
+                    <button type="submit">Confirmar</button>
                     <button type="button" class="cancel-modal-edit-user">Cancelar</button>
                 </div>
 
@@ -840,17 +951,14 @@
                 
                 <div class="modal-form1-inputs user-penalidad">
                     <div class="modal-form1-input-item">
-                        <input class="input-penal-user" type="number" id="" required>
+                        <input type="number" id="" required>
                         <label for="">Penalidad (Horas)</label>
                     </div>
                 </div>
 
-                <div class="modal-form1-status db-penal-user">
-
-                </div>
                 
                 <div class="modal-form1-btns">
-                    <button type="button" class="confirm-modal-penal-user">Confirmar</button>
+                    <button type="submit">Confirmar</button>
                     <button type="button" class="cancel-modal-penal-user">Cancelar</button>
                 </div>
 
@@ -870,17 +978,12 @@
                 
                 <div class="modal-form1-confirmdialog">
                     <p>¿Está seguro de eliminar el siguiente elemento?</p>
-                    <span class="icon-user del-usuario-id">
-
-                    </span>
+                    <span class="icon-user del-user-id"><p>#123415135 - Pablo Perez</p></span>
                 </div>
 
-                <div class="modal-form1-status db-del-user">
-                    
-                </div>
                 
                 <div class="modal-form1-btns">
-                    <button type="button" class="confirm-modal-del-user">Confirmar</button>
+                    <button type="submit">Confirmar</button>
                     <button type="button" class="cancel-modal-del-user">Cancelar</button>
                 </div>
 
@@ -1011,50 +1114,39 @@
                 
                 <div class="modal-form1-inputs">
                     <div class="modal-form1-input-item">
-                        <input class="libro-add titulo" type="text" id="" required>
+                        <input type="text" id="" required>
                         <label for="">Titulo</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input class="libro-add autor" type="text" name="" id="" required>
-                        <label for="">Autor</label>
-                    </div>
-                    <div class="modal-form1-input-item">
-                        <input class="libro-add ubicacion" type="text" name="" id="" required>
-                        <label for="">Ubicación en biblioteca</label>
-                    </div>
-                    <div class="modal-form1-input-item">
-                        <input class="libro-add editorial" type="text" name="" id="" required>
+                        <input type="text" name="" id="" required>
                         <label for="">Editorial</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input class="libro-add materia" type="text" name="" id="" required>
-                        <label for="">Materia</label>
+                        <input type="text" name="" id="" required>
+                        <label for="">Autor</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input class="libro-add origen" type="text" name="" id="" required>
-                        <label for="">Lugar de edición</label>
-                    </div>
-                    <div class="modal-form1-input-item">
-                        <input class="libro-add anio" type="text" name="" id="" required>
+                        <input type="text" name="" id="" required>
                         <label for="">Año de fabricación</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input class="libro-add edicion" type="text" name="" id="" required>
-                        <label for="">Número de serie</label>
+                        <input type="text" name="" id="" required>
+                        <label for="">Número de edición</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input class="libro-add observacion" type="text" name="" id="" required>
+                        <input type="text" name="" id="" required>
+                        <label for="">Ubicación en biblioteca</label>
+                    </div>
+                    <div class="modal-form1-input-item">
+                        <input type="text" name="" id="" required>
                         <label for="">Observaciones</label>
                     </div>
 
                 </div>
 
-                <div class="modal-form1-status db-add-libro">
-
-                </div>
                 
                 <div class="modal-form1-btns">
-                    <button type="button" class="confirm-modal-add-libro" >Confirmar</button>
+                    <button type="submit">Confirmar</button>
                     <button type="button" class="cancel-modal-add-libro">Cancelar</button>
                 </div>
 
@@ -1066,7 +1158,7 @@
     <div class="modal-frame modal-edit-libro-pedido">
         <form action="#" class="modal-form1">
             <div class="modal-form1-titulo">
-                <p>Editar Pedido</p>
+                <p>Editar libro</p>
                 <span class="icon-cross close-modal-edit-libro-pedido"></span>
             </div>
 
@@ -1074,47 +1166,35 @@
                 
                 <div class="modal-form1-inputs">
                     <div class="modal-form1-input-item">
-                        <input class="libro-edit-pedido titulo" type="text" id="" required>
+                        <input type="text" id="" required>
                         <label for="">Titulo</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input class="libro-edit-pedido editorial" type="text" name="" id="" required>
+                        <input type="text" name="" id="" required>
                         <label for="">Editorial</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input class="libro-edit-pedido autor" type="text" name="" id="" required>
+                        <input type="text" name="" id="" required>
                         <label for="">Autor</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input class="libro-edit-pedido anio" type="text" name="" id="" required>
+                        <input type="text" name="" id="" required>
                         <label for="">Año de fabricación</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input class="libro-edit-pedido ejemplares" type="text" name="" id="" required>
-                        <label for="">Número de Ejemplares</label>
+                        <input type="text" name="" id="" required>
+                        <label for="">Cantidad ejemplares</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input class="libro-edit-pedido edicion" type="text" name="" id="" required>
-                        <label for="">Edición</label>
-                    </div>
-                    <div class="modal-form1-input-item">
-                        <input class="libro-edit-pedido ubicacion" type="text" name="" id="" required>
-                        <label for="">Ubicación</label>
-                    </div>
-                    <div class="modal-form1-input-item">
-                        <input class="libro-edit-pedido observacion" type="text" name="" id="" required>
+                        <input type="text" name="" id="" required>
                         <label for="">Observaciones</label>
                     </div>
 
                 </div>
 
-                <div class="modal-form1-status db-edit-libro-pedido">
-
-                </div>
-
                 
                 <div class="modal-form1-btns">
-                    <button type="submit" class="confirm-modal-edit-libro-pedido">Confirmar</button>
+                    <button type="submit">Confirmar</button>
                     <button type="button" class="cancel-modal-edit-libro-pedido">Cancelar</button>
                 </div>
 
@@ -1126,7 +1206,7 @@
     <div class="modal-frame modal-edit-libro">
         <form action="#" class="modal-form1">
             <div class="modal-form1-titulo">
-                <p>Editar Libro</p>
+                <p>Editar libro</p>
                 <span class="icon-cross close-modal-edit-libro"></span>
             </div>
 
@@ -1134,51 +1214,39 @@
                 
                 <div class="modal-form1-inputs">
                     <div class="modal-form1-input-item">
-                        <input type="text" class="libro-edit titulo" id="" required>
+                        <input type="text" id="" required>
                         <label for="">Titulo</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input type="text" class="libro-edit autor" name="" id="" required>
-                        <label for="">Autor</label>
-                    </div>
-                    <div class="modal-form1-input-item">
-                        <input type="text" class="libro-edit ubicacion" name="" id="" required>
-                        <label for="">Ubicación en biblioteca</label>
-                    </div>
-                    <div class="modal-form1-input-item">
-                        <input type="text" class="libro-edit editorial" name="" id="" required>
+                        <input type="text" name="" id="" required>
                         <label for="">Editorial</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input type="text" class="libro-edit materia" name="" id="" required>
-                        <label for="">Materia</label>
+                        <input type="text" name="" id="" required>
+                        <label for="">Autor</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input type="text" class="libro-edit origen" name="" id="" required>
-                        <label for="">Lugar de edición</label>
-                    </div>
-                    <div class="modal-form1-input-item">
-                        <input type="text" class="libro-edit anio" name="" id="" required>
+                        <input type="text" name="" id="" required>
                         <label for="">Año de fabricación</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input type="text" class="libro-edit edicion" name="" id="" required>
+                        <input type="text" name="" id="" required>
                         <label for="">Número de edición</label>
                     </div>
                     <div class="modal-form1-input-item">
-                        <input type="text" class="libro-edit observacion" name="" id="" required>
+                        <input type="text" name="" id="" required>
+                        <label for="">Ubicación en biblioteca</label>
+                    </div>
+                    <div class="modal-form1-input-item">
+                        <input type="text" name="" id="" required>
                         <label for="">Observaciones</label>
                     </div>
 
                 </div>
 
-                <div class="modal-form1-status db-edit-libro">
-
-                </div>
-
                 
                 <div class="modal-form1-btns">
-                    <button type="button" class="confirm-modal-edit-libro">Confirmar</button>
+                    <button type="submit">Confirmar</button>
                     <button type="button" class="cancel-modal-edit-libro">Cancelar</button>
                 </div>
 
@@ -1198,15 +1266,12 @@
                 
                 <div class="modal-form1-confirmdialog">
                     <p>¿Está seguro de eliminar el siguiente elemento?</p>
-                    <span class="icon-book del-libro-id"></span>
+                    <span class="icon-user del-user-id"><p>#123415135 - Caperucita Verde</p></span>
                 </div>
 
-                <div class="modal-form1-status db-del-libro">
-
-                </div>
                 
                 <div class="modal-form1-btns">
-                    <button type="button" class="confirm-modal-del-libro">Confirmar</button>
+                    <button type="submit">Confirmar</button>
                     <button type="button" class="cancel-modal-del-libro">Cancelar</button>
                 </div>
 
@@ -1266,15 +1331,14 @@
     </div>
 
     <!-- Scripts -->
-    <script src="vistas/js/classes/Libro.js"></script>
-    <script src="vistas/js/classes/Usuario.js"></script>
-    <script src="vistas/js/calendario.js"></script>
-    <script src="vistas/js/reservas.js"></script>
-    <script src="vistas/js/dashboard-menu.js"></script>
-    <script src="vistas/js/libro.js"></script>
-    <script src="vistas/js/prestamo.js"></script>
-    <script src="vistas/js/solicitar-libro.js"></script>
-    
+    <script src="js/calendario.js"></script>
+    <script src="js/reservas.js"></script>
+    <script src="js/dashboard-menu.js"></script>
+    <script src="js/user.js"></script>
+    <script src="js/libro.js"></script>
+    <script src="js/prestamo.js"></script>
+    <script src="js/solicitar-libro.js"></script>
+    <script src="js/classes/Libro.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,26 @@
+.modal-form1-confirmdialog{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.modal-form1-confirmdialog span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 0px;
+    border-radius: 10px;
+    padding: 1px 1px 1px 10px;
+    border: 2px solid var(--main-color);
+    background: var(--main-color);
+}
+
+.modal-form1-confirmdialog span p{
+    padding: 10px 10px;
+    background: var(--second-bg-color);
+    border-radius: 0px 10px 10px 0px;
+    margin: 0px 0px 0px 10px;
+}

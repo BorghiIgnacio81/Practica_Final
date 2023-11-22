@@ -63,7 +63,8 @@ var modalPedidolibroCancel = document.querySelector(".cancel-modal-edit-libro-pe
 var modalPedidoLibro = document.querySelector(".modal-edit-libro-pedido");
 var botonPedidoLibroOpen = document.querySelectorAll(".edit-libro-pedido");
 var modalEditPedidoBotonSend = document.querySelector(".confirm-modal-edit-libro-pedido");
-var modalStatusEditLibro = document.querySelector(".db-edit-libro-pedido");
+
+var modalStatusEditLibroPedido = document.querySelector(".db-edit-libro-pedido");
 
 var campoTituloEditPedido = document.querySelector(".libro-edit-pedido.titulo");
 var campoEditorialEditPedido = document.querySelector(".libro-edit-pedido.editorial");
@@ -135,12 +136,12 @@ class Libro{
             "titulo" : this.titulo,
             "autor" : this.autor,
             "ubicacionFisica" : this.ubicacionFisica,
-            "editorial" : this.editorial,
-            "materia" : this.materia,
+            "editorial" : this.editorial,            
             "lugarEdicion" : this.lugarEdicion,
             "anio" : this.anio,
             "serie" : this.serie,
-            "observaciones" : this.observaciones
+            "observaciones" : this.observaciones,
+            "materia" : this.materia
         }
     }
 }
@@ -229,9 +230,6 @@ class LibroController{
                     case "add":
                         if(response.status == "ok"){
                             modalStatusAddLibro.innerHTML = '<span class="icon-checkmark"> Libro agregado exitosamente</span>';
-                            setTimeout(() => {
-                                modalAddLibro.classList.remove("active");
-                            }, 2000);
                         }else{
                             modalStatusAddLibro.innerHTML = '<span class="icon-blocked"> No se ha podido agregar el libro</span>';
                         }
@@ -240,9 +238,6 @@ class LibroController{
                         if(response.status == "ok"){
                             modalStatusEditLibro.innerHTML = '<span class="icon-checkmark"> Libro editado exitosamente</span>';
                             busquedaLibro();
-                            setTimeout(() => {
-                                modalEditLibro.classList.remove("active");
-                            }, 2000);
                         }else{
                             modalStatusEditLibro.innerHTML = '<span class="icon-blocked"> No se ha podido editar el libro</span>';
                         }
@@ -251,9 +246,6 @@ class LibroController{
                         if(response.status == "ok"){
                             modalStatusDelLibro.innerHTML = '<span class="icon-checkmark"> Libro eliminado exitosamente</span>';
                             busquedaLibro();
-                            setTimeout(() => {
-                                modalDelLibro.classList.remove("active");
-                            }, 2000);
                         }else{
                             modalStatusDelLibro.innerHTML = '<span class="icon-blocked"> No se ha podido eliminar el libro</span>';
                         }
@@ -315,32 +307,18 @@ modalAddLibroOpen.addEventListener("click",()=>{
 });
 
 modalAddBotonSend.addEventListener("click",()=>{
-    if(campoTituloAdd.value != "" &&
-        campoAutorAdd.value != "" &&
-        campoUbicacionAdd.value != "" &&
-        campoEditorialAdd.value != "" &&
-        campoMateriaAdd.value != "" &&
-        campoOrigenAdd.value != "" &&
-        campoAnioAdd.value != "" &&
-        campoEdicionAdd.value != "" &&
-        campoObservacionAdd.value){
-    
-        let libro = new Libro(null,
-        campoTituloAdd.value,
-        campoAutorAdd.value,
-        campoUbicacionAdd.value,
-        campoEditorialAdd.value,
-        campoMateriaAdd.value,
-        campoOrigenAdd.value,
-        campoAnioAdd.value,
-        campoEdicionAdd.value,
-        campoObservacionAdd.value);
+    let libro = new Libro(null,
+    campoTituloAdd.value,
+    campoAutorAdd.value,
+    campoUbicacionAdd.value,
+    campoEditorialAdd.value,
+    campoMateriaAdd.value,
+    campoOrigenAdd.value,
+    campoAnioAdd.value,
+    campoEdicionAdd.value,
+    campoObservacionAdd.value);
 
-        libroCtrl.solicitudAjaxABM(libro.toJson(),"add");
-
-    }else{
-        modalStatusAddLibro = "<span class='icon-warning'>Por favor complete los campos antes de enviar.</span>";
-    }
+    libroCtrl.solicitudAjaxABM(libro.toJson(),"add");
 });
 
 // ------------------------  Eventos editar libro  ------------------------
@@ -365,11 +343,11 @@ function agregarEventoLibrosEditar(){
             campoAutorEdit.value = objLibro.autor;
             campoUbicacionEdit.value = objLibro.ubicacionFisica;
             campoEditorialEdit.value = objLibro.editorial;
-            campoMateriaEdit.value = objLibro.materia;
             campoOrigenEdit.value = objLibro.lugarEdicion;
             campoAnioEdit.value = objLibro.anio;
             campoEdicionEdit.value = objLibro.serie;
             campoObservacionEdit.value = objLibro.observaciones;
+            campoMateriaEdit.value = objLibro.materia;
     
             modalEditLibro.setAttribute("idLibroTemp", idLibro);
     
@@ -379,33 +357,18 @@ function agregarEventoLibrosEditar(){
 }
 
 modalEditBotonSend.addEventListener("click", ()=>{
-
-    if(campoTituloEdit.value != "" &&
-        campoAutorEdit.value != "" &&
-        campoUbicacionEdit.value != "" &&
-        campoEditorialEdit.value != "" &&
-        campoMateriaEdit.value != "" &&
-        campoOrigenEdit.value != "" &&
-        campoAnioEdit.value != "" &&
-        campoEdicionEdit.value != "" &&
-        campoObservacionEdit.value){
-
-        let libro = new Libro(modalEditLibro.getAttribute("idLibroTemp"),
-            campoTituloEdit.value,
-            campoAutorEdit.value,
-            campoUbicacionEdit.value,
-            campoEditorialEdit.value,
-            campoMateriaEdit.value,
-            campoOrigenEdit.value,
-            campoAnioEdit.value,
-            campoEdicionEdit.value,
-            campoObservacionEdit.value);
+    let libro = new Libro(modalEditLibro.getAttribute("idLibroTemp"),
+        campoTituloEdit.value,
+        campoAutorEdit.value,
+        campoUbicacionEdit.value,
+        campoEditorialEdit.value,
+        campoMateriaEdit.value,
+        campoOrigenEdit.value,
+        campoAnioEdit.value,
+        campoEdicionEdit.value,
+        campoObservacionEdit.value);
     
-        libroCtrl.solicitudAjaxABM(libro.toJson(),"edit");
-    }else{
-        modalStatusEditLibro.innerHTML = "<span class='icon-warning'>Por favor complete los campos antes de enviar.</span>";
-    }
-
+    libroCtrl.solicitudAjaxABM(libro.toJson(),"edit");
 });
 
 

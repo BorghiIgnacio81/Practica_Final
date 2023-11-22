@@ -1,0 +1,174 @@
+body{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: url("../img/006-library-biblioteca-angelica-a-roma_0002.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.registro-formulario{
+    width: 50vw;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 0px 0px 5px var(--second-bg-color);
+}
+
+.registro-formulario form{
+    width: 100%;
+    max-width: 500px;
+    max-height: 90%;
+    background: rgba(0,0,0,0.5);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.registro-formulario form h2{
+    font-size: 20px;
+    font-weight: 500;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background: linear-gradient(var(--main-color), var(--second-bg-color));
+}
+
+.reg-form-campo{
+    position: relative;
+    width: 90%;
+    height: 50px;
+    margin: 20px 0px 0px 0px;
+    padding: 0px 50px;
+}
+
+.reg-form-campo input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid var(--text-color);
+    font-size: 16px;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: all 0.5s ease;
+    color: transparent;
+}
+
+.reg-form-campo input:focus,
+.reg-form-campo input:valid{
+    border-bottom-color: var(--main-color);
+    color: var(--text-color);
+}
+
+.reg-form-campo label{
+    position: absolute;
+    top: 40%;
+    left: 50px;
+    transform: translate(10%);
+    font-size: 16px;
+    color: var(--text-color);
+    pointer-events: none;
+    transition: all 0.5s ease;
+}
+
+.reg-form-campo input:focus~label,
+.reg-form-campo input:valid~label{
+    top: -15px;
+    color: var(--main-color);
+}
+
+.btn{
+    position: relative;
+    width: 50%;
+    height: 45px;
+    background: transparent;
+    border: 2px solid var(--main-color);
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--text-color);
+    font-weight: 600;
+    overflow: hidden;
+    z-index: 1;
+    margin: 30px 0px;
+}
+
+.btn::before{
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0px;
+    width: 100%;
+    height: 300%;
+    background: linear-gradient(var(--second-bg-color), var(--main-color), var(--second-bg-color), var(--main-color));
+    z-index: -1;
+    transition: all 0.5s ease;
+}
+
+.btn:hover::before{
+    top: 0px;
+}
+
+
+
+
+.registro-info{
+    width: 50vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.registro-info::before{
+    content: "";
+    width: 250%;
+    height: 100%;
+    top: 0;
+    right: -10%;
+    position: absolute;
+    background: linear-gradient(var(--main-color), var(--second-bg-color));
+    z-index: -1;
+    transform: skewY(-35deg);
+    border-radius: 50%;
+}
+
+.registro-info::after{
+    content: "";
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    right: -100%;
+    position: absolute;
+    background: var(--second-bg-color);
+    z-index: -2;
+    
+}
+
+
+.reg-info-titulo{
+    font-size: 30px;
+    font-weight: 700;
+    max-width: 75%;
+    text-shadow: 0px 0px 5px var(--second-bg-color);
+}
+
+.reg-info-texto{
+    font-size: 20px;
+    font-weight: 300;
+    max-width: 75%;
+    text-shadow: 0px 0px 5px var(--second-bg-color);
+}

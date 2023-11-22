@@ -3,8 +3,8 @@
 // *****************************************************************
 
 //  ----------------------- Buscar Usuario BM -----------------------
-var botonBuscarUsuarioBM = document.querySelector(".icon-search.buscar-usuario-bm");
-var inputBuscarUsuarioBM = document.querySelector(".input-buscar-usuario-bm");
+var inputBuscarUsuarioBM = document.querySelector(".icon-search.buscar-usuario-bm");
+var botonBuscarUsuarioBM = document.querySelector(".input-buscar-usuario-bm");
 var filtrosBuscarUsuarioBM = document.querySelector(".filtro-buscar-usuario-bm");
 var fieldBuscarUsuarioBM = document.querySelector(".bm-user-result");
 
@@ -62,7 +62,7 @@ var botonDelUserOpen; //
 var botonDelUserSend = document.querySelector(".confirm-modal-del-user");
 var fieldDelUserStatus = document.querySelector(".modal-form1-status.db-del-user");
 
-var labelDelUserId = document.querySelector(".icon-user.del-usuario-id");
+var labelDelUserId = document.querySelector(".icon-user.del-user-id");
 
 
 
@@ -189,7 +189,7 @@ class UsuarioController{
 
                 if(listaUsuarios){
                     listaUsuarios.forEach(function (u) {
-                        listado += (new Usuario(u.idUsuario, u.nombre, u.apellido, u.dni, u.direccion, u.telefono, u.email, u.fechaNac, u.penalidad, u.tipoUsuario)).printBoxUsuarioABM();
+                        listado += (new Usuario(u.idUsuario, u.nombre, u.apellido, u.dni, u.direccion, u.telefono, u.email, u.fechaNac, u.penalidad, u.tipoUsuario)).printBoxUsuarioBM();
                     });
 
                     target.innerHTML = listado;
@@ -234,9 +234,6 @@ class UsuarioController{
                     case "add":
                         if(response.status == "ok"){
                             fieldAddUserStatus.innerHTML = '<span class="icon-checkmark"> Usuario agregado exitosamente</span>';
-                            setTimeout(() => {
-                                modalAddUser.classList.remove("active");
-                            }, 2000);
                         }else{
                             fieldAddUserStatus.innerHTML = '<span class="icon-blocked"> No se ha podido agregar el usuario</span>';
                         }
@@ -244,10 +241,7 @@ class UsuarioController{
                     case "edit":
                         if(response.status == "ok"){
                             fieldEditUserStatus.innerHTML = '<span class="icon-checkmark"> Usuario editado exitosamente</span>';
-                            busquedaUsuario();
-                            setTimeout(() => {
-                                modalEditUser.classList.remove("active");
-                            }, 2000);
+                            solicitudAjaxBuscar(fieldBuscarUsuarioBM, filtrosBuscarUsuarioBM.value, inputBuscarUsuarioBM.value);
                         }else{
                             fieldEditUserStatus.innerHTML = '<span class="icon-blocked"> No se ha podido editar el Usuario</span>';
                         }
@@ -255,26 +249,12 @@ class UsuarioController{
                     case "del":
                         if(response.status == "ok"){
                             fieldDelUserStatus.innerHTML = '<span class="icon-checkmark"> Usuario eliminado exitosamente</span>';
-                            busquedaUsuario();
-                            setTimeout(() => {
-                                modalDelUser.classList.remove("active");
-                            }, 2000);
+                            solicitudAjaxBuscar(fieldBuscarUsuarioBM, filtrosBuscarUsuarioBM.value, inputBuscarUsuarioBM.value);
                         }else{
                             fieldDelUserStatus.innerHTML = '<span class="icon-blocked"> No se ha podido eliminar el Usuario</span>';
                         }
                         break;
-                    case "penal":
-                        if(response.status == "ok"){
-                            fieldPenalUserStatus.innerHTML = '<span class="icon-checkmark"> Usuario eliminado exitosamente</span>';
-                            busquedaUsuario();
-                            setTimeout(() => {
-                                modalPenalUser.classList.remove("active");
-                            }, 2000);
-                        }else{
-                            fieldPenalUserStatus.innerHTML = '<span class="icon-blocked"> No se ha podido eliminar el Usuario</span>';
-                        }
-                        break;
-
+                    
                 }
 
             } else if (xhr.readyState == 4 && xhr.status != 200) {
@@ -332,15 +312,6 @@ botonAddUserOpen.addEventListener("click",()=>{
 });
 
 botonAddUserSend.addEventListener("click",()=>{
-    
-    if( inputAddUserModalNombre.value !="" &&
-        inputAddUserModalApellido.value !="" &&
-        inputAddUserModalDNI.value !="" &&
-        inputAddUserModalDireccion.value !="" &&
-        inputAddUserModalTelefono.value !="" &&
-        inputAddUserModalEmail.value !="" &&
-        inputAddUserModalFechaNac.value){
-
     let usuario = new Usuario(null,
         inputAddUserModalNombre.value,
         inputAddUserModalApellido.value,
@@ -353,10 +324,6 @@ botonAddUserSend.addEventListener("click",()=>{
         null);
 
     usuarioCtrl.solicitudAjaxABM(usuario.toJson(),"add");
-    }else{
-        fieldAddUserStatus.innerHTML = "<span class='icon-warning'> Complete todos los campos antes de enviar. </span>";
-    }
-
 });
 
 
@@ -376,16 +343,15 @@ function agregarEventoUsuariosEditar(){
         botonEditUserOpen[i].addEventListener("click",()=>{
             let idUsuario = botonEditUserOpen[i].getAttribute("idUsuario");
             let objUsuario = usuarioCtrl.buscarUsuarioPorid(idUsuario);
-            console.log(objUsuario);
-            fieldEditUserStatus.innerHTML = "";
+            modalStatusEditUsuario.innerHTML = "";
 
-            inputEditUserModalNombre.value = objUsuario.nombre;
-            inputEditUserModalApellido.value = objUsuario.apellido;
-            inputEditUserModalDNI.value = objUsuario.dni;
-            inputEditUserModalDireccion.value = objUsuario.direccion;
-            inputEditUserModalEmail.value = objUsuario.email;
-            inputEditUserModalTelefono.value = objUsuario.telefono;
-            inputEditUserModalFechaNac.value = objUsuario.fechaNac;
+            inputAddUserModalNombre.value = objUsuario.nombre;
+            inputAddUserModalApellido.value = objUsuario.apellido;
+            inputAddUserModalDNI.value = objUsuario.dni;
+            inputAddUserModalDireccion.value = objUsuario.direccion;
+            inputAddUserModalEmail.value = objUsuario.email;
+            inputAddUserModalTelefono.value = objUsuario.telefono;
+            inputAddUserModalFechaNac.value = objUsuario.fechaNac;
             inputEditUserModalTipoUsuario.value = objUsuario.tipoUsuario;
     
             modalEditUser.setAttribute("idUsuarioTemp", idUsuario);
@@ -396,14 +362,6 @@ function agregarEventoUsuariosEditar(){
 }
 
 botonEditUserSend.addEventListener("click", ()=>{
-    if(inputEditUserModalNombre.value != "" &&
-        inputEditUserModalApellido.value != "" &&
-        inputEditUserModalDNI.value != "" &&
-        inputEditUserModalDireccion.value != "" &&
-        inputEditUserModalTelefono.value != "" &&
-        inputEditUserModalEmail.value != "" &&
-        inputEditUserModalFechaNac.value != "" &&
-        inputEditUserModalTipoUsuario.value != ""){
     let usuario = new Usuario(modalEditUser.getAttribute("idUsuarioTemp"),
         inputEditUserModalNombre.value,
         inputEditUserModalApellido.value,
@@ -416,10 +374,6 @@ botonEditUserSend.addEventListener("click", ()=>{
         inputEditUserModalTipoUsuario.value);
     
     usuarioCtrl.solicitudAjaxABM(usuario.toJson(),"edit");
-    }else{
-        fieldEditUserStatus.innerHTML = "<span class='icon-warning'> Complete todos los campos antes de enviar. </span>";
-    }
-
 });
 
 
@@ -444,23 +398,20 @@ function agregarEventoUsuariosPenalizar(){
 
             inputPenalUserModal.value = objUsuario.penalidad;
     
-            modalPenalUser.setAttribute("idUsuarioTemp", idUsuario);
+            modalEditUser.setAttribute("idUsuarioTemp", idUsuario);
     
-            modalPenalUser.classList.add('active');
+            modalEditUser.classList.add('active');
         });
     }
 }
 
 
-botonPenalUserSend.addEventListener("click", ()=>{
-    let usuario = usuarioCtrl.buscarUsuarioPorid(modalPenalUser.getAttribute("idUsuarioTemp"));
+botonDelUserSend.addEventListener("click", ()=>{
+    let usuario = usuarioCtrl.buscarUsuarioPorid(modalDelUser.getAttribute("idUsuarioTemp"));
 
-    if(inputPenalUserModal.value > 0 && inputPenalUserModal != null){
-        usuario.penalidad = inputPenalUserModal.value;
-        usuarioCtrl.solicitudAjaxABM(usuario.toJson(),"penal");
-    }else{
-        fieldPenalUserStatus.innerHTML = "<span class='icon-warning'> Escriba un valor válido antes de enviar. </span>";
-    }
+    usuario.penalidad = inputPenalUserModal.value;
+    
+    usuarioCtrl.solicitudAjaxABM(usuario.toJson(),"del");
 });
 
 
@@ -482,7 +433,7 @@ function agregarEventoUsuariosEliminar(){
             
             fieldDelUserStatus.innerHTML = "";
 
-            labelDelUserId.innerHTML = "<p>"+objUsuario.nombre+" "+ objUsuario.apellido+"</p>";
+            campoModalDelUsuario.innerHTML = "<p>#"+objUsuario.nombre+" - "+ objUsuario.apellido+"</p>";
 
             modalDelUser.setAttribute("idUsuarioTemp", idUsuario);
 

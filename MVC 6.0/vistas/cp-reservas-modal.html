@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="css/normalize-cp.css">
+    <link rel="stylesheet" href="css/cp-user.css">
+    <link rel="stylesheet" href="css/cp-reserva.css">
+    <link rel="stylesheet" href="css/calendario.css">
+    <link rel="stylesheet" href="css/modal-reserva.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+
+</head>
+<body>
+    
+    <div class="modal-frame modal-reserva active">
+        <form action="#" class="modal-form1">
+            <div class="modal-form1-titulo">
+                <p>Confirmar reserva - Fijar fecha</p>
+                <span class="icon-cross" id="close-modal-res"></span>
+            </div>
+
+            <div class="modal-form1-content">
+                <div class="reserva-user-info">
+                    <span class="icon-user"></span>
+                    <p>#12354125 - Pablo Perez</p>
+                </div>
+                <div class="reserva-libro-info">
+                    <span class="icon-book"></span>
+                    <p>Caperusita y el lobo feroz</p>
+                </div>
+                
+                <div class="reserva-seleccionar-fechas">
+                    <div class="calendario">
+                        <div class="display-fecha">
+                            <div class="display-desde">
+                                <h1 id="dia-desde">18</h1>
+                                <p id="mes-anio-desde">Octubre - 2023</p>
+                            </div>
+                            <div class="display-hasta">
+                                <h1 id="dia-hasta">25</h1>
+                                <p id="mes-anio-hasta">Octubre - 2023</p>
+                            </div>
+                        </div>
+            
+                        <div class="almanaques">
+                            <span class="icon-arrow-left"></span>
+                            <span class="icon-arrow-right"></span>
+            
+                            <div class="almanaque">
+                                <div class="almanaque-mes primer">
+                                    <!-- Auto Generado con JS -->
+                                </div>
+                                <div class="almanaque-fechas">
+                                        <li>Dom</li>
+                                        <li>Lun</li>
+                                        <li>Mar</li>
+                                        <li>Mie</li>
+                                        <li>Jue</li>
+                                        <li>Vie</li>
+                                        <li>Sab</li>
+                                </div>
+                                <div class="almanaque-dias" id="alm1">
+                                    <!-- Auto Generado con JS -->
+                                </div>
+                            </div>
+                            
+                            <div class="almanaque">
+                                <div class="almanaque-mes segundo">
+                                    <!-- Auto Generado con JS -->
+                                </div>
+                                <div class="almanaque-fechas">
+                                        <li>Dom</li>
+                                        <li>Lun</li>
+                                        <li>Mar</li>
+                                        <li>Mie</li>
+                                        <li>Jue</li>
+                                        <li>Vie</li>
+                                        <li>Sab</li>
+                                </div>
+                                <div class="almanaque-dias" id="alm2">
+                                        <!-- Auto Generado con JS -->
+                                </div>
+            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-form1-btns">
+                    <button type="submit">Confirmar</button>
+                    <button id="cancel-modal-res">Cancelar</button>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+
+    <script src="js/calendario.js"></script>
+    <script src="js/reservas.js"></script>
+</body>
+</html>

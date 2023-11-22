@@ -27,7 +27,7 @@
     
     <aside>
         <div class="avatar">
-            <img src="vistas/img/129868.PNG">
+            <img src="img/129868.PNG">
             <span class="icon-cross"></span>
         </div>
 
@@ -870,9 +870,7 @@
                 
                 <div class="modal-form1-confirmdialog">
                     <p>¿Está seguro de eliminar el siguiente elemento?</p>
-                    <span class="icon-user del-usuario-id">
-
-                    </span>
+                    <span class="icon-user del-user-id"><p>#123415135 - Pablo Perez</p></span>
                 </div>
 
                 <div class="modal-form1-status db-del-user">
@@ -1267,10 +1265,10 @@
 
     <!-- Scripts -->
     <script src="vistas/js/classes/Libro.js"></script>
-    <script src="vistas/js/classes/Usuario.js"></script>
     <script src="vistas/js/calendario.js"></script>
     <script src="vistas/js/reservas.js"></script>
     <script src="vistas/js/dashboard-menu.js"></script>
+    <script src="vistas/js/user.js"></script>
     <script src="vistas/js/libro.js"></script>
     <script src="vistas/js/prestamo.js"></script>
     <script src="vistas/js/solicitar-libro.js"></script>
