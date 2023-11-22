@@ -13,7 +13,8 @@ class LoginModelo
         
         if ($result && password_verify($password, $result['contraseña']))
         {
-            return [
+            return 
+            [
                 'success'=> true,
                 'nombre_usuario'=> $result['nombre_usuario'],
                 'contraseña'=> $result['contraseña'],

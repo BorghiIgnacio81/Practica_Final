@@ -138,6 +138,7 @@
             </span>
 
             <div class="form-box login">
+                
                 <h2 class="animation" style="--i:0; --j:21;">Login</h2>
                 <form action="../controlador/login_controlador.php" method="post">
                     <div class="input-box animation" style="--i:1; --j:22;">
@@ -146,8 +147,8 @@
                         <i class="bx bxs-user"></i>
                     </div>
                     <div class="input-box animation" style="--i:2; --j:23;">
-                        <input type="password" name="password" id="password" required>
-                        <label for="password">Contraseña</label>
+                        <input type="password" name="contraseña" id="contraseña" required>
+                        <label for="contraseña">Contraseña</label>
                         <i class="bx bxs-lock-alt"></i>
                     </div>
                     <button type="submit" class="btn animation" style="--i:3; --j:24;">Login</button>
@@ -159,7 +160,7 @@
                     </div>
                 </form>
             </div>
-
+            
             <div class="info-text login">
                 <h2 class="animation" style="--i:0; --j:20;">¡Bienvenido!</h2>
                 <p class="animation" style="--i:1; --j:21;">Accede a la gestión de biblioteca.</p>
