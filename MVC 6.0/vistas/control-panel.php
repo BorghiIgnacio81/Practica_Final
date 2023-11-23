@@ -265,7 +265,7 @@
                     </div>
                 </div>
 
-                <h3>Lista de pedidos <span class="icon-file-pdf" title="Descarga lista pdf"></span></h3>
+                <h3>Lista de pedidos <span class="icon-file-pdf descargar-pdf" title="Descarga lista pdf"></span></h3>
                 
                 <div class="add-libros-pedidos">
                     <div class="add-lp-item box-type1" >

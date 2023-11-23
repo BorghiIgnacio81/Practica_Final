@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/jspdf.js" ></script>
+    <script src="js/autotable.js"></script>
+    <title>Generar PDF con tabla de texto</title>
+</head>
+<body>
+
+    <h1>Tabla en PDF</h1>
+
+    <!-- Agrega un botón para activar la generación del PDF -->
+    <button onclick="generarPDF()">Generar PDF</button>
+
+    <script>
+        function generarPDF() {
+            // Crear un nuevo documento PDF
+            var pdf = new jsPDF();
+
+            // Definir las columnas y filas
+            var columnas = ["Título 1", "Título 2", "Título 3", "Título 4", "Título 5"];
+            var datos = [];
+
+            // Agregar filas de datos
+            for (var i = 1; i <= 4; i++) {
+                datos.push(["Dato " + i + ",1", "Dato " + i + ",2", "Dato " + i + ",3", "Dato " + i + ",4", "Dato " + i + ",5"]);
+            }
+
+            // Definir el tamaño de las celdas y la separación entre ellas
+            var cellWidth = 40;
+            var cellHeight = 10;
+            var margin = 10;
+
+            // Agregar la tabla al documento PDF
+            pdf.autoTable({
+                head: [columnas],
+                body: datos,
+                startY: 40,
+                margin: { top: margin },
+                styles: { overflow: 'linebreak' },
+                columnStyles: { 0: { cellWidth: cellWidth }, 1: { cellWidth: cellWidth }, 2: { cellWidth: cellWidth }, 3: { cellWidth: cellWidth }, 4: { cellWidth: cellWidth } }
+            });
+
+            // Guardar el PDF con un nombre específico
+            pdf.save("mi_tabla.pdf");
+        }
+    </script>
+</body>
+</html>

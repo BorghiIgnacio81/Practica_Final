@@ -1,28 +1,32 @@
 <?php
-include_once __DIR__ . '/../modelo/login_modelo.php';
 
-set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/../modelo/');
-include_once 'login_modelo.php';
-class LoginControlador
-{
-    public function login_controlador($datos)
-    {
-        if (isset($datos["nombre_usuario"])) {
-            $encriptar = password_hash($datos["password"], PASSWORD_DEFAULT);
-            $datos = array(
-                "nombre_usuario"=> $datos["nombre_usuario"],
-                "password"=> $encriptar
-            );
+class LoginControlador{
 
-            $respuesta = LoginModelo::login_modelo($datos["nombre_usuario"], $datos["password"]);
 
-            if ($respuesta['success']){
-                header("Location: ../vistas/control-panel.php");
-                exit();
+    static public function login_controlador($datos){
+
+        $username = $datos["nombre_usuario"];
+        $encriptar = md5($datos["password"]);
+
+        $respuesta = LoginModelo::login_modelo($username, $encriptar);
+
+            if ($respuesta){
+                return 1;
             } else {
-                echo "Login fallido: " . $respuesta['message'];
+                return 0;
             }
-        }
+        
+    }
+
+    static public function registro_controlador($datos){
+
+        $username = $datos["nombre_usuario"];
+        $encriptar = md5($datos["password"]);
+        $email = $datos["email"];
+
+        $respuesta = LoginModelo::registro_modelo($username, $encriptar, $email);
+        
+        return 0;
     }
 
 }

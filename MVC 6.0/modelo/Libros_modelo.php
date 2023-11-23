@@ -3,7 +3,7 @@ include_once 'Conectar.php';
 class Libros_modelo {
     static public function get_libros_modelo($pTitulo) {             
         try {
-            $consulta = Conectar::conexion()->prepare("CALL librosXtitulo(:pTitulo)");
+            $consulta = Conectar::conexion()->prepare("CALL `librosXtitulo`(:pTitulo)");
 
             $consulta->bindParam(":pTitulo", $pTitulo, PDO::PARAM_STR);
             
@@ -24,7 +24,7 @@ class Libros_modelo {
     }
     static public function get_libro_activo_modelo($pActivo) {             
         try {
-            $consulta = Conectar::conexion()->prepare("CALL librosXactivo(:pActivo)");
+            $consulta = Conectar::conexion()->prepare("CALL `librosXactivo`(:pActivo)");
 
             $consulta->bindParam(":pActivo", $pActivo, PDO::PARAM_STR);
             
@@ -43,11 +43,11 @@ class Libros_modelo {
 
     static public function nuevo_libro_modelo($libro){
         try {
-            $consulta = Conectar::conexion()->prepare("CALL insertarLibro(
+            $consulta = Conectar::conexion()->prepare("CALL `nuevoLibro`(
                 :titulo,
                 :idAutor,
                 :idEditorial, 
-                :ubicacionFisica, 
+                :ubicacionBiblioteca, 
                 :lugarEdicion, 
                 :anio, 
                 :serie, 
@@ -57,14 +57,14 @@ class Libros_modelo {
             // UN ENLACE POR CADA DATO, TENER EN CUENTA EL TIPO DE DATO STR O INT
             
             $consulta->bindParam(":titulo", $libro["titulo"], PDO::PARAM_STR);
-            $consulta->bindParam(":idAutor", $libro["idAutor"], PDO::PARAM_STR);
-            $consulta->bindParam(":idEditorial", $libro["idEditorial"], PDO::PARAM_STR);
-            $consulta->bindParam(":ubicacionFisica", $libro["ubicacionFisica"], PDO::PARAM_STR);
+            $consulta->bindParam(":idAutor", $libro["idAutor"], PDO::PARAM_INT);
+            $consulta->bindParam(":idEditorial", $libro["idEditorial"], PDO::PARAM_INT);
+            $consulta->bindParam(":ubicacionBiblioteca", $libro["ubicacionBiblioteca"], PDO::PARAM_STR);
             $consulta->bindParam(":lugarEdicion", $libro["lugarEdicion"], PDO::PARAM_STR);
             $consulta->bindParam(":anio", $libro["anio"], PDO::PARAM_INT);
             $consulta->bindParam(":serie", $libro["serie"], PDO::PARAM_INT);
             $consulta->bindParam(":observaciones", $libro["observaciones"], PDO::PARAM_STR);
-            $consulta->bindParam(":idMateria", $libro["idMateria"], PDO::PARAM_STR);
+            $consulta->bindParam(":idMateria", $libro["idMateria"], PDO::PARAM_INT);
 
             $consulta->execute();
             
@@ -77,12 +77,12 @@ class Libros_modelo {
 
     static public function editar_libro_modelo($libro){
         try{
-            $consulta = Conectar::conexion()->prepare(" CALL editarLibro(
+            $consulta = Conectar::conexion()->prepare(" CALL `editarLibro`(
                 :idLibro,
                 :titulo,
                 :idAutor,
                 :idEditorial, 
-                :ubicacionFisica, 
+                :ubicacionBiblioteca, 
                 :lugarEdicion, 
                 :anio, 
                 :serie, 
@@ -91,41 +91,25 @@ class Libros_modelo {
 
 
 
-            $consulta->bindParam(":idLibro", $libro["idLibro"], PDO::PARAM_INT); 
+            $consulta->bindParam(":idLibro", $libro["idLibro"], PDO::PARAM_STR); //
             $consulta->bindParam(":titulo", $libro["titulo"], PDO::PARAM_STR);
-            $consulta->bindParam(":idAutor", $libro["idAutor"], PDO::PARAM_STR);
-            $consulta->bindParam(":idEditorial", $libro["idEditorial"], PDO::PARAM_STR);
-            $consulta->bindParam(":ubicacionFisica", $libro["ubicacionFisica"], PDO::PARAM_STR);
+            $consulta->bindParam(":idAutor", $libro["idAutor"], PDO::PARAM_INT);
+            $consulta->bindParam(":idEditorial", $libro["idEditorial"], PDO::PARAM_INT);
+            $consulta->bindParam(":ubicacionBiblioteca", $libro["ubicacionBiblioteca"], PDO::PARAM_STR);
             $consulta->bindParam(":lugarEdicion", $libro["lugarEdicion"], PDO::PARAM_STR);
             $consulta->bindParam(":anio", $libro["anio"], PDO::PARAM_INT);
             $consulta->bindParam(":serie", $libro["serie"], PDO::PARAM_INT);
             $consulta->bindParam(":observaciones", $libro["observaciones"], PDO::PARAM_STR);
-            $consulta->bindParam(":idMateria", $libro["idMateria"], PDO::PARAM_STR);
+            $consulta->bindParam(":idMateria", $libro["idMateria"], PDO::PARAM_INT);
 
             $consulta->execute();
             
             return true;
             
         } 
-        catch (Exception $e) 
-            {
+        catch (Exception $e) {
             return false;
         }
-        
-    }
-    static public function eliminar_libro_modelo($idLibro)
-        {
-            try {
-            $consulta = Conectar::conexion()->prepare(" CALL `eliminarLibro`(:idLibro)");
-            $consulta->bindParam(":idLibro", $idLibro, PDO::PARAM_INT);
-            $consulta->execute();
-            return true;
-               
-            
-            } 
-            catch (Exception $e) {
-                return false;
-            }
-        }
+    } 
 }
 ?>

@@ -1,0 +1,282 @@
+main{
+    width: 100%;
+    
+}
+
+section{
+    min-height: 100vh;
+    padding: 10rem 9% 2rem;
+
+
+}
+
+.home{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 9%;
+    background: url('../img/006-library-biblioteca-angelica-a-roma_0002.webp') no-repeat;
+    background-size: cover;
+    background-position: center;
+    box-shadow: inset 0rem -2rem 7.5rem rgba(0,0,0,0.75);
+}
+
+.home-content{
+    max-width: 85rem;
+    min-width: 60rem;
+    padding: 5rem;
+    border-radius: 0.5rem;
+    background: rgba(0,0,0,0.65);
+    
+}
+
+.home-content h1{
+    font-size: 5.6rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.home-content .text-animate{
+    position: relative;
+    width: 32.8rem;
+}
+
+.home-content .text-animate h3{
+    width: 75rem;
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: var(--main-color);
+    
+}
+
+.home-content p{
+    font-size: 1.6rem;
+    margin: 2rem 0 4rem;
+}
+
+
+
+
+
+
+.about{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: var(--second-bg-color);
+    padding-bottom: 6rem;
+}
+
+.heading{
+    font-size: 5rem;
+    margin-bottom: 3rem;
+    text-align: center;
+
+
+}
+
+.heading span{
+    color: var(--main-color);
+}
+
+.about-galery{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.about-img-left{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-img-left img{
+    width: 20rem;
+    height: 20rem;
+    opacity: 0.65;
+    border-radius: 50%;
+    margin: 0 2.5rem;
+    padding: 0.5rem;
+    border: 2px solid var(--main-color);
+}
+
+.about-img-right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-img-right img{
+    width: 20rem;
+    height: 20rem;
+    opacity: 0.65;
+    border-radius: 50%;
+    margin: 0 2.5rem;
+    padding: 0.5rem;
+    border: 2px solid var(--main-color);
+}
+
+.about-img{
+    position: relative;
+    width: 30rem;
+    min-width: 30rem;
+    height: 30rem;
+    min-height: 30rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-img img{
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    border: 0.2rem solid var(--main-color);
+
+}
+
+.about-img .circle-spin{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border-top: 0.2rem solid var(--second-bg-color);
+    border-right: 0.2rem solid var(--main-color);
+    border-bottom: 0.2rem solid var(--second-bg-color);
+    border-left: 0.2rem solid var(--main-color);
+    animation: aboutSpinner 8s linear infinite;
+}
+
+@keyframes aboutSpinner{
+    100%{
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.about-content{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about-content h3{
+    font-size: 2.6rem;
+    color: var(--main-color);
+}
+
+.about-content p{
+    font-size: 1.6rem;
+    margin: 2rem 0 3rem;
+    width: 75%;
+}
+
+
+
+
+
+
+
+.contact{
+    min-height: 100vh;
+    padding-bottom: 7rem;
+}
+
+.contact form{
+    max-width: 70rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact form .input-box{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.contact form .input-box .input-field{
+    position: relative;
+    width: 49%;
+    margin: 0.8rem 0;
+}
+
+.contact form .input-box .input-field input,
+.contact form .textarea-field textarea{
+    width: 100%;
+    height: 100%;
+    padding: 1.5rem;
+    font-size: 1.6rem;
+    color: var(--text-color);
+    background: transparent;
+    border-radius: 0.6rem;
+    border: 0.2rem solid var(--main-color);
+
+}
+
+.contact form .input-box .input-field input::placeholder,
+.contact form .textarea-field textarea::placeholder{
+    color: var(--text-color);
+
+}
+
+.contact form .textarea-field{
+    position: relative;
+    margin: 0.8rem 0 2.7rem;
+    display: flex;
+}
+
+.contact form .textarea-field textarea{
+    resize: none;
+}
+
+.contact form .btn-box{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.contact form .btn-box button{
+    padding: 1.5rem 3.5rem;
+    font-size: 1.6rem;
+    color: var(--text-color);
+    background: transparent;
+    border-radius: 0.6rem;
+    border: 0.2rem solid var(--main-color);
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+
+.contact form .btn-box button::after{
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: -100%;
+    background: var(--main-color);
+    transition: all 0.5s ease;
+    z-index: -1;
+}
+
+.contact form .btn-box button:hover{
+    color: var(--second-bg-color);
+}
+
+.contact form .btn-box button:hover::after{
+    left: 0;
+}

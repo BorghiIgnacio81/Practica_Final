@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/icomoon.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/front-main.css">
-    <link rel="stylesheet" href="css/login2.css">
-    <link rel="stylesheet" href="css/busqueda.css">
+    <link rel="stylesheet" href="vistas/css/normalize.css">
+    <link rel="stylesheet" href="vistas/css/icomoon.css">
+    <link rel="stylesheet" href="vistas/css/header.css">
+    <link rel="stylesheet" href="vistas/css/front-main.css">
+    <link rel="stylesheet" href="vistas/css/login2.css">
+    <link rel="stylesheet" href="vistas/css/busqueda.css">
 </head>
 <body>
 
@@ -140,15 +140,15 @@
             <div class="form-box login">
                 
                 <h2 class="animation" style="--i:0; --j:21;">Login</h2>
-                <form action="../controlador/login_controlador.php" method="post">
+                <form action="index.php" method="post">
                     <div class="input-box animation" style="--i:1; --j:22;">
                         <input type="text" name="nombre_usuario" id="nombre_usuario" required>
                         <label for="nombre_usuario">Usuario</label>
                         <i class="bx bxs-user"></i>
                     </div>
                     <div class="input-box animation" style="--i:2; --j:23;">
-                        <input type="password" name="contraseña" id="contraseña" required>
-                        <label for="contraseña">Contraseña</label>
+                        <input type="password" name="contrasenia" id="contrasenia" required>
+                        <label for="contrasenia">Contraseña</label>
                         <i class="bx bxs-lock-alt"></i>
                     </div>
                     <button type="submit" class="btn animation" style="--i:3; --j:24;">Login</button>
@@ -169,19 +169,19 @@
 
             <div class="form-box register">
                 <h2 class="animation" style="--i:17; --j:0;">Registrarse</h2>
-                <form action="#">
+                <form action="index.php" method="post">
                     <div class="input-box animation" style="--i:18; --j:1;">
-                        <input type="text" name="" id="" required>
+                        <input type="text" name="r-username" id="" required>
                         <label for="">Usuario</label>
                         <i class="bx bxs-user"></i>
                     </div>
                     <div class="input-box animation" style="--i:19; --j:2;">
-                        <input type="text" name="" id="" required>
+                        <input type="text" name="r-email" id="" required>
                         <label for="">Email</label>
                         <i class="bx bxs-envelope"></i>
                     </div>
                     <div class="input-box animation" style="--i:20; --j:3;">
-                        <input type="password" name="" id="" required>
+                        <input type="password" name="r-password" id="" required>
                         <label for="">Contraseña</label>
                         <i class="bx bxs-lock-alt"></i>
                     </div>
@@ -222,18 +222,18 @@
             
             <div class="about-galery">
                 <div class="about-img-left">
-                    <img src="img/leyendo2.jpg" alt="">
-                    <img src="img/leyendo3.jpg" alt="">
+                    <img src="vistas/img/leyendo2.jpg" alt="">
+                    <img src="vistas/img/leyendo3.jpg" alt="">
                 </div>
                 
                 <div class="about-img">
-                    <img src="img/leyendo1.jpg" alt="">
+                    <img src="vistas/img/leyendo1.jpg" alt="">
                     <span class="circle-spin"></span>
                 </div>
 
                 <div class="about-img-right">
-                    <img src="img/leyendo4.jpg" alt="">
-                    <img src="img/leyendo5.jpeg" alt="">
+                    <img src="vistas/img/leyendo4.jpg" alt="">
+                    <img src="vistas/img/leyendo5.jpeg" alt="">
                 </div>
                 
             </div>
@@ -283,7 +283,7 @@
         </section>
     </main>
 
-    <script src="js/login2.js"></script>
-    <script src="js/front-page.js"></script>
+    <script src="vistas/js/login2.js"></script>
+    <script src="vistas/js/front-page.js"></script>
 </body> 
 </html>

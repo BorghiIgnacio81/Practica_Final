@@ -74,6 +74,9 @@ var campoEdicionEditPedido = document.querySelector(".libro-edit-pedido.edicion"
 var campoUbicacionEditPedido = document.querySelector(".libro-edit-pedido.ubicacion");
 var campoObservacionEditPedido = document.querySelector(".libro-edit-pedido.observacion");
 
+// ------------------------ Boton descarga de pdf ----------------------------------
+var botonDescargaPDF = document.querySelector(".descargar-pdf");
+
 
 
 
@@ -441,4 +444,11 @@ modalDelBotonSend.addEventListener("click", ()=>{
     let libro = libroCtrl.buscarLibroPorid(modalDelLibro.getAttribute("idLibroTemp"));
     
     libroCtrl.solicitudAjaxABM(libro.toJson(),"del");
+});
+
+
+// ----------------------- Descargar Reporte de libros -----------------------------
+
+botonDescargaPDF.addEventListener("click",()=>{
+    window.open("libraries/examples/informe.php")
 });

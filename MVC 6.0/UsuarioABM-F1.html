@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/busqueda.css">
+</head>
+<body>
+
+    <div class="busqueda">
+
+        <span class="bg-animate">
+        </span>
+
+        <div class="form-box">
+            <h1 class="animation" style="--i:0; --j:21;">Gestion Usuarios</h1>
+
+            <form action="#">
+                <div class="buscar-normal">
+                    <div class="input-box animation" style="--i:1; --j:22;">
+                        <input type="text" name="" id="" required placeholder="Buscar usuario">
+                    </div>
+                    <button type="submit" class="btn animation" style="--i:3; --j:24;">Buscar</button>
+                </div>
+                <div class="buscar-avanzada">
+                    <h1> Filtros</h1>
+                    <span class="animation">></span>
+                    <div class="adv-modes">
+
+
+                        <div class="adv-modes-items">
+                            <h2>Penalidad</h2>
+                            <div class="input-box">
+                                <select>
+                                    <option value="">Fuera de Termino</option>
+                                    <option value="">Destruccion o perdida</option>
+                                    <option value="">Mal Estado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="adv-modes-items">
+                            <h2>Tipo usuario</h2>
+                            <div class="input-box">
+                                <select>
+                                    <option value="">Docente</option>
+                                    <option value="">Socio</option>
+                                    <option value="">Alumno</option>
+                                    <option value="">Usuario</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="adv-modes-items">
+                            <h2>Año inscripcion a la Biblioteca</h2>
+                            <div class="input-box">
+                                <label for="">Desde</label>
+                                <input type="number" min="2000" max="2030">
+                                <label for="">Hasta</label>
+                                <input type="number" min="2000" max="2030">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+        <div class="resultado-busqueda">
+            <!-- Mostrar la tabla vacía hacia abajo -->
+            <table id="miDataGridView">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Telefono</th>
+                        <th>Tipo Usuario</th>
+                        <th>Penalidad</th>
+                        <th>Eliminar</th>
+                        <th>Modificar</th>
+                        <th>Penalizar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- La tabla está vacía, no se agrega ninguna fila aquí inicialmente -->
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script>
+        // Funciones del DataGridView y botones
+        // ... (las mismas funciones que se mencionaron en respuestas anteriores)
+    </script>
+
+</body>
+</html>
