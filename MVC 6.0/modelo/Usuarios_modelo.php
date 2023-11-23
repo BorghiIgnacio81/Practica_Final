@@ -44,7 +44,7 @@ class Usuarios_modelo {
                 :dni, 
                 :fechaNac, 
                 :telefono, 
-                :email,
+                :email,|
                 :direccion)");
 
             $consulta->bindParam(":nombre", $usuario["nombre"], PDO::PARAM_STR);

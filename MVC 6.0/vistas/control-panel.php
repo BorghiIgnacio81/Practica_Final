@@ -55,49 +55,40 @@
 
         </div>
     </aside>
+<?php
+$usuarios = Usuarios_Controlador::get_pre_Usuarios_Controlador();
+?>
 
+<!-- Frames -->
+<section class="frame-usuarios active">
+    <form action="" class="form-container">
+        <h1>Gestión de Usuarios</h1>
+        <article class="a-user">
+            <h2>Alta de usuario</h2>
+            <div class="add-new-user">
+                <span class="icon-plus"></span>
+                <p>Nuevo usuario</p>
+            </div>
 
-    <!-- Frames -->
-    <section class="frame-usuarios active">
-        <form action="" class="form-container">
-            <h1>Gestión de Usuarios</h1>
-            <article class="a-user">
-                <h2>Alta de usuario</h2>
-                <div class="add-new-user">
-                    <span class="icon-plus"></span>
-                    <p>Nuevo usuario</p>
-                </div>
+            <h3>Pre registros por aprobar</h3>
 
-                <h3>Pre registros por aprobar</h3>
+            <?php foreach ($usuarios as $usuario) : ?>
                 <div class="add-pre-registred">
-                    <div class="add-pre-item box-type1" >
-                        <h4>Pablo Perez</h4>
+                    <div class="add-pre-item box-type1">
+                        <h4><?php echo $usuario['nombre'], ', ',$usuario['apellido']; ?></h4>
                         <div class="add-pre-content box-type1-content">
-                            <span class="icon-home"><p>Alberdi 345</p></span>
-                            <span class="icon-phone"><p>+345515964</p></span>
-                            <span class="icon-mail"><p>pabloperez@gmail.com</p></span>
+                            <span class="icon-home"><p><?php echo $usuario['direccion']; ?></p></span>
+                            <span class="icon-phone"><p><?php echo $usuario['telefono']; ?></p></span>
+                            <span class="icon-mail"><p><?php echo $usuario['email']; ?></p></span>
                         </div>
                         <div class="add-pre-btns box-type1-btns">
                             <span class="icon-checkmark"></span>
                             <span class="icon-cross"></span>
                         </div>
                     </div>
-                    <div class="add-pre-item box-type1">
-                        <h4>Pablo Perez</h4>
-                        <div class="add-pre-content box-type1-content">
-                            <span class="icon-home"><p>Alberdi 345</p></span>
-                            <span class="icon-phone"><p>+345515964</p></span>
-                            <span class="icon-mail"><p>pabloperez@gmail.com</p></span>
-                        </div>
-                        <div class="add-pre-btns box-type1-btns" >
-                            <span class="icon-checkmark"></span>
-                            <span class="icon-cross"></span>
-                        </div>
-                    </div>
-                    
-                    
                 </div>
-            </article>
+            <?php endforeach; ?>
+        </article>
             
             <article class="bm-user">
                 <h2>Baja, Modificación y Penalidad</h2>
