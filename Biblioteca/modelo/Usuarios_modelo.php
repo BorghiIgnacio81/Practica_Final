@@ -5,15 +5,16 @@ class Usuarios_modelo {
     
 
     static public function get_pre_usuarios_modelo(){
-        try
-        { 
+        try{ 
             $consulta = Conectar::conexion()->prepare("Call preUsuarios");
             $consulta->execute();
             $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
-            return $resultados;
+            if(count($resultados)> 0)
+                return $resultados;
+            else
+                return null;
         }
-        catch(Exception $e)
-        {
+        catch(Exception $e){
             return null;
         }
     }
@@ -25,7 +26,7 @@ class Usuarios_modelo {
                 $filtros = explode(" ", $filtros);
                 $order = "ORDER BY ".$filtros[0]." ".$filtros[1];
             }
-            $consulta = Conectar::conexion()->prepare("SELECT idUsuarios as idUsuario, nombre, apellido, dni, direccion, telefono, email, fechaNac, tipoUsuario, penalidad
+            $consulta = Conectar::conexion()->prepare("SELECT idUsuarios as idUsuario, nombre, apellido, dni, direccion, telefono, email, fechaNac, tipoUsuario, penalidadHasta as penalidad
             FROM usuarios 
             WHERE Nombre LIKE concat('%', :pUsuario, '%') OR Apellido LIKE concat('%', :pUsuario, '%') OR DNI like concat ('%',:pUsuario, '%') ".$order);
             //$consulta = Conectar::conexion()->prepare("CALL `usuarioXparam`(:pUsuario)");
@@ -37,12 +38,12 @@ class Usuarios_modelo {
             $fechaActual = new DateTime();
 
             foreach ($resultados as &$usuario) {
-                $fechaNacimiento = new DateTime($usuario["penalidad"]);
-                $diferencia = $fechaActual->diff($fechaNacimiento);
-                $usuario["penalidad"] = $diferencia->days;
+                if($usuario["penalidad"]){
+                    $fecha = explode(" ", $usuario["penalidad"]);
+                    $usuario["penalidad"] = $fecha[0]."T".$fecha[1];
+                }
             }
 
-            
             if(count($resultados) > 0)
                 return $resultados;
             else
@@ -125,7 +126,7 @@ class Usuarios_modelo {
     }
    
     static public function penalidad_modelo($idUsuario, $penalidad){
-        $consulta = Conectar::conexion()->prepare("UPDATE usuarios SET penalidad = :penalidad WHERE usuarios.idUsuarios = :idUsuario");
+        $consulta = Conectar::conexion()->prepare("UPDATE usuarios SET penalidadHasta = :penalidad WHERE usuarios.idUsuarios = :idUsuario");
         $consulta->bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
         $consulta->bindParam(":penalidad", $penalidad, PDO::PARAM_STR);
 
@@ -138,4 +139,27 @@ class Usuarios_modelo {
         }
 
     }
+
+    static public function rechazar_pre_registrado_modelo($idUsuario){
+        $consulta = Conectar::conexion()->prepare("DELETE FROM usuarios WHERE usuarios.idUsuarios = :idUsuario");
+        $consulta->bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
+        try{
+            $consulta->execute();
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
+    }
+
+    static public function aprobar_pre_registrado_modelo($idUsuario){
+        $consulta = Conectar::conexion()->prepare("UPDATE usuarios SET tipoUsuario = 2 WHERE usuarios.idUsuarios = :idUsuario ");
+        $consulta->bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
+        try{
+            $consulta->execute();
+            return true;
+        }catch(Exception $e){
+            return false;
+        }
+    }
+
 }

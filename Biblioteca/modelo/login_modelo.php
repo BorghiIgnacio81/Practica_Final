@@ -4,7 +4,7 @@ require_once 'Conectar.php';
 
 class LoginModelo{
     static public function login_modelo($nombre_usuario, $password){
-        $consulta = Conectar::conexion()->prepare("CALL login(:nombre_usuario, :contrasenia)");
+        $consulta = Conectar::conexion()->prepare("SELECT * FROM usuarios WHERE username = :nombre_usuario AND contrasenia = :contrasenia");
         $consulta->bindParam(":nombre_usuario", $nombre_usuario, PDO::PARAM_STR);
         $consulta->bindParam(':contrasenia', $password, PDO::PARAM_STR);
         $consulta->execute();

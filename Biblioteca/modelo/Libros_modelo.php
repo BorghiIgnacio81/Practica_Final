@@ -3,12 +3,20 @@ include_once 'Conectar.php';
 
 class Libros_modelo {
     private static $resultadosTitulo = null;
-    static public function get_libros_modelo($pTitulo) {             
+    static public function get_libros_modelo($pTitulo, $filtros) {
         try {
+            $order = "";
+            if(isset($filtros) && $filtros != "")
+                $order = "ORDER BY ".$filtros;
             
-            $consulta = Conectar::conexion()->prepare("CALL `librosXtitulo`(:pTitulo)");
+            $consulta = Conectar::conexion()->prepare("SELECT L.idLibro, L.titulo, A.autor,
+            L.ubicacionFisica, E.editorial, M.materia, L.lugarEdicion, L.anio, L.serie, L.observaciones 
+            FROM libros AS L JOIN autores AS A ON L.idAutor = A.idAutor 
+            JOIN editoriales AS E ON E.idEditorial = L.idEditorial 
+            JOIN materias AS M on M.idMateria = L.idMateria 
+            where L.titulo like '%$pTitulo%' $order");
 
-            $consulta->bindParam(":pTitulo", $pTitulo, PDO::PARAM_STR);
+            //$consulta->bindParam(":pTitulo", $pTitulo, PDO::PARAM_STR);
             
             $consulta->execute();
             
@@ -16,23 +24,33 @@ class Libros_modelo {
             
             //Esta lógica de retornar Null por array() en caso de que no encuentre resultados <<<<<
 
-            if (count($resultados) > 0)
-            {
+            if (count($resultados) > 0){
                 self::$resultadosTitulo = $resultados;
                 return $resultados;
-            }
-            else
-            {
+            }else{
                 self::$resultadosTitulo = null;
                 return null; // <<<<<<<<<<<< antes era array()
             }
+         
         } catch (PDOException $e) {
             return null;
         }
     }
-    static public function get_resultados_titulo(){
-        return self::$resultadosTitulo;
+    static public function get_libros_pedidos_modelo(){
+        try{ 
+            $consulta = Conectar::conexion()->prepare("Call libroPedido");
+            $consulta->execute();
+            $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            if(count($resultados)> 0)
+                return $resultados;
+            else
+                return null;
+        }
+        catch(Exception $e){
+            return null;
+        }
     }
+
     static public function get_libro_activo_modelo($pActivo) {             
         try {
             $consulta = Conectar::conexion()->prepare("CALL `librosXactivo`(:pActivo)");
@@ -50,7 +68,11 @@ class Libros_modelo {
         } catch (PDOException $e) {
             return null;
         }
-    }  
+    } 
+    
+    static public function get_resultados_titulo(){
+        return self::$resultadosTitulo;
+    }
 
     static public function nuevo_libro_modelo($libro){
         try {
@@ -88,7 +110,7 @@ class Libros_modelo {
 
     static public function editar_libro_modelo($libro){
         try{
-            $consulta = Conectar::conexion()->prepare(" CALL libroEditar(
+            $consulta = Conectar::conexion()->prepare(" CALL `editarLibro`(
                 :idLibro,
                 :titulo,
                 :idAutor,
@@ -117,25 +139,23 @@ class Libros_modelo {
             
             return true;
             
-        } 
-        catch (Exception $e) {
-            return false;
-        }
-    } 
-    static public function eliminar_libro_modelo($idLibro)
-    {
-        try {
-        $consulta = Conectar::conexion()->prepare(" CALL eliminarLibro(:idLibro)");
-        $consulta->bindParam(":idLibro", $idLibro, PDO::PARAM_INT);
-        $consulta->execute();
-        return true;
-            
-        
-        } 
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
     }
+
+    static public function eliminar_libro_modelo($idLibro){
+        try {
+            $consulta = Conectar::conexion()->prepare(" CALL eliminarLibro(:idLibro)");
+            $consulta->bindParam(":idLibro", $idLibro, PDO::PARAM_INT);
+            $consulta->execute();
+            return true;
+        
+        }catch (Exception $e) {
+            return false;
+        }
+    }
+
     static public function get_materias_modelo(){
         try
         { 
@@ -194,6 +214,7 @@ class Libros_modelo {
             return null;
         }
     }
+
 }
 
 ?>
