@@ -11,7 +11,7 @@
     if($response){
         Libros_Controlador::get_Libros_Controlador($response);
     }
-   
+
     class Libros_Controlador { 
         static public function get_libro_activo_Controlador($data) { 
             if ($data["funcion"] == "pedidos") {
@@ -24,12 +24,14 @@
                     }
                 }
         }
+        
         static public function get_Libros_Controlador($data) { 
             switch ($data["funcion"]) {
                 case "search":
                     if (isset($data["data"])) {
                         $pTitulo = $data["data"];
-                        $respuesta = Libros_modelo::get_libros_modelo($pTitulo);
+                        $filtros = $data["filtros"];
+                        $respuesta = Libros_modelo::get_libros_modelo($pTitulo, $filtros);
                         if($respuesta)
                             echo json_encode($respuesta);
                         else
@@ -103,9 +105,9 @@
                         }else {
                             echo json_encode(array("status"=>"no"));
                         }
-                        break;
                     }
-                    case "searchAvanzada":
+                    break;
+                case "searchAvanzada":
                     $titulo = isset($data["titulo"]) ? $data["titulo"] : null;
                 
                     // Verifica si ya hay resultados de búsqueda por título
@@ -146,25 +148,34 @@
                         }
                     }
                     break;
-                
-                
+                case "search-pedido":
+                    $respuesta = self::get_libros_pedidos_Controlador();
+                    echo json_encode($respuesta);
+                    break;    
                 default:
                     // Manejo de error si la función no está definida
-                    echo json_encode(["error" => "Función no válida"]);
+                    echo json_encode(["status" => "error"]);
                     break;
             }
        
         }
+
         static public function get_materias_Controlador() {
             $respuesta = Libros_modelo::get_materias_modelo();
             return $respuesta;
         }
+
         static public function get_autores_Controlador() {
             $respuesta = Libros_modelo::get_autores_modelo();
             return $respuesta;
         }
+
         static public function get_editoriales_Controlador() {
             $respuesta = Libros_modelo::get_editoriales_modelo();
+            return $respuesta;
+        }
+        static public function get_libros_pedidos_Controlador() {
+            $respuesta = Libros_modelo::get_libros_pedidos_modelo();
             return $respuesta;
         }
          
