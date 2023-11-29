@@ -16,12 +16,13 @@
                     <span class="icon-play3"></span>
 
                     <select name="" id="" class="filtro-libro-pedido">
-                        <option value="">por Titulo (ASC)</option>
-                        <option value="">por Titulo (DESC)</option>
-                        <option value="">por Autor (ASC)</option>
-                        <option value="">por Autor (DESC)</option>
-                        <option value="">por Materia (ASC)</option>
-                        <option value="">por Materia (DESC)</option>
+                        <option value="">Sin Filtros</option>
+                        <option value="libros.titulo ASC">por Titulo (ASC)</option>
+                        <option value="libros.titulo DESC">por Titulo (DESC)</option>
+                        <option value="usuarios.apellido ASC">por Profesor (ASC)</option>
+                        <option value="usuarios.apellido DESC">por Profesor (DESC)</option>
+                        <option value="pedidos.fecha ASC">por Fecha (ASC)</option>
+                        <option value="pedidos.fecha DESC">por Fecha (DESC)</option>
                         
                     </select>    
                     
@@ -30,8 +31,8 @@
 
             <h3>Lista de pedidos <span class="icon-file-pdf descargar-pdf" title="Descarga lista pdf"></span></h3>
             
-            <div class="add-libros-pedidos">
-                <div class="add-lp-item box-type1" >
+            <div class="add-pedido-libro">
+                <!-- <div class="add-lp-item box-type1" >
                     <h4>Los 3 mosquiteros</h4>
                     <div class="add-lp-content box-type1-content">
                         <span class="icon-user"><p>Prof. Pablo Perez</p></span>
@@ -71,7 +72,7 @@
                         <span class="icon-pencil edit-libro-pedido"></span>
                         <span class="icon-cross"></span>
                     </div>
-                </div>
+                </div> -->
                 
             </div>
         </article>
@@ -95,11 +96,10 @@
                         <option value="">Sin filtros</option>
                         <option value="titulo ASC">por Titulo (ASC)</option>
                         <option value="titulo DESC">por Titulo (DESC)</option>
-                        <option value="autor ASC">por Autor (ASC)</option>
-                        <option value="autor DESC">por Autor (DESC)</option>
-                        <option value="materia ASC">por Materia (ASC)</option>
-                        <option value="materia DESC">por Materia (DESC)</option>
-
+                        <option value="A.autor ASC">por Autor (ASC)</option>
+                        <option value="A.autor DESC">por Autor (DESC)</option>
+                        <option value="M.materia ASC">por Materia (ASC)</option>
+                        <option value="M.materia DESC">por Materia (DESC)</option>
                     </select>    
                     
                 </div>

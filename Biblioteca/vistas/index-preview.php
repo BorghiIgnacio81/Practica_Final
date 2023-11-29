@@ -37,7 +37,7 @@ $editoriales = Libros_Controlador::get_editoriales_Controlador();
 
     </header>
 
-    <article class="busqueda">
+    <div class="busqueda">
 
         <span class="icon-cross cerrar-busqueda"></span>
 
@@ -105,7 +105,7 @@ $editoriales = Libros_Controlador::get_editoriales_Controlador();
         </div>
 
 
-    </article>
+    </div>
 
     <div class="login-frame <?php if(isset($_SESSION) || isset($GET)) echo "active"?>">
         <span class="icon-cross cerrar-login"></span>

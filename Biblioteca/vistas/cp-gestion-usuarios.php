@@ -1,7 +1,3 @@
-<?php
-    $usuarios = Usuarios_Controlador::get_pre_Usuarios_Controlador();
-?>
-
 <!-- Frames -->
 <section class="frame-usuarios">
     <form action="" class="form-container">
@@ -16,20 +12,7 @@
             <h3>Pre registros por aprobar</h3>
 
             <div class="add-pre-registred">
-                <?php foreach ($usuarios as $usuario) : ?>
-                    <div class="add-pre-item box-type1">
-                        <h4><?php echo $usuario['nombre'], ', ',$usuario['apellido']; ?></h4>
-                        <div class="add-pre-content box-type1-content">
-                            <span class="icon-home"><p><?php echo $usuario['direccion']; ?></p></span>
-                            <span class="icon-phone"><p><?php echo $usuario['telefono']; ?></p></span>
-                            <span class="icon-mail"><p><?php echo $usuario['email']; ?></p></span>
-                        </div>
-                        <div class="add-pre-btns box-type1-btns">
-                            <span class="icon-checkmark"></span>
-                            <span class="icon-cross"></span>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
+                
             </div>
         </article>
         
@@ -125,7 +108,7 @@
 <div class="modal-frame modal-edit-user">
     <form action="#" class="modal-form1">
         <div class="modal-form1-titulo">
-            <p>Agregar nuevo usuario</p>
+            <p>Editar datos de usuario</p>
             <span class="icon-cross close-modal-edit-user"></span>
         </div>
 
@@ -161,8 +144,8 @@
                     <label for="">Telefono</label>
                 </div>
                 <div class="modal-form1-input-item">
-                    <input class="input-edit-user tipoUsuario" type="text" name="" id="" required>
-                    <label for="">Privilegios</label>
+                    <input type="number" class="input-edit-user tipoUsuario" min=0 max=2>
+                    <label class="label-edit-user tipoUsuario-label" for="">Privilegios</label>
                 </div>
             </div>
 
@@ -183,7 +166,7 @@
 <div class="modal-frame modal-penal-user">
     <form action="#" class="modal-form1">
         <div class="modal-form1-titulo">
-            <p>Agregar nuevo usuario</p>
+            <p>Penalizar usuario</p>
             <span class="icon-cross close-modal-penal-user"></span>
         </div>
 
@@ -191,8 +174,8 @@
             
             <div class="modal-form1-inputs user-penalidad">
                 <div class="modal-form1-input-item">
-                    <input class="input-penal-user" type="number" id="" required>
-                    <label for="">Penalidad (Dias)</label>
+                    <input class="input-penal-user" type="datetime-local" id="" required>
+                    <label for="">Penalizado hasta:</label>
                 </div>
             </div>
 
@@ -213,7 +196,7 @@
 <div class="modal-frame modal-del-user">
     <form action="#" class="modal-form1">
         <div class="modal-form1-titulo">
-            <p>Agregar nuevo usuario</p>
+            <p>Eliminar usuario</p>
             <span class="icon-cross close-modal-del-user"></span>
         </div>
 

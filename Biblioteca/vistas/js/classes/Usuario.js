@@ -22,8 +22,8 @@ class Usuario{
                         '<span class="icon-mail"><p>'+this.email+'</p></span>'+
                     '</div>'+
                     '<div class="add-pre-btns box-type1-btns">'+
-                        '<span idUsuario="'+this.idUsuario+'" class="icon-checkmark"></span>'+
-                        '<span idUsuario="'+this.idUsuario+'" class="icon-cross"></span>'+
+                        '<span idUsuario="'+this.idUsuario+'" class="icon-checkmark pre-registrado-add"></span>'+
+                        '<span idUsuario="'+this.idUsuario+'" class="icon-cross pre-registrado-del"></span>'+
                     '</div>'+
                 '</div>';
     }

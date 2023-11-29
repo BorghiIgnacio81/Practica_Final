@@ -31,6 +31,7 @@ var modalEditUserCancel = document.querySelector(".cancel-modal-edit-user");
 var modalEditUser = document.querySelector(".modal-frame.modal-edit-user");
 var botonEditUserOpen;
 var botonEditUserSend = document.querySelector(".confirm-modal-edit-user");
+var labelEditUserPrivilegio = document.querySelector(".tipoUsuario-label");
 var fieldEditUserStatus = document.querySelector(".modal-form1-status.db-edit-user");
 
 var inputEditUserModalNombre = document.querySelector(".input-edit-user.nombre");
@@ -64,6 +65,16 @@ var fieldDelUserStatus = document.querySelector(".modal-form1-status.db-del-user
 
 var labelDelUserId = document.querySelector(".icon-user.del-usuario-id");
 
+
+
+// ----------------------- Pre Registrados -----------------------
+var gridPreRegistrados = document.querySelector(".add-pre-registred");
+
+// ----------------------- Aprobar Usuario Pre Registrado -----------------------
+var botonAddPreRegistrado = document.querySelectorAll(".pre-registrado-add");
+
+// ----------------------- Rechazar Usuario Pre Registrado -----------------------
+var botonDelPreRegistrado = document.querySelectorAll(".pre-registrado-del");
 
 
 // *****************************************************************
@@ -163,6 +174,7 @@ class UsuarioController{
                             fieldAddUserStatus.innerHTML = '<span class="icon-blocked"> No se ha podido agregar el usuario</span>';
                         }
                         break;
+                        
                     case "edit":
                         if(response.status == "ok"){
                             fieldEditUserStatus.innerHTML = '<span class="icon-checkmark"> Usuario editado exitosamente</span>';
@@ -174,6 +186,7 @@ class UsuarioController{
                             fieldEditUserStatus.innerHTML = '<span class="icon-blocked"> No se ha podido editar el Usuario</span>';
                         }
                         break;
+
                     case "del":
                         if(response.status == "ok"){
                             fieldDelUserStatus.innerHTML = '<span class="icon-checkmark"> Usuario eliminado exitosamente</span>';
@@ -185,18 +198,34 @@ class UsuarioController{
                             fieldDelUserStatus.innerHTML = '<span class="icon-blocked"> No se ha podido eliminar el Usuario</span>';
                         }
                         break;
+
                     case "penal":
                         if(response.status == "ok"){
-                            fieldPenalUserStatus.innerHTML = '<span class="icon-checkmark"> Usuario eliminado exitosamente</span>';
+                            fieldPenalUserStatus.innerHTML = '<span class="icon-checkmark"> Se han atribuido una nueva penalidad</span>';
                             busquedaUsuario();
                             setTimeout(() => {
                                 modalPenalUser.classList.remove("active");
                             }, 2000);
                         }else{
-                            fieldPenalUserStatus.innerHTML = '<span class="icon-blocked"> No se ha podido eliminar el Usuario</span>';
+                            fieldPenalUserStatus.innerHTML = '<span class="icon-blocked"> No se ha podido penalizar al usuario</span>';
                         }
                         break;
 
+                    case "add-pre":
+                        if(response.status == "ok"){
+                            buscarPreRegistrados();
+                            alert('¡Usuario promovido a Socio!');
+                        }else
+                            alert('¡Ha surgido un error!');
+                        break;
+
+                    case "del-pre":
+                        if(response.status == "ok"){
+                            alert('¡Solicitud rechazada!');
+                            buscarPreRegistrados();
+                        }else
+                            alert('¡Ha surgido un error!');
+                        break;
                 }
 
             } else if (xhr.readyState == 4 && xhr.status != 200) {
@@ -205,6 +234,45 @@ class UsuarioController{
         };
     
         xhr.send(JSON.stringify(data)); //Envía la info al servidor en formato string de json
+    }
+
+    solicitudAjaxBuscarPreRegistrados(target){
+        let datasend = {"funcion" : "search-pre"};
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "controlador/usuarios_controlador.php", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+    
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                let listaUsuarios = JSON.parse(xhr.responseText); //el json que envía el servidor
+                let listado = "";
+
+                if(listaUsuarios){
+                    listaUsuarios.forEach(function (u) {
+                        listado += (new Usuario(u.idUsuario, u.nombre, u.apellido, u.dni, u.direccion, u.telefono, u.email, u.fechaNac, u.penalidad, u.tipoUsuario)).printBoxUsuarioPreRegistrado();
+                    });
+
+                    target.innerHTML = listado;
+
+                    //Agregar eventos
+                    botonAddPreRegistrado = document.querySelectorAll(".pre-registrado-add");
+                    botonDelPreRegistrado = document.querySelectorAll(".pre-registrado-del");
+
+                    agregarEventoPreRegistradosAgregar();
+                    agregarEventoPreRegistradosEliminar();
+                    //fin agregar eventos
+
+                }else{
+                    target.innerHTML = "<p>No se han encontrado resultados.</p>";
+                }
+
+            } else if (xhr.readyState == 4 && xhr.status != 200) {
+                usuarioCtrl.listaUsuarioBM = null;
+                target.innerHTML = "<p>Se ha producido un error desconocido.</p>";
+            }
+        };
+    
+        xhr.send(JSON.stringify(datasend)); //Envía la info al servidor en formato string de json
     }
 
 }
@@ -292,6 +360,25 @@ modalEditUserCancel.addEventListener("click", ()=>{
     modalEditUser.classList.remove('active');
 });
 
+inputEditUserModalTipoUsuario.addEventListener("change", ()=>{
+    
+    switch(Number(inputEditUserModalTipoUsuario.value)){
+        case 0: 
+            labelEditUserPrivilegio.innerHTML="Privilegios >>> Bibliotecario";
+            break;
+        case 1:
+            labelEditUserPrivilegio.innerHTML="Privilegios >>> Profesor";
+            break;
+        case 2:
+            labelEditUserPrivilegio.innerHTML="Privilegios >>> Socio";
+            break;
+        default:
+            labelEditUserPrivilegio.innerHTML="Privilegios";
+            break;
+    }
+    
+});
+
 function agregarEventoUsuariosEditar(){
     for (let i = 0; i < usuarioCtrl.cantidadUsuarios(); i++) {
         
@@ -364,7 +451,7 @@ function agregarEventoUsuariosPenalizar(){
             
             fieldPenalUserStatus.innerHTML = "";
 
-            inputPenalUserModal.value = 0;
+            inputPenalUserModal.value = objUsuario.penalidad;
     
             modalPenalUser.setAttribute("idUsuarioTemp", idUsuario);
     
@@ -377,7 +464,7 @@ function agregarEventoUsuariosPenalizar(){
 botonPenalUserSend.addEventListener("click", ()=>{
     let usuario = usuarioCtrl.buscarUsuarioPorid(modalPenalUser.getAttribute("idUsuarioTemp"));
 
-    if(inputPenalUserModal.value > 0 && inputPenalUserModal != null){
+    if( inputPenalUserModal != null && inputPenalUserModal.value.length > 0){
         usuario.penalidad = inputPenalUserModal.value;
         usuarioCtrl.solicitudAjaxABM(usuario.toJson(),"penal");
     }else{
@@ -418,3 +505,38 @@ botonDelUserSend.addEventListener("click", ()=>{
     
     usuarioCtrl.solicitudAjaxABM(usuario.toJson(),"del");
 });
+
+
+
+// ----------------------- Evento Pre Registrados -----------------------
+// ----------------------- Evento Agregar -----------------------
+function agregarEventoPreRegistradosAgregar(){
+    for (let i = 0; i < botonAddPreRegistrado.length; i++) {
+        botonAddPreRegistrado[i].addEventListener("click",()=>{
+            let idUsuario = botonAddPreRegistrado[i].getAttribute("idUsuario");
+            
+            usuarioCtrl.solicitudAjaxABM({"idUsuario":idUsuario}, "add-pre");
+            
+        });
+    }
+}
+
+// ----------------------- Evento Eliminar -----------------------
+function agregarEventoPreRegistradosEliminar(){
+    for (let i = 0; i < botonDelPreRegistrado.length; i++) {
+        botonDelPreRegistrado[i].addEventListener("click",()=>{
+            let idUsuario = botonDelPreRegistrado[i].getAttribute("idUsuario");
+            console.log(idUsuario);
+            
+            usuarioCtrl.solicitudAjaxABM({"idUsuario":idUsuario}, "del-pre");
+            
+        });
+    }
+}
+
+// ----------------------- Evento Buscar -----------------------
+function buscarPreRegistrados(){
+    usuarioCtrl.solicitudAjaxBuscarPreRegistrados(gridPreRegistrados);
+}
+
+buscarPreRegistrados();

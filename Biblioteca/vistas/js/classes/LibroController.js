@@ -56,6 +56,14 @@ var modalStatusDelLibro = document.querySelector(".db-del-libro");
 
 var campoModalDelLibro = document.querySelector(".icon-book.del-libro-id");
 
+// ----------------------- Libro Pedido -----------------------
+var gridLibroPedido = document.querySelector(".add-pedido-libro");
+
+// ----------------------- Aprobar Libro Pedido -----------------------
+var botonAddLibroPedido = document.querySelectorAll(".libro-pedido-add");
+
+// ----------------------- Rechazar Libro Pedido -----------------------
+var botonDelLibroPedido = document.querySelectorAll(".libro-pedido-del");
 
 // ------------------------ Editar libro pedido + modal pedido ------------------------
 var modalPedidoLibroClose = document.querySelector(".close-modal-edit-libro-pedido");
@@ -198,6 +206,21 @@ class LibroController{
                             modalStatusDelLibro.innerHTML = '<span class="icon-blocked"> No se ha podido eliminar el libro</span>';
                         }
                         break;
+                    case "add-pedido":
+                        if(response.status == "ok"){
+                            buscarPreRegistrados();
+                            alert('¡Libro agregado a biblioteca!');
+                        }else
+                            alert('¡Ha surgido un error!');
+                        break;
+
+                    case "del-pedido":
+                        if(response.status == "ok"){
+                            alert('¡Libro eliminado!');
+                            buscarPreRegistrados();
+                        }else
+                            alert('¡Ha surgido un error!');
+                        break;
                     
                 }
 
@@ -207,6 +230,45 @@ class LibroController{
         };
     
         xhr.send(JSON.stringify(data)); //Envía la info al servidor en formato string de json
+    }
+
+    solicitudAjaxBuscarLibroPedido(target){
+        let datasend = {"funcion" : "search-pedido"};
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "controlador/libros_controlador.php", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+    
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                let listaLibros = JSON.parse(xhr.responseText); //el json que envía el servidor
+                let listado = "";
+
+                if(listaLibros){
+                    listaLibros.forEach(function (l) {
+                        listado += (new Libro(l.idLibro, l.titulo, l.autor, l.ubicacionFisica, l.editorial, l.materia, l.lugarEdicion, l.anio, l.serie, l.observaciones, l.activo, l.fechaIngreso)).printBoxLibrosPedidos();
+                    });
+
+                    target.innerHTML = listado;
+
+                    //Agregar eventos
+                    botonAddLibroPedido = document.querySelectorAll(".libro-pedido-add");
+                    botonDelLibroPedido = document.querySelectorAll(".libro-pedido-del");
+
+                    agregarEventoLibroPedidoAgregar();
+                    agregarEventoLibroPedidoEliminar();
+                    //fin agregar eventos
+
+                }else{
+                    target.innerHTML = "<p>No se han encontrado resultados.</p>";
+                }
+
+            } else if (xhr.readyState == 4 && xhr.status != 200) {
+                libroCtrl.listaLibrosBM = null;
+                target.innerHTML = "<p>Se ha producido un error desconocido.</p>";
+            }
+        };
+    
+        xhr.send(JSON.stringify(datasend)); //Envía la info al servidor en formato string de json
     }
 
 }
@@ -389,3 +451,35 @@ modalDelBotonSend.addEventListener("click", ()=>{
 botonDescargaPDF.addEventListener("click",()=>{
     window.open("libraries/examples/informe.php")
 });
+// ----------------------- Evento Pre Registrados -----------------------
+// ----------------------- Evento Agregar -----------------------
+function agregarEventoLibroPedidoAgregar(){
+    for (let i = 0; i < botonAddLibroPedido.length; i++) {
+        botonAddLibroPedido[i].addEventListener("click",()=>{
+            let idLibro = botonAddLibroPedido[i].getAttribute("idLibro");
+            
+            libroCtrl.solicitudAjaxABM({"idLibro":idLibro}, "add-pedido-libro");
+            
+        });
+    }
+}
+
+// ----------------------- Evento Eliminar -----------------------
+function agregarEventoLibroPedidoEliminar(){
+    for (let i = 0; i < botonDelLibroPedido.length; i++) {
+        botonDelLibroPedido[i].addEventListener("click",()=>{
+            let idLibro = botonDelLibroPedido[i].getAttribute("idLibro");
+            console.log(idLibro);
+            
+            libroCtrl.solicitudAjaxABM({"idLibro":idLibro}, "del-pedido");
+            
+        });
+    }
+}
+
+// ----------------------- Evento Buscar -----------------------
+function buscarLibroPedido(){
+    libroCtrl.solicitudAjaxBuscarLibroPedido(gridLibroPedido);
+}
+
+buscarLibroPedido();
