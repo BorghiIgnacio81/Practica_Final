@@ -3,7 +3,26 @@ include_once 'Conectar.php';
 
 class Libros_modelo {
     private static $resultadosTitulo = null;
-    static public function get_libros_modelo($pTitulo, $filtros) {
+    static public function get_libros_modelo($pTitulo) {             
+        try {
+            $consulta = Conectar::conexion()->prepare("CALL `librosXtitulo`(:pTitulo)");
+            $consulta->bindParam(":pTitulo", $pTitulo, PDO::PARAM_STR);
+            $consulta->execute();
+            $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
+
+            if (count($resultados) > 0){
+                self::$resultadosTitulo = $resultados;
+                return $resultados;
+            }else{
+                self::$resultadosTitulo = null;
+                return null; 
+            }
+         
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+    static public function get_libros_modeloAB($pTitulo, $filtros) {
         try {
             $order = "";
             if(isset($filtros) && $filtros != "")
@@ -15,8 +34,7 @@ class Libros_modelo {
             JOIN editoriales AS E ON E.idEditorial = L.idEditorial 
             JOIN materias AS M on M.idMateria = L.idMateria 
             where L.titulo like '%$pTitulo%' $order");
-
-            //$consulta->bindParam(":pTitulo", $pTitulo, PDO::PARAM_STR);
+            
             
             $consulta->execute();
             
@@ -36,20 +54,7 @@ class Libros_modelo {
             return null;
         }
     }
-    static public function get_libros_pedidos_modelo(){
-        try{ 
-            $consulta = Conectar::conexion()->prepare("Call libroPedido");
-            $consulta->execute();
-            $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
-            if(count($resultados)> 0)
-                return $resultados;
-            else
-                return null;
-        }
-        catch(Exception $e){
-            return null;
-        }
-    }
+    
 
     static public function get_libro_activo_modelo($pActivo) {             
         try {
@@ -195,25 +200,21 @@ class Libros_modelo {
             return null;
         }
     }
-    static public function buscar_libros_avanzada_modelo($idMateria, $idAutor, $idEditorial) {
-        try {
-            $consulta = Conectar::conexion()->prepare("CALL `librosMateriaAutorEditorial`(:idMateria, :idAutor, :idEditorial)");
-    
-            $consulta->bindParam(":idMateria", $idMateria, PDO::PARAM_INT);
-            $consulta->bindParam(":idAutor", $idAutor, PDO::PARAM_INT);
-            $consulta->bindParam(":idEditorial", $idEditorial, PDO::PARAM_INT);
+    static public function get_libros_pedidos_modelo(){
+        try{ 
+            $consulta = Conectar::conexion()->prepare("Call libroPedido");
             $consulta->execute();
-    
             $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
-    
-            if (count($resultados) > 0)
+            if(count($resultados)> 0)
                 return $resultados;
             else
                 return null;
-        } catch (PDOException $e) {
+        }
+        catch(Exception $e){
             return null;
         }
     }
+    
 
 }
 
