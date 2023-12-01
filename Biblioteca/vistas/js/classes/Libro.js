@@ -1,5 +1,5 @@
 class Libro{
-    constructor(idLibro, titulo, autor, ubicacionFisica, editorial, materia, lugarEdicion, anio, serie, observaciones, activo, fechaIngreso){
+    constructor(idLibro, titulo, autor, ubicacionFisica, editorial, materia, lugarEdicion, anio, serie, observaciones, activo, profesor, cantidad, fechaPedido){
         this.idLibro = idLibro;
         this.titulo = titulo;
         this.autor = autor;
@@ -11,7 +11,9 @@ class Libro{
         this.serie = serie;
         this.observaciones = observaciones;
         this.activo = activo;
-        this.fechaIngreso = fechaIngreso;
+        this.profesor = profesor;
+        this.cantidad = cantidad;
+        this.fechaPedido = fechaPedido;
     }
 
     // --------------  Metodos clase Libro -----------------
@@ -19,11 +21,13 @@ class Libro{
         return '<div class="add-pre-item box-type1" >'+
                     '<h4>'+this.titulo+'</h4>'+
                     '<div class="add-pre-content box-type1-content">'+
-                        '<span class="icon-book" title="Materia"><p>'+this.materia+'</p></span>'+
-                        '<span class="icon-calendar"><p>Fecha solicitada:'+this.fechaIngreso+'</p></span>'+
+                        '<span class="icon-user"><p>Prof. '+this.profesor+'</p></span>'+
+                        '<span class="icon-book"><p>Cantidad: '+this.cantidad+'</p></span>'+
+                        '<span class="icon-calendar"><p>Fecha solicitada: '+this.fechaPedido+'</p></span>'+
                     '</div>'+
                     '<div class="add-pre-btns box-type1-btns">'+
                         '<span class="icon-checkmark"'+this.idLibro+'" class="icon-checkmark libro-pedido-add"></span>'+
+                        '<span class="icon-pencil edit-libro-pedido"'+this.idLibro+'"class="icon-pencil edit-libro-pedido"></span>'+
                         '<span class="icon-cross"'+this.idLibro+'" class="icon-cross libro-pedido-del"></span>'+
                     '</div>'+
                 '</div>';
@@ -70,7 +74,9 @@ class Libro{
             "serie" : this.serie,
             "observaciones" : this.observaciones,
             "activo" : this.activo,
-            "fechaIngreso" : this.fechaIngreso
+            "profesor" : this.profesor,
+            "cantidad" :this.cantidad,
+            "fechaPedido" : this.fechaPedido
         }
     }
 }

@@ -30,7 +30,7 @@
                 <div class="frame-filters-select-container">
                     <span class="icon-play3"></span>
 
-                    <select class="filtro-buscar-usuario-bm" name="" id="">
+                    <select class="filtro-buscar-usuario-bm" name="filtro-buscar-usuario-bm" id="filtro-buscar-usuario-bm" onchange="busquedaUsuario()">
                         <option value="">Sin Filtros</option>
                         <option value="apellido ASC">por Apellido (ASC)</option>
                         <option value="apellido DESC">por Apellido (DESC)</option>

@@ -119,7 +119,7 @@ class LibroController{
     }
 
     solicitudAjaxBuscar(target, filtros, data){
-        let datasend = {"funcion" : "search", "filtros": filtros, "data" : data};
+        let datasend = {"funcion" : "searchAB", "filtros": filtros, "data" : data};
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "controlador/libros_controlador.php", true);
         xhr.setRequestHeader("Content-Type", "application/json");
@@ -245,7 +245,7 @@ class LibroController{
 
                 if(listaLibros){
                     listaLibros.forEach(function (l) {
-                        listado += (new Libro(l.idLibro, l.titulo, l.autor, l.ubicacionFisica, l.editorial, l.materia, l.lugarEdicion, l.anio, l.serie, l.observaciones, l.activo, l.fechaIngreso)).printBoxLibrosPedidos();
+                        listado += (new Libro(l.idLibro, l.titulo, l.autor, l.ubicacionFisica, l.editorial, l.materia, l.lugarEdicion, l.anio, l.serie, l.observaciones, l.activo, l.profesor, l.cantidad, l.fechaPedido)).printBoxLibrosPedidos();
                     });
 
                     target.innerHTML = listado;
@@ -286,7 +286,8 @@ botonBuscarLibrosBM.addEventListener("click",()=>{
 });
 
 function busquedaLibro(){
-    libroCtrl.solicitudAjaxBuscar(listadoResultadosLibrosBM, filtroBuscarLibrosBM.value, inputBuscarLibrosBM.value);
+    let filtroSeleccionado = filtroBuscarLibrosBM.value;
+    libroCtrl.solicitudAjaxBuscar(listadoResultadosLibrosBM, filtroSeleccionado, inputBuscarLibrosBM.value);
 }
 
 // ------------------------  Eventos añadir libro  ------------------------

@@ -57,7 +57,7 @@ $editoriales = Libros_Controlador::get_editoriales_Controlador();
                     <div class="adv-modes-items">
                             <h2>Materia</h2>
                             <div class="input-box">
-                            <select name="materia" id="materia" onclick="buscarLibrosAvanzada()">
+                            <select name="materia" id="materia" onchange="">
                                 <option value="">- - - - - - </option>
                                     <?php
                                     foreach ($materias as $materia) {
@@ -70,7 +70,7 @@ $editoriales = Libros_Controlador::get_editoriales_Controlador();
                             <div class="adv-modes-items">
                                 <h2>Autor</h2>
                                 <div class="input-box">
-                                    <select name="autor" idname="autor" onclick="buscarLibrosAvanzada()">
+                                    <select name="autor" idname="autor" onchange="">
                                     <option value="">- - - - - - </option>
                                     <?php
                                     foreach ($autores as $autor) {
@@ -84,7 +84,7 @@ $editoriales = Libros_Controlador::get_editoriales_Controlador();
                         <div class="adv-modes-items">
                             <h2>Editorial</h2>
                             <div class="input-box">
-                            <select name="editorial" idname="editorial" onclick="buscarLibrosAvanzada()">
+                            <select name="editorial" idname="editorial" onchange="">
                                     <option value="">- - - - - - </option>
                                     <?php
                                     foreach ($editoriales as $editorial) {

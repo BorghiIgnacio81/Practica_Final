@@ -293,7 +293,8 @@ botonBuscarUsuarioBM.addEventListener("click",()=>{
 });
 
 function busquedaUsuario(){
-    usuarioCtrl.solicitudAjaxBuscar(fieldBuscarUsuarioBM, filtrosBuscarUsuarioBM.value, inputBuscarUsuarioBM.value);
+    let filtroSeleccionado = filtrosBuscarUsuarioBM.value
+    usuarioCtrl.solicitudAjaxBuscar(fieldBuscarUsuarioBM, filtroSeleccionado, inputBuscarUsuarioBM.value);
 }
 
 // ----------------------- Evento Agregar -----------------------

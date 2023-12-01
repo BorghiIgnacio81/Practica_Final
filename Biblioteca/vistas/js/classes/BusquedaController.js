@@ -78,11 +78,8 @@ class LibroController {
     
                 if (listaLibros) {
                     for (const libro of listaLibros) {
-                        // Utiliza el método printToBox para obtener el HTML de cada libro
                         listado += libroCtrl.printToBox(libro);
                     }
-    
-                    // Agrega el listado al contenedor
                     target.innerHTML = listado;
                 } else {
                     target.innerHTML = "<p>No se han encontrado resultados.</p>";
@@ -95,54 +92,6 @@ class LibroController {
     
         xhr.send(JSON.stringify(datasend));
     }
-    solicitudAjaxBuscarAvanzada(target, idMateria, idAutor, idEditorial) {
-        let datasend = {
-            "funcion": "searchAvanzada",
-            "idMateria": idMateria,
-            "idAutor": idAutor,
-            "idEditorial": idEditorial
-        };
-    
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "controlador/libros_controlador.php", true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4) {
-                if (xhr.status == 200) {
-                    try {
-                        console.log("Respuesta del servidor:", xhr.responseText);
-        
-                        // Agrega una verificación para manejar null
-                        let responseData = xhr.responseText.trim();
-                        let listaLibros = responseData ? JSON.parse(responseData) : null;
-        
-                        if (listaLibros) {
-                            let listado = "";
-                            for (const libro of listaLibros) {
-                                listado += libroCtrl.printToBox(libro);
-                            }
-                            target.innerHTML = listado;
-                        } else {
-                            target.innerHTML = "<p>No se han encontrado resultados.</p>";
-                        }
-                    } catch (error) {
-                        console.error("Error al parsear la respuesta como JSON:", error);
-                        target.innerHTML = "<p>Se ha producido un error al procesar la respuesta.</p>";
-                    }
-                } else {
-                    libroCtrl.listaLibros = null;
-                    target.innerHTML = "<p>Se ha producido un error en la solicitud, intente nuevamente.</p>";
-                }
-            }
-        };
-        
-        
-        
-        
-        xhr.send(JSON.stringify(datasend));
-    }
-    
-     
      
 }
 
@@ -165,48 +114,10 @@ function busquedaLibro() {
 
     libroCtrl.solicitudAjaxBuscar(listadoResultadosLibros, filtroBuscarLibros.value, inputBuscarLibros.value);
 }
-function buscarLibrosAvanzada() {
-    console.log("Función buscarLibrosAvanzada ejecutada");
 
-    var listadoResultadosLibros = document.querySelector(".busqueda-result.resultado-busqueda");
-    var filtroBuscarLibros = document.querySelector(".buscar-avanzada");
-    var inputBuscarLibros = document.querySelector(".inputLibro");
-
-    if (!listadoResultadosLibros || !filtroBuscarLibros || !inputBuscarLibros) {
-        console.error("Elementos no encontrados.");
-        return;
-    }
-
-    // Acceder al valor solo si el elemento está presente
-    let idAutorElement = document.getElementById("autor");
-    let idMateriaElement = document.getElementById("materia");
-    let idEditorialElement = document.getElementById("editorial");
-
-    let idAutor = idAutorElement ? idAutorElement.value : null;
-    let idMateria = idMateriaElement ? idMateriaElement.value : null;
-    let idEditorial = idEditorialElement ? idEditorialElement.value : null;
-    libroCtrl.solicitudAjaxBuscarAvanzada(listadoResultadosLibros, idMateria, idAutor, idEditorial);
-}
-botonBuscarLibros.addEventListener("click", () => {
-    buscarLibrosAvanzada();
-});
 
 botonBuscarLibros.addEventListener("click",()=>{
     busquedaLibro();
-});
-document.addEventListener("DOMContentLoaded", function () {
-    // Acceder al valor solo si el elemento está presente
-    let idAutorElement = document.getElementById("autor");
-    let idMateriaElement = document.getElementById("materia");
-    let idEditorialElement = document.getElementById("editorial");
-
-    let idAutor = idAutorElement ? idAutorElement.value : null;
-    let idMateria = idMateriaElement ? idMateriaElement.value : null;
-    let idEditorial = idEditorialElement ? idEditorialElement.value : null;
-
-    var libroCtrl = new LibroController();
-
-    libroCtrl.solicitudAjaxBuscarAvanzada(listadoResultadosLibros, idMateria, idAutor, idEditorial);
 });
 
 
