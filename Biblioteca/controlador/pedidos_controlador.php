@@ -17,7 +17,6 @@ class Pedidos_Controlador
         switch ($data["funcion"]) {
             case "search":
                 if (isset($data["data"])) {
-                    //$pTitulo = $data["data"];
                     $respuesta = Pedidos_modelo::get_pedidos_modelo();
                     if($respuesta)
                         echo json_encode($respuesta);
@@ -83,6 +82,20 @@ class Pedidos_Controlador
                     }
                 }
                 break;
+            case "confirm":
+            if (isset($data["data"])) {
+                $aux = $data["data"];
+                    
+                    $idLibro = $aux["idLibro"];
+                    
+                    $respuesta = Pedidos_modelo::get_pedidos_confirmar_modelo($idLibro);
+                    if ($respuesta) {
+                        echo json_encode(array("status"=>"ok"));
+                    }else {
+                        echo json_encode(array("status"=>"no"));
+                    }
+                    break;
+            }
 
         }
     }
