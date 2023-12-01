@@ -3,7 +3,7 @@
     include_once("controlador/login_controlador.php");
     include_once("modelo/Libros_modelo.php");
     include_once("controlador/libros_controlador.php");
-    
+
     if(isset($_POST["logout"])){
         session_destroy();
         $_SESSION = null;
