@@ -88,5 +88,16 @@ class Pedidos_modelo
             return false;
         }
     }
+    static public function get_pedidos_confirmar_modelo($idLibro){
+        try{ 
+            $consulta = Conectar::conexion()->prepare(" CALL pedidoConfirmar(:idLibro");
+            $consulta->bindParam(":idLibro", $idLibro, PDO::PARAM_INT);
+            $consulta->execute();
+            return true;
+        
+        }catch (Exception $e) {
+            return false;
+        }
+    }
 
 }
