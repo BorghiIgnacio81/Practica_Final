@@ -1,4 +1,5 @@
 <?php
+    session_start();
         
     include_once __DIR__ . '/../modelo/Pedidos_modelo.php';
     set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/../modelo/');
@@ -16,13 +17,12 @@ class Pedidos_Controlador
     { 
         switch ($data["funcion"]) {
             case "search":
-                if (isset($data["data"])) {
-                    $respuesta = Pedidos_modelo::get_pedidos_modelo();
-                    if($respuesta)
-                        echo json_encode($respuesta);
-                    else
-                        array("status"=>"no");
-                }
+                $respuesta = Pedidos_modelo::get_pedidos_modelo($data["filtros"]);
+                if($respuesta)
+                    echo json_encode($respuesta);
+                else
+                    echo json_encode(array("status"=>"no"));
+                
                 break;
             case "add":
                 if (isset($data["data"])) {
@@ -32,15 +32,14 @@ class Pedidos_Controlador
                         "titulo" => $aux["titulo"],
                         "idAutor" => $aux["idAutor"],
                         "idEditorial" => $aux["idEditorial"],
-                        "ubicacionFisica" => $aux["cantidad"],
                         "lugarEdicion" => $aux["lugarEdicion"],
                         "anio" => $aux["anio"],
                         "serie" => $aux["serie"],
                         "observaciones" => $aux["observaciones"],
                         "idMateria" => $aux["idMateria"],
                         "idUsuario" => $aux["idUsuario"],
-                        "cantidad" => $aux["cantidad"],
-                        "fechaPedido" => $aux["fechaPedido"]
+                        "cantidad" => $aux["cantidad"]
+                    );
                     $respuesta = Pedidos_modelo::nuevo_libro_pedido_modelo($pedido);
                     if ($respuesta) {
                         echo json_encode(array("status"=>"ok"));
@@ -72,7 +71,7 @@ class Pedidos_Controlador
                         "libro" => $aux["libro"],
                         "usuario" => $aux["usuario"],
                         "cantidad" => $aux["cantidad"],
-                        "fechaPedido" => $aux["fechaPedido"]
+                        "fechaPedido" => $aux["fechaPedido"]);
                                         
                     $respuesta = Pedidos_modelo::editar_pedido_modelo($pedido);
                     if ($respuesta) {

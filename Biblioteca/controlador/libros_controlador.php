@@ -1,5 +1,5 @@
 <?php
-        
+    
     include_once __DIR__ . '/../modelo/Libros_modelo.php';
     set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/../modelo/');
     include_once 'Libros_modelo.php';
@@ -29,24 +29,25 @@
                 case "search":
                     if (isset($data["data"])) {
                         $pTitulo = $data["data"];
-                        $respuesta = Libros_modelo::get_libros_modelo($pTitulo);
-                        if($respuesta)
-                            echo json_encode($respuesta);
-                        else
-                            array("status"=>"no");
-                    }
-                    break;
-                    case "searchAB":
-                    if (isset($data["data"])) {
-                        $pTitulo = $data["data"];
                         $filtros = $data["filtros"];
-                        $respuesta = Libros_modelo::get_libros_modeloAB($pTitulo, $filtros);
+                        $respuesta = Libros_modelo::get_libros_modelo($pTitulo, $filtros);
                         if($respuesta)
                             echo json_encode($respuesta);
                         else
-                            array("status"=>"no");
+                            echo json_encode(array("status"=>"no"));
                     }
                     break;
+
+                case "searchMain":
+                    if (isset($data["data"])) {
+                        $respuesta = Libros_modelo::get_libros_modelo_main($data);
+                        if($respuesta)
+                            echo json_encode($respuesta);
+                        else
+                            echo json_encode(array("status"=>"no"));
+                    }
+                    break;
+                
                 case "add":
                     if (isset($data["data"])) {
                         $aux = $data["data"];
@@ -116,7 +117,8 @@
                 case "search-pedido":
                     $respuesta = self::get_libros_pedidos_Controlador();
                     echo json_encode($respuesta);
-                    break;    
+                    break;
+
                 default:
                     // Manejo de error si la función no está definida
                     echo json_encode(["status" => "error"]);
@@ -139,11 +141,11 @@
             $respuesta = Libros_modelo::get_editoriales_modelo();
             return $respuesta;
         }
+
         static public function get_libros_pedidos_Controlador() {
             $respuesta = Libros_modelo::get_libros_pedidos_modelo();
             return $respuesta;
         }
-        
          
     }      
 ?>

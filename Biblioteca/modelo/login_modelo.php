@@ -28,7 +28,7 @@ class LoginModelo{
         $consulta->execute();
         $result = $consulta->fetch(PDO::FETCH_ASSOC);
         if(!$result){
-            $consulta = Conectar::conexion()->prepare("INSERT INTO usuarios (username, contraseña, email, tipoUsuario) VALUES (:nombre_usuario, :contrasenia, :email, 4)");
+            $consulta = Conectar::conexion()->prepare("INSERT INTO usuarios (username, contrasenia, email, tipoUsuario) VALUES (:nombre_usuario, :contrasenia, :email, 4)");
             $consulta->bindParam(":nombre_usuario", $nombre_usuario, PDO::PARAM_STR);
             $consulta->bindParam(':contrasenia', $password, PDO::PARAM_STR);
             $consulta->bindParam(":email", $email, PDO::PARAM_STR);
@@ -43,7 +43,7 @@ class LoginModelo{
             if(isset($result["nombre"]) &&  isset($result["apellido"]) && isset($result["dni"])){
                 $_GET = array("funcion" => "reg1", "status" => "error");
             }else{
-                $consulta = Conectar::conexion()->prepare("UPDATE usuarios SET contraseña = :contrasenia WHERE usuarios.idUsuarios = (SELECT idUsuarios FROM usuarios WHERE email = :email)");
+                $consulta = Conectar::conexion()->prepare("UPDATE usuarios SET contrasenia = :contrasenia WHERE usuarios.idUsuarios = (SELECT idUsuarios FROM usuarios WHERE email = :email)");
                 $consulta->bindParam(":contrasenia", $password, PDO::PARAM_STR);
                 $consulta->bindParam(":email", $email, PDO::PARAM_STR);
                 try{
