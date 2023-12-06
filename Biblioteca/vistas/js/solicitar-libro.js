@@ -3,9 +3,9 @@
 // ****************************************************************************
 
 var gridSolicitudesProfesor = document.querySelector(".add-libros-pedidos");
-var filtrosSolicitudesProfesor = document.querySelector("filtros-pedidos-profesor");
+var filtrosSolicitudesProfesor = document.querySelector(".filtros-pedidos-profesor");
 var botonAddPedido = document.querySelector(".add-solicitud-libro");
-var botonesDelPedido = document.querySelectorAll(".del-pedido");
+var botonesDelPedido;
 var modalSolicitarLibroClose = document.querySelector(".close-modal-solicitar");
 var modalSolicitarLibroCancel = document.querySelector(".cancel-modal-solicitar");
 
@@ -58,9 +58,9 @@ botonAddPedido.addEventListener("click",()=>{
 });
 
 botonSendSolicitarLibro.addEventListener("click", ()=>{
-    if(inputAddSolicitudTitulo != "" && inputAddSolicitudAutor != "" && inputAddSolicitudEditorial != "" &&
-        inputAddSolicitudMateria != "" && inputAddSolicitudOrigen != "" && inputAddSolicitudAnio != "" &&
-        inputAddSolicitudEdicion != "" && inputAddSolicitudCantidad != "" && inputAddSolicitudObservacion){
+    if(inputAddSolicitudTitulo.value != "" && inputAddSolicitudAutor.value != "" && inputAddSolicitudEditorial.value != "" &&
+        inputAddSolicitudMateria.value != "" && inputAddSolicitudOrigen.value != "" && inputAddSolicitudAnio.value != "" &&
+        inputAddSolicitudEdicion.value != "" && inputAddSolicitudCantidad.value != "" && inputAddSolicitudObservacion.value != ""){
 
         let pedidoAux = new Pedido(null,
             new Libro(null, 
@@ -73,7 +73,7 @@ botonSendSolicitarLibro.addEventListener("click", ()=>{
                 inputAddSolicitudAnio.value, 
                 inputAddSolicitudEdicion.value, 
                 inputAddSolicitudObservacion.value),
-            new Usuario(null, null, null, null, null, null, null, null, null, null), // <---- Los datos del usuario vienen de la variable $_SESSION
+            new Usuario(null, null, null, null, null, null, null, null, null, null, null, null), // <---- Los datos del usuario vienen de la variable $_SESSION
             inputAddSolicitudCantidad.value,
             null);
 
@@ -87,6 +87,7 @@ botonSendSolicitarLibro.addEventListener("click", ()=>{
 // ---------------------------- Metodos Cancelar ----------------------------------
 
 function agregarEventosEliminarPedido(){
+    botonesDelPedido = document.querySelectorAll(".del-pedido");
     for (let i = 0; i < botonesDelPedido.length ; i++) {
         botonesDelPedido[i].addEventListener("click",()=>{
             let idPedido = botonesDelPedido[i].getAttribute("idPedido");
@@ -100,3 +101,4 @@ function agregarEventosEliminarPedido(){
 //                                Fin Eventos
 // *****************************************************************
 
+buscarPedidosProfesor();

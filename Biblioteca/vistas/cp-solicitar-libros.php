@@ -15,47 +15,14 @@
                     <span class="icon-play3"></span>
 
                     <select class="filtros-pedidos-profesor" name="" id="">
-                        <option value="">-- Sin Filtros --</option>    
-                        <option value="fecha ASC">por Fecha (ASC)</option>
-                        <option value="fecha DESC">por Fecha (DESC)</option>
+                        <option value="fechaPedido ASC">por Fecha (ASC)</option>
+                        <option value="fechaPedido DESC">por Fecha (DESC)</option>
                     </select>    
                     
                 </div>
             </div>
 
             <div class="add-libros-pedidos">
-                <div class="add-lp-item box-type1" >
-                    <h4>Los 3 mosquiteros</h4>
-                    <div class="add-lp-content box-type1-content">
-                        <span class="icon-books"><p>Ejemplares: 10</p></span>
-                        <span class="icon-calendar"><p>Fecha solicitada: 16/10/2023</p></span>
-                    </div>
-                    <div class="add-lp-btns box-type1-btns">
-                        <span class="icon-cross"></span>
-                    </div>
-                </div>
-
-                <div class="add-lp-item box-type1" >
-                    <h4>Los 3 mosquiteros</h4>
-                    <div class="add-lp-content box-type1-content">
-                        <span class="icon-books"><p>Ejemplares: 10</p></span>
-                        <span class="icon-calendar"><p>Fecha solicitada: 16/10/2023</p></span>
-                    </div>
-                    <div class="add-lp-btns box-type1-btns">
-                        
-                    </div>
-                </div>
-
-                <div class="add-lp-item box-type1" >
-                    <h4>Los 3 mosquiteros</h4>
-                    <div class="add-lp-content box-type1-content">
-                        <span class="icon-books"><p>Ejemplares: 10</p></span>
-                        <span class="icon-calendar"><p>Fecha solicitada: 16/10/2023</p></span>
-                    </div>
-                    <div class="add-lp-btns box-type1-btns">
-                        
-                    </div>
-                </div>
                 
             </div>
         </article>

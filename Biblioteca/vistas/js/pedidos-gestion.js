@@ -5,9 +5,9 @@
 var filtrosPedidosLibro = document.querySelector(".filtro-libro-pedido");
 var gridPedidosLibro = document.querySelector(".add-libros-pedidos");
 
-var botonesConfirmPedidosLibro = document.querySelectorAll(".confirm-libro-pedido");
-var botonesEditPedidosLibro = document.querySelectorAll(".edit-libro-pedido");
-var botonesRejectPedidosLibro = document.querySelectorAll(".reject-libro-pedido");
+var botonesConfirmPedidosLibro;
+var botonesEditPedidosLibro;
+var botonesRejectPedidosLibro;
 
 var modalLibroPedido = document.querySelector(".modal-edit-libro-pedido");
 var botonCloseModalEditPedido = document.querySelector(".close-modal-edit-libro-pedido");
@@ -58,11 +58,11 @@ botonCloseModalEditPedido.addEventListener("click", ()=>{
 });
 
 function agregarEventosEditarPedido(){
+    botonesEditPedidosLibro = document.querySelectorAll(".edit-libro-pedido");
     for (let i = 0; i < botonesEditPedidosLibro.length ; i++) {
-        
         botonesEditPedidosLibro[i].addEventListener("click",()=>{
             let idPedido = botonesEditPedidosLibro[i].getAttribute("idPedido");
-            let objPedido = pedidoCtrl.buscarLibroPorid(idPedido);
+            let objPedido = pedidoCtrl.buscarPedidoPorid(idPedido);
             statusEditPedidoLibro.innerHTML = "";
 
             inputEditPedidoTitulo.value = objPedido.libro.titulo;
@@ -105,7 +105,7 @@ botonSendPedidoLibro.addEventListener("click", ()=>{
                 inputEditPedidoAnio.value, 
                 inputEditPedidoEdicion.value, 
                 inputEditPedidoObservacion.value),
-            new Usuario(null, null, null, null, null, null, null, null, null, null), // <---- Los datos del usuario vienen de la variable $_SESSION
+            new Usuario(null, null, null, null, null, null, null, null, null, null, null, null), // <---- Los datos del usuario vienen de la variable $_SESSION
             inputEditPedidoCantidad.value,
             null);
     
@@ -119,11 +119,12 @@ botonSendPedidoLibro.addEventListener("click", ()=>{
 
 // ------------------------ Metodos confirmar ----------------------------
 
-function agregarEventosEliminarPedido(){
-    for (let i = 0; i < botonesRejectPedidosLibro.length ; i++) {
-        botonesRejectPedidosLibro[i].addEventListener("click",()=>{
-            let idPedido = botonesRejectPedidosLibro[i].getAttribute("idPedido");
-            pedidoCtrl.solicitudAjaxABM({"idPedido": idPedido}, "del");
+function agregarEventosConfirmarPedido(){
+    botonesConfirmPedidosLibro = document.querySelectorAll(".confirm-libro-pedido");
+    for (let i = 0; i < botonesConfirmPedidosLibro.length ; i++) {
+        botonesConfirmPedidosLibro[i].addEventListener("click",()=>{
+            let idPedido = botonesConfirmPedidosLibro[i].getAttribute("idPedido");
+            pedidoCtrl.solicitudAjaxABM({"idPedido": idPedido}, "confirm");
         });
     }
 }
@@ -131,7 +132,8 @@ function agregarEventosEliminarPedido(){
 
 // ---------------------------- Metodos Cancelar ----------------------------------
 
-function agregarEventosEliminarPedido(){
+function agregarEventosRechazarPedido(){
+    botonesRejectPedidosLibro = document.querySelectorAll(".reject-libro-pedido");
     for (let i = 0; i < botonesRejectPedidosLibro.length ; i++) {
         botonesRejectPedidosLibro[i].addEventListener("click",()=>{
             let idPedido = botonesRejectPedidosLibro[i].getAttribute("idPedido");
@@ -145,3 +147,4 @@ function agregarEventosEliminarPedido(){
 //                                Fin Eventos
 // *****************************************************************
 
+buscarPedidosLibro();

@@ -1,6 +1,8 @@
 class Usuario{
-    constructor(idUsuario, nombre, apellido, dni, direccion, telefono, email, fechaNac, penalidad, tipoUsuario){
+    constructor(idUsuario, username, password, nombre, apellido, dni, direccion, telefono, email, fechaNac, penalidad, tipoUsuario){
         this.idUsuario = idUsuario;
+        this.username = username;
+        this.password = password;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -60,6 +62,8 @@ class Usuario{
     toJson(){
         return {
             "idUsuario" : this.idUsuario,
+            "username" : this.username,
+            "password" : this.password,
             "nombre" : this.nombre,
             "apellido" : this.apellido,
             "dni" : this.dni,

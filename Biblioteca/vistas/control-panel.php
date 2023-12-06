@@ -63,6 +63,15 @@
 <!-- Scripts -->
 
     <script>
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault(); 
+            }
+        });
+    </script>
+
+    <script>
         const showRes = document.querySelector(".menu-item.show-reservas");
         const frameRes = document.querySelector(".frame-reservas");
         
@@ -139,20 +148,20 @@
     <script src="vistas/js/classes/Libro.js"></script>
     <script src="vistas/js/classes/Usuario.js"></script>
     <script src="vistas/js/classes/Pedido.js"></script>
+    <script src="vistas/js/calendario.js"></script>
 
     
     <?php if($_SESSION['tipoUsuario'] == 0){ ?>
         <script src="vistas/js/classes/PedidoController.js"></script>
         <script src="vistas/js/classes/LibroController.js"></script>
         <script src="vistas/js/classes/UsuarioController.js"></script>
-        <script src="vistas/js/calendario.js"></script>
         <script src="vistas/js/prestamo.js"></script>
         <script src="vistas/js/pedidos-gestion.js"></script>
     <?php } ?>
 
     <?php if($_SESSION['tipoUsuario'] == 1){ ?>
-        <script src="vistas/js/solicitar-libro.js"></script>
         <script src="vistas/js/classes/PedidoController.js"></script>
+        <script src="vistas/js/solicitar-libro.js"></script>
     <?php } ?>
 
 </body>

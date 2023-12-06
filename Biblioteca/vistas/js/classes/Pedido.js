@@ -12,7 +12,7 @@ class Pedido{
         return '<div class="add-lp-item box-type1" >'+
                 '<h4>'+this.libro.titulo+'</h4>'+
                 '<div class="add-lp-content box-type1-content">'+
-                    '<span class="icon-user"><p>Prof. '+ this.usuario.nombre + ' ' + this.usuario.apellido +'</p></span>'+
+                    '<span class="icon-user"><p>Prof. '+ this.usuario.apellido + ' ' + this.usuario.nombre +'</p></span>'+
                     '<span class="icon-book"><p>Ejemplares: '+ this.cantidad +'</p></span>'+
                     '<span class="icon-calendar"><p>Fecha solicitada:'+ this.fechaPedido +'</p></span>'+
                 '</div>'+

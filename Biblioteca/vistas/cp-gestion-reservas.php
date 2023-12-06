@@ -1,5 +1,5 @@
 <section class="frame-reservas">
-    <form action="" class="form-container">
+    <form action="" class="form-container" disabled>
         <h1>Gestión de Reservas</h1>
         <article class="mis-reservas">
             <h2>Reservas activas</h2>
@@ -36,7 +36,7 @@
             <div class="add-res-buscar">
                 <div class="add-res-buscador search-type1">
                     <span class="icon-search"></span>
-                    <input type="text" name="" id="" placeholder="Ingrese nombre del libro">
+                    <input type="text"  name="" id="" placeholder="Ingrese nombre del libro">
                 </div>
             </div>
 
@@ -104,7 +104,7 @@
 
     <!-- Modals de reserva -->
 <div class="modal-frame modal-reserva">
-    <form action="#" class="modal-form1">
+    <form action="#" class="modal-form1" disabled>
         <div class="modal-form1-titulo">
             <p>Confirmar reserva - Fijar fecha</p>
             <span class="icon-cross close-modal-res"></span>
@@ -178,7 +178,7 @@
             </div>
 
             <div class="modal-form1-btns">
-                <button type="submit">Confirmar</button>
+                <button type="button">Confirmar</button>
                 <button type="button" class="cancel-modal-res">Cancelar</button>
             </div>
 
@@ -188,7 +188,7 @@
 </div>
 
 <div class="modal-frame modal-del-reserva">
-    <form action="#" class="modal-form1">
+    <form action="#" class="modal-form1" disabled>
         <div class="modal-form1-titulo">
             <p>Eliminar libro</p>
             <span class="icon-cross close-modal-del-reserva"></span>
@@ -203,7 +203,7 @@
 
             
             <div class="modal-form1-btns">
-                <button type="submit">Confirmar</button>
+                <button type="button">Confirmar</button>
                 <button type="button" class="cancel-modal-del-reserva">Cancelar</button>
             </div>
 

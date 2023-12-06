@@ -40,28 +40,26 @@ $editoriales = Libros_Controlador::get_editoriales_Controlador();
     <div class="busqueda">
 
         <span class="icon-cross cerrar-busqueda"></span>
-
         <div class="form-box">
             <h1 class="animation">Búsqueda de Libros</h1>
-
             <form action="#">
                 <div class="buscar-normal">
                     <div class="input-box animation">
                         <input type="text" name="" id="" class="inputLibro" required placeholder="Buscar titulo de libro">
                     </div>
-                    <button type="button" class="btn animation" onclick="busquedaLibro()">Buscar</button>
+                    <button type="button" class="btn animation buscar-libro-boton">Buscar</button>
                 </div>
-
                 <div class="buscar-avanzada">
                     <div class="adv-modes">
                     <div class="adv-modes-items">
                             <h2>Materia</h2>
                             <div class="input-box">
-                            <select name="materia" id="materia" onchange="">
+                            <select class="filtro-materia">
                                 <option value="">- - - - - - </option>
-                                    <?php
+                                <?php
                                     foreach ($materias as $materia) {
-                                        echo '<option value="' . $materia['idMateria'] . '">' . $materia['materia'] . '</option>';
+                                        echo '<option value="'.$materia['idMateria'].'">' . $materia['materia'] . '</option>';
+                                        // 23
                                     }
                                     ?>
                             </select>
@@ -70,12 +68,12 @@ $editoriales = Libros_Controlador::get_editoriales_Controlador();
                             <div class="adv-modes-items">
                                 <h2>Autor</h2>
                                 <div class="input-box">
-                                    <select name="autor" idname="autor" onchange="">
+                                <select class="filtro-autor">
                                     <option value="">- - - - - - </option>
                                     <?php
-                                    foreach ($autores as $autor) {
+                                        foreach ($autores as $autor) {
                                         echo '<option value="' . $autor['idAutor'] . '">' . $autor['autor'] . '</option>';
-                                    }
+                                        }
                                     ?>
                                     </select>
                                 </div>
@@ -84,7 +82,7 @@ $editoriales = Libros_Controlador::get_editoriales_Controlador();
                         <div class="adv-modes-items">
                             <h2>Editorial</h2>
                             <div class="input-box">
-                            <select name="editorial" idname="editorial" onchange="">
+                            <select class="filtro-editorial">
                                     <option value="">- - - - - - </option>
                                     <?php
                                     foreach ($editoriales as $editorial) {
@@ -284,6 +282,7 @@ $editoriales = Libros_Controlador::get_editoriales_Controlador();
 
     <script src="vistas/js/login2.js"></script>
     <script src="vistas/js/front-page.js"></script>
+    <script src="vistas/js/classes/Libro.js"></script>
     <script src="vistas/js/classes/BusquedaController.js"></script>
     
 </body> 

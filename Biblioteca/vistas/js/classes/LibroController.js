@@ -56,31 +56,6 @@ var modalStatusDelLibro = document.querySelector(".db-del-libro");
 
 var campoModalDelLibro = document.querySelector(".icon-book.del-libro-id");
 
-// ----------------------- Libro Pedido -----------------------
-var gridLibroPedido = document.querySelector(".add-pedido-libro");
-
-// ----------------------- Aprobar Libro Pedido -----------------------
-var botonAddLibroPedido = document.querySelectorAll(".libro-pedido-add");
-
-// ----------------------- Rechazar Libro Pedido -----------------------
-var botonDelLibroPedido = document.querySelectorAll(".libro-pedido-del");
-
-// ------------------------ Editar libro pedido + modal pedido ------------------------
-var modalPedidoLibroClose = document.querySelector(".close-modal-edit-libro-pedido");
-var modalPedidolibroCancel = document.querySelector(".cancel-modal-edit-libro-pedido");
-var modalPedidoLibro = document.querySelector(".modal-edit-libro-pedido");
-var botonPedidoLibroOpen = document.querySelectorAll(".edit-libro-pedido");
-var modalEditPedidoBotonSend = document.querySelector(".confirm-modal-edit-libro-pedido");
-var modalStatusEditLibro = document.querySelector(".db-edit-libro-pedido");
-
-var campoTituloEditPedido = document.querySelector(".libro-edit-pedido.titulo");
-var campoEditorialEditPedido = document.querySelector(".libro-edit-pedido.editorial");
-var campoAutorEditPedido = document.querySelector(".libro-edit-pedido.autor");
-var campoAnioEditPedido = document.querySelector(".libro-edit-pedido.anio");
-var campoEjemplaresEditPedido = document.querySelector(".libro-edit-pedido.ejemplares");
-var campoEdicionEditPedido = document.querySelector(".libro-edit-pedido.edicion");
-var campoUbicacionEditPedido = document.querySelector(".libro-edit-pedido.ubicacion");
-var campoObservacionEditPedido = document.querySelector(".libro-edit-pedido.observacion");
 
 // ------------------------ Boton descarga de pdf ----------------------------------
 var botonDescargaPDF = document.querySelector(".descargar-pdf");
@@ -119,7 +94,7 @@ class LibroController{
     }
 
     solicitudAjaxBuscar(target, filtros, data){
-        let datasend = {"funcion" : "searchAB", "filtros": filtros, "data" : data};
+        let datasend = {"funcion" : "search", "filtros": filtros, "data" : data};
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "controlador/libros_controlador.php", true);
         xhr.setRequestHeader("Content-Type", "application/json");
@@ -206,21 +181,6 @@ class LibroController{
                             modalStatusDelLibro.innerHTML = '<span class="icon-blocked"> No se ha podido eliminar el libro</span>';
                         }
                         break;
-                    case "add-pedido":
-                        if(response.status == "ok"){
-                            buscarPreRegistrados();
-                            alert('¡Libro agregado a biblioteca!');
-                        }else
-                            alert('¡Ha surgido un error!');
-                        break;
-
-                    case "del-pedido":
-                        if(response.status == "ok"){
-                            alert('¡Libro eliminado!');
-                            buscarPreRegistrados();
-                        }else
-                            alert('¡Ha surgido un error!');
-                        break;
                     
                 }
 
@@ -230,45 +190,6 @@ class LibroController{
         };
     
         xhr.send(JSON.stringify(data)); //Envía la info al servidor en formato string de json
-    }
-
-    solicitudAjaxBuscarLibroPedido(target){
-        let datasend = {"funcion" : "search-pedido"};
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "controlador/libros_controlador.php", true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-    
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                let listaLibros = JSON.parse(xhr.responseText); //el json que envía el servidor
-                let listado = "";
-
-                if(listaLibros){
-                    listaLibros.forEach(function (l) {
-                        listado += (new Libro(l.idLibro, l.titulo, l.autor, l.ubicacionFisica, l.editorial, l.materia, l.lugarEdicion, l.anio, l.serie, l.observaciones, l.activo, l.profesor, l.cantidad, l.fechaPedido)).printBoxLibrosPedidos();
-                    });
-
-                    target.innerHTML = listado;
-
-                    //Agregar eventos
-                    botonAddLibroPedido = document.querySelectorAll(".libro-pedido-add");
-                    botonDelLibroPedido = document.querySelectorAll(".libro-pedido-del");
-
-                    agregarEventoLibroPedidoAgregar();
-                    agregarEventoLibroPedidoEliminar();
-                    //fin agregar eventos
-
-                }else{
-                    target.innerHTML = "<p>No se han encontrado resultados.</p>";
-                }
-
-            } else if (xhr.readyState == 4 && xhr.status != 200) {
-                libroCtrl.listaLibrosBM = null;
-                target.innerHTML = "<p>Se ha producido un error desconocido.</p>";
-            }
-        };
-    
-        xhr.send(JSON.stringify(datasend)); //Envía la info al servidor en formato string de json
     }
 
 }
@@ -286,8 +207,7 @@ botonBuscarLibrosBM.addEventListener("click",()=>{
 });
 
 function busquedaLibro(){
-    let filtroSeleccionado = filtroBuscarLibrosBM.value;
-    libroCtrl.solicitudAjaxBuscar(listadoResultadosLibrosBM, filtroSeleccionado, inputBuscarLibrosBM.value);
+    libroCtrl.solicitudAjaxBuscar(listadoResultadosLibrosBM, filtroBuscarLibrosBM.value, inputBuscarLibrosBM.value);
 }
 
 // ------------------------  Eventos añadir libro  ------------------------
@@ -452,35 +372,3 @@ modalDelBotonSend.addEventListener("click", ()=>{
 botonDescargaPDF.addEventListener("click",()=>{
     window.open("libraries/examples/informe.php")
 });
-// ----------------------- Evento Pre Registrados -----------------------
-// ----------------------- Evento Agregar -----------------------
-function agregarEventoLibroPedidoAgregar(){
-    for (let i = 0; i < botonAddLibroPedido.length; i++) {
-        botonAddLibroPedido[i].addEventListener("click",()=>{
-            let idLibro = botonAddLibroPedido[i].getAttribute("idLibro");
-            
-            libroCtrl.solicitudAjaxABM({"idLibro":idLibro}, "add-pedido-libro");
-            
-        });
-    }
-}
-
-// ----------------------- Evento Eliminar -----------------------
-function agregarEventoLibroPedidoEliminar(){
-    for (let i = 0; i < botonDelLibroPedido.length; i++) {
-        botonDelLibroPedido[i].addEventListener("click",()=>{
-            let idLibro = botonDelLibroPedido[i].getAttribute("idLibro");
-            console.log(idLibro);
-            
-            libroCtrl.solicitudAjaxABM({"idLibro":idLibro}, "del-pedido");
-            
-        });
-    }
-}
-
-// ----------------------- Evento Buscar -----------------------
-function buscarLibroPedido(){
-    libroCtrl.solicitudAjaxBuscarLibroPedido(gridLibroPedido);
-}
-
-buscarLibroPedido();

@@ -30,7 +30,7 @@
                 <div class="frame-filters-select-container">
                     <span class="icon-play3"></span>
 
-                    <select class="filtro-buscar-usuario-bm" name="filtro-buscar-usuario-bm" id="filtro-buscar-usuario-bm" onchange="busquedaUsuario()">
+                    <select class="filtro-buscar-usuario-bm" name="" id="">
                         <option value="">Sin Filtros</option>
                         <option value="apellido ASC">por Apellido (ASC)</option>
                         <option value="apellido DESC">por Apellido (DESC)</option>
@@ -60,6 +60,14 @@
         <div class="modal-form1-content">
             
             <div class="modal-form1-inputs">
+                <div class="modal-form1-input-item">
+                    <input class="input-add-user username" type="text" id="" required>
+                    <label for="">Nombre de Usuario</label>
+                </div>
+                <div class="modal-form1-input-item">
+                    <input class="input-add-user password" type="text" id="" required>
+                    <label for="">Contraseña</label>
+                </div>
                 <div class="modal-form1-input-item">
                     <input class="input-add-user nombre" type="text" id="" required>
                     <label for="">Nombre</label>

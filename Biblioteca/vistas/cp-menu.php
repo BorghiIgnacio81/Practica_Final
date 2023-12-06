@@ -10,10 +10,11 @@
         });
     </script>
 
-    <form action="index.php" method="POST" class="formulario-logout" style="display: none;">
-        <input type="submit" name="deslogear" value="1">
+    
+    <form action="index.php" method="POST" class="formulario-logout" disabled style="display: none;">
+        <button type="hidden" name="deslogear" value="1" disabled></button>
     </form>
-
+    
     <div class="menu-dash">
     <?php
         switch($_SESSION['tipoUsuario']){

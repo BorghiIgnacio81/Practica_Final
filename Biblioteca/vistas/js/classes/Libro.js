@@ -1,5 +1,5 @@
 class Libro{
-    constructor(idLibro, titulo, autor, ubicacionFisica, editorial, materia, lugarEdicion, anio, serie, observaciones, activo, profesor, cantidad, fechaPedido){
+    constructor(idLibro, titulo, autor, ubicacionFisica, editorial, materia, lugarEdicion, anio, serie, observaciones, activo){
         this.idLibro = idLibro;
         this.titulo = titulo;
         this.autor = autor;
@@ -9,30 +9,11 @@ class Libro{
         this.lugarEdicion = lugarEdicion;
         this.anio = anio;
         this.serie = serie;
-        this.observaciones = observaciones;
         this.activo = activo;
-        this.profesor = profesor;
-        this.cantidad = cantidad;
-        this.fechaPedido = fechaPedido;
+        this.observaciones = observaciones;
     }
 
     // --------------  Metodos clase Libro -----------------
-    printBoxLibrosPedidos(){
-        return '<div class="add-pre-item box-type1" >'+
-                    '<h4>'+this.titulo+'</h4>'+
-                    '<div class="add-pre-content box-type1-content">'+
-                        '<span class="icon-user"><p>Prof. '+this.profesor+'</p></span>'+
-                        '<span class="icon-book"><p>Cantidad: '+this.cantidad+'</p></span>'+
-                        '<span class="icon-calendar"><p>Fecha solicitada: '+this.fechaPedido+'</p></span>'+
-                    '</div>'+
-                    '<div class="add-pre-btns box-type1-btns">'+
-                        '<span class="icon-checkmark"'+this.idLibro+'" class="icon-checkmark libro-pedido-add"></span>'+
-                        '<span class="icon-pencil edit-libro-pedido"'+this.idLibro+'"class="icon-pencil edit-libro-pedido"></span>'+
-                        '<span class="icon-cross"'+this.idLibro+'" class="icon-cross libro-pedido-del"></span>'+
-                    '</div>'+
-                '</div>';
-    }
-    
     printBoxLibroBM(){
         return '<div class="add-pre-item box-type1">'+
                 '<h4>'+this.titulo+'</h4>'+
@@ -61,6 +42,20 @@ class Libro{
             '</div>';
     }
 
+    printToBoxMain() {
+        return '<div class="res-item">' +
+                    '<div class="item-breef">' +
+                    '<h3>' + this.titulo + '</h3>' +
+                '</div>' +
+            (this.activo == 1 ? '<div class="pulse"></div>' : '<div class="pulse2"></div>') +
+                '<div class="item-content">' +
+                    '<span class="icon-quill" title="Autor"><p>' + this.autor + '</p></span>' +
+                    '<span class="icon-library" title="Editorial"><p>' + this.editorial + '</p></span>' +
+                    '<p>' + this.observaciones + '</p>' + 
+                '</div>' +
+            '</div>';
+    }
+
     toJson(){
         return {
             "idLibro" : this.idLibro,
@@ -72,11 +67,8 @@ class Libro{
             "lugarEdicion" : this.lugarEdicion,
             "anio" : this.anio,
             "serie" : this.serie,
-            "observaciones" : this.observaciones,
             "activo" : this.activo,
-            "profesor" : this.profesor,
-            "cantidad" :this.cantidad,
-            "fechaPedido" : this.fechaPedido
+            "observaciones" : this.observaciones
         }
     }
 }

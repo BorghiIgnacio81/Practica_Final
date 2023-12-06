@@ -17,12 +17,12 @@
 
                     <select name="" id="" class="filtro-libro-pedido">
                         <option value="">Sin Filtros</option>
-                        <option value="libros.titulo ASC">por Titulo (ASC)</option>
-                        <option value="libros.titulo DESC">por Titulo (DESC)</option>
-                        <option value="usuarios.apellido ASC">por Profesor (ASC)</option>
-                        <option value="usuarios.apellido DESC">por Profesor (DESC)</option>
-                        <option value="pedidos.fecha ASC">por Fecha (ASC)</option>
-                        <option value="pedidos.fecha DESC">por Fecha (DESC)</option>
+                        <option value="l.titulo ASC">por Titulo (ASC)</option>
+                        <option value="l.titulo DESC">por Titulo (DESC)</option>
+                        <option value="u.apellido ASC">por Profesor (ASC)</option>
+                        <option value="u.apellido DESC">por Profesor (DESC)</option>
+                        <option value="p.fechaPedido ASC">por Fecha (ASC)</option>
+                        <option value="p.fechaPedido DESC">por Fecha (DESC)</option>
                         
                     </select>    
                     
@@ -32,23 +32,6 @@
             <h3>Lista de pedidos <span class="icon-file-pdf descargar-pdf" title="Descarga lista pdf"></span></h3>
             
             <div class="add-libros-pedidos">
-                <div class="add-lp-item box-type1" >
-                    <h4>Los 3 mosquiteros</h4>
-                    <div class="add-lp-content box-type1-content">
-                        <span class="icon-user"><p>Prof. Pablo Perez</p></span>
-                        <span class="icon-book"><p>Cantidad: 10</p></span>
-                        <span class="icon-calendar"><p>Fecha solicitada: 16/10/2023</p></span>
-                    </div>
-                    <div class="add-lp-btns box-type1-btns">
-                        <span class="icon-checkmark" idPedido="123"></span>
-                        <span class="icon-pencil edit-libro-pedido" idPedido="123"></span>
-                        <span class="icon-cross" idPedido="123"></span>
-                    </div>
-                </div>
-
-                <div class="add-pedido-libro" >
-                    
-                </div>
                 
             </div>
         </article>
@@ -68,7 +51,7 @@
                 <div class="frame-filters-select-container">
                     <span class="icon-play3"></span>
 
-                    <select name="filtro-libro-bm" id="filtro-libro-bm" class="filtro-libro-bm" onchange="busquedaLibro()">
+                    <select name="" id="" class="filtro-libro-bm">
                         <option value="">Sin filtros</option>
                         <option value="titulo ASC">por Titulo (ASC)</option>
                         <option value="titulo DESC">por Titulo (DESC)</option>
@@ -166,35 +149,39 @@
             
             <div class="modal-form1-inputs">
                 <div class="modal-form1-input-item">
-                    <input class="libro-edit-pedido titulo" type="text" id="" required>
+                    <input class="solicitud-edit titulo" type="text" id="" required>
                     <label for="">Titulo</label>
                 </div>
                 <div class="modal-form1-input-item">
-                    <input class="libro-edit-pedido editorial" type="text" name="" id="" required>
-                    <label for="">Editorial</label>
-                </div>
-                <div class="modal-form1-input-item">
-                    <input class="libro-edit-pedido autor" type="text" name="" id="" required>
+                    <input class="solicitud-edit autor" type="text" name="" id="" required>
                     <label for="">Autor</label>
                 </div>
                 <div class="modal-form1-input-item">
-                    <input class="libro-edit-pedido anio" type="text" name="" id="" required>
+                    <input class="solicitud-edit editorial" type="text" name="" id="" required>
+                    <label for="">Editorial</label>
+                </div>
+                <div class="modal-form1-input-item">
+                    <input class="solicitud-edit materia" type="text" name="" id="" required>
+                    <label for="">Materia</label>
+                </div>
+                <div class="modal-form1-input-item">
+                    <input class="solicitud-edit origen" type="text" name="" id="" required>
+                    <label for="">Lugar de edición</label>
+                </div>
+                <div class="modal-form1-input-item">
+                    <input class="solicitud-edit anio" type="text" name="" id="" required>
                     <label for="">Año de fabricación</label>
                 </div>
                 <div class="modal-form1-input-item">
-                    <input class="libro-edit-pedido ejemplares" type="text" name="" id="" required>
-                    <label for="">Número de Ejemplares</label>
+                    <input class="solicitud-edit edicion" type="text" name="" id="" required>
+                    <label for="">Número de serie</label>
                 </div>
                 <div class="modal-form1-input-item">
-                    <input class="libro-edit-pedido edicion" type="text" name="" id="" required>
-                    <label for="">Edición</label>
+                    <input class="solicitud-edit cantidad" type="text" name="" id="" required>
+                    <label for="">Cantidad Ejemplares</label>
                 </div>
                 <div class="modal-form1-input-item">
-                    <input class="libro-edit-pedido ubicacion" type="text" name="" id="" required>
-                    <label for="">Ubicación</label>
-                </div>
-                <div class="modal-form1-input-item">
-                    <input class="libro-edit-pedido observacion" type="text" name="" id="" required>
+                    <input class="solicitud-edit observacion" type="text" name="" id="" required>
                     <label for="">Observaciones</label>
                 </div>
 
@@ -206,7 +193,7 @@
 
             
             <div class="modal-form1-btns">
-                <button type="submit" class="confirm-modal-edit-libro-pedido">Confirmar</button>
+                <button type="button" class="confirm-modal-edit-libro-pedido">Confirmar</button>
                 <button type="button" class="cancel-modal-edit-libro-pedido">Cancelar</button>
             </div>
 

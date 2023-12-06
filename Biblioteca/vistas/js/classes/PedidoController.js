@@ -33,13 +33,13 @@ class PedidoController{
                 let listado = "";
 
 
-                if(listaPedidos){
-                    pedidoCtrl.listaPedidosBM = {};
+                if(!listaPedidos.status){
+                    pedidoCtrl.listaPedidosBM = [];
 
                     listaPedidos.forEach(function (l) {
                         let pedidoAux = new Pedido(l.idPedido,
                             new Libro(l.idLibro, l.titulo, l.autor, l.ubicacionFisica, l.editorial, l.materia, l.lugarEdicion, l.anio, l.serie, l.observaciones),
-                            new Usuario(l.idUsuario, l.nombre, l.apellido, l.dni, l.direccion, l.telefono, l.email, l.fechaNac, l.penalidad, l.tipoUsuario),
+                            new Usuario(l.idUsuario, l.username, l.password, l.nombre, l.apellido, l.dni, l.direccion, l.telefono, l.email, l.fechaNac, l.penalidad, l.tipoUsuario),
                             l.cantidad,
                             l.fechaPedido);
 

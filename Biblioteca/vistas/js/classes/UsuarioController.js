@@ -16,6 +16,8 @@ var botonAddUserOpen = document.querySelector(".add-new-user");
 var botonAddUserSend = document.querySelector(".confirm-modal-add-user");
 var fieldAddUserStatus = document.querySelector(".modal-form1-status.db-add-user");
 
+var inputAddUserModalUsername = document.querySelector(".input-add-user.username");
+var inputAddUserModalPassword = document.querySelector(".input-add-user.password");
 var inputAddUserModalNombre = document.querySelector(".input-add-user.nombre");
 var inputAddUserModalApellido = document.querySelector(".input-add-user.apellido");
 var inputAddUserModalDNI = document.querySelector(".input-add-user.dni");
@@ -99,7 +101,7 @@ class UsuarioController{
         let aux;
         this.listaUsuarioBM.forEach(function (u) {
             if(u.idUsuario == id){
-                aux = new Usuario(u.idUsuario, u.nombre, u.apellido, u.dni, u.direccion, u.telefono, u.email, u.fechaNac, u.penalidad, u.tipoUsuario);
+                aux = new Usuario(u.idUsuario, u.username, u.password, u.nombre, u.apellido, u.dni, u.direccion, u.telefono, u.email, u.fechaNac, u.penalidad, u.tipoUsuario);
                 return aux.toJson();
             }
         });
@@ -122,7 +124,7 @@ class UsuarioController{
 
                 if(listaUsuarios){
                     listaUsuarios.forEach(function (u) {
-                        listado += (new Usuario(u.idUsuario, u.nombre, u.apellido, u.dni, u.direccion, u.telefono, u.email, u.fechaNac, u.penalidad, u.tipoUsuario)).printBoxUsuarioABM();
+                        listado += (new Usuario(u.idUsuario, u.username, u.password, u.nombre, u.apellido, u.dni, u.direccion, u.telefono, u.email, u.fechaNac, u.penalidad, u.tipoUsuario)).printBoxUsuarioABM();
                     });
 
                     target.innerHTML = listado;
@@ -249,7 +251,7 @@ class UsuarioController{
 
                 if(listaUsuarios){
                     listaUsuarios.forEach(function (u) {
-                        listado += (new Usuario(u.idUsuario, u.nombre, u.apellido, u.dni, u.direccion, u.telefono, u.email, u.fechaNac, u.penalidad, u.tipoUsuario)).printBoxUsuarioPreRegistrado();
+                        listado += (new Usuario(u.idUsuario, u.username, u.password, u.nombre, u.apellido, u.dni, u.direccion, u.telefono, u.email, u.fechaNac, u.penalidad, u.tipoUsuario)).printBoxUsuarioPreRegistrado();
                     });
 
                     target.innerHTML = listado;
@@ -293,8 +295,7 @@ botonBuscarUsuarioBM.addEventListener("click",()=>{
 });
 
 function busquedaUsuario(){
-    let filtroSeleccionado = filtrosBuscarUsuarioBM.value
-    usuarioCtrl.solicitudAjaxBuscar(fieldBuscarUsuarioBM, filtroSeleccionado, inputBuscarUsuarioBM.value);
+    usuarioCtrl.solicitudAjaxBuscar(fieldBuscarUsuarioBM, filtrosBuscarUsuarioBM.value, inputBuscarUsuarioBM.value);
 }
 
 // ----------------------- Evento Agregar -----------------------
@@ -324,7 +325,9 @@ botonAddUserOpen.addEventListener("click",()=>{
 
 botonAddUserSend.addEventListener("click",()=>{
     
-    if( inputAddUserModalNombre.value !="" &&
+    if( inputAddUserModalUsername.value != "" &&
+        inputAddUserModalPassword.value != "" &&
+        inputAddUserModalNombre.value !="" &&
         inputAddUserModalApellido.value !="" &&
         inputAddUserModalDNI.value !="" &&
         inputAddUserModalDireccion.value !="" &&
@@ -333,6 +336,8 @@ botonAddUserSend.addEventListener("click",()=>{
         inputAddUserModalFechaNac.value){
 
     let usuario = new Usuario(null,
+        inputAddUserModalUsername.value,
+        inputAddUserModalPassword.value,
         inputAddUserModalNombre.value,
         inputAddUserModalApellido.value,
         inputAddUserModalDNI.value,
@@ -415,6 +420,8 @@ botonEditUserSend.addEventListener("click", ()=>{
         inputEditUserModalFechaNac.value != "" &&
         inputEditUserModalTipoUsuario.value != ""){
     let usuario = new Usuario(modalEditUser.getAttribute("idUsuarioTemp"),
+            null,
+            null,
         inputEditUserModalNombre.value,
         inputEditUserModalApellido.value,
         inputEditUserModalDNI.value,
