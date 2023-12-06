@@ -29,6 +29,8 @@ class Usuarios_Controlador {
                     $aux = $data["data"];
 
                     $usuario = array(
+                        "username" => $aux["username"],
+                        "password" => md5($aux["password"]),
                         "nombre" => $aux["nombre"],
                         "apellido" => $aux["apellido"],
                         "dni" => $aux["dni"],

@@ -27,19 +27,17 @@ class Pedidos_Controlador
             case "add":
                 if (isset($data["data"])) {
                     $aux = $data["data"];
-
+                    $libro = $aux["libro"];
                     $pedido = array(
-                        "titulo" => $aux["titulo"],
-                        "idAutor" => $aux["idAutor"],
-                        "idEditorial" => $aux["idEditorial"],
-                        "lugarEdicion" => $aux["lugarEdicion"],
-                        "anio" => $aux["anio"],
-                        "serie" => $aux["serie"],
-                        "observaciones" => $aux["observaciones"],
-                        "idMateria" => $aux["idMateria"],
-                        "idUsuario" => $aux["idUsuario"],
-                        "cantidad" => $aux["cantidad"]
-                    );
+                        "titulo" => $libro["titulo"],
+                        "autor" => $libro["autor"],
+                        "editorial" => $libro["editorial"],
+                        "materia" => $libro["materia"],
+                        "lugarEdicion" => $libro["lugarEdicion"],
+                        "anio" => $libro["anio"],
+                        "serie" => $libro["serie"],
+                        "observaciones" => $libro["observaciones"],                        
+                        "cantidad" => $aux["cantidad"]);
                     $respuesta = Pedidos_modelo::nuevo_libro_pedido_modelo($pedido);
                     if ($respuesta) {
                         echo json_encode(array("status"=>"ok"));
@@ -65,13 +63,19 @@ class Pedidos_Controlador
             case "edit":
                 if (isset($data["data"])) {
                     $aux = $data["data"];
-                   
+                    $libro = $aux["libro"];
                     $pedido = array(
                         "idPedido" => $aux["idPedido"],
-                        "libro" => $aux["libro"],
-                        "usuario" => $aux["usuario"],
-                        "cantidad" => $aux["cantidad"],
-                        "fechaPedido" => $aux["fechaPedido"]);
+                        "idLibro" => $libro["idLibro"],
+                        "titulo" => $libro["titulo"],
+                        "autor" => $libro["autor"],
+                        "editorial" => $libro["editorial"],
+                        "materia" => $libro["materia"],
+                        "lugarEdicion" => $libro["lugarEdicion"],
+                        "anio" => $libro["anio"],
+                        "serie" => $libro["serie"],
+                        "observaciones" => $libro["observaciones"],
+                        "cantidad" => $aux["cantidad"]);
                                         
                     $respuesta = Pedidos_modelo::editar_pedido_modelo($pedido);
                     if ($respuesta) {
@@ -95,6 +99,20 @@ class Pedidos_Controlador
                     }
                     break;
             }
+            case "reject":
+                if (isset($data["data"])) {
+                    $aux = $data["data"];
+                    
+                    $idPedido = $aux["idPedido"];
+                    
+                    $respuesta = Pedidos_modelo::eliminar_pedido_modelo($idPedido);
+                    if ($respuesta) {
+                        echo json_encode(array("status"=>"ok"));
+                    }else {
+                        echo json_encode(array("status"=>"no"));
+                    }
+                    break;
+                }
 
         }
     }
