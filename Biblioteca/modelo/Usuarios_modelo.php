@@ -57,6 +57,8 @@ class Usuarios_modelo {
     static public function nuevo_usuario_modelo($usuario){
         try {
             $consulta = Conectar::conexion()->prepare("CALL `insertarUsuario`(
+                :username,
+                :password,
                 :nombre, 
                 :apellido, 
                 :dni, 
@@ -65,6 +67,8 @@ class Usuarios_modelo {
                 :email,
                 :direccion)");
 
+            $consulta->bindParam(":username", $usuario["username"], PDO::PARAM_STR);
+            $consulta->bindParam(":password", $usuario["password"], PDO::PARAM_STR);
             $consulta->bindParam(":nombre", $usuario["nombre"], PDO::PARAM_STR);
             $consulta->bindParam(":apellido", $usuario["apellido"], PDO::PARAM_STR);
             $consulta->bindParam(":dni", $usuario["dni"], PDO::PARAM_INT);
